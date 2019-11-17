@@ -1,0 +1,121 @@
+name: nitnem
+description: Nitnem App. Please respectfully cover you head and remove your shoes before reciting gurbani.
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.2.34+34
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  url_launcher: 5.0.2
+  package_info: ^0.4.0+5
+  shared_preferences: ^0.5.2
+  json_serializable: ^2.2.2
+  intl: ^0.15.8
+  redux: ^3.0.0
+  flutter_redux: ^0.5.3
+  battery: 0.3.0+5
+  provider: ^3.0.0
+  screen: ^0.0.5
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^0.1.2
+
+dev_dependencies:
+  flutter_launcher_icons: "^0.7.0"
+  flutter_test:
+    sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon" 
+  ios: true
+  image_path: "assets/images/khanda.png"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/khanda.png
+    - assets/images/floral-left.png
+    - assets/images/floral-right.png
+    - assets/images/book.png
+    - assets/themes/ThemeName.Forest.jpg
+    - assets/themes/ThemeName.Stars.jpg
+    - assets/themes/ThemeName.Default.jpg
+    - assets/themes/ThemeName.Ethnic.jpg
+    - assets/themes/ThemeName.Floral.jpg
+    - assets/themes/ThemeName.Wood.jpg
+    - assets/path/japji_sahib_pa.txt
+    - assets/path/japji_sahib_en.txt
+    - assets/path/japji_sahib_hi.txt
+    - assets/path/jaap_sahib_pa.txt
+    - assets/path/jaap_sahib_en.txt
+    - assets/path/jaap_sahib_hi.txt
+    - assets/path/chaupai_sahib_pa.txt
+    - assets/path/chaupai_sahib_en.txt
+    - assets/path/chaupai_sahib_hi.txt
+    - assets/path/anand_sahib_pa.txt
+    - assets/path/anand_sahib_en.txt
+    - assets/path/anand_sahib_hi.txt
+    - assets/path/rehraas_sahib_pa.txt
+    - assets/path/rehraas_sahib_en.txt
+    - assets/path/rehraas_sahib_hi.txt
+    - assets/path/tavprasad_savaiye_pa.txt
+    - assets/path/tavprasad_savaiye_en.txt
+    - assets/path/tavprasad_savaiye_hi.txt
+    - assets/path/ardas_pa.txt
+    - assets/path/ardas_en.txt
+    - assets/path/ardas_hi.txt
+    - assets/path/sukhmani_sahib_pa.txt
+    - assets/path/sukhmani_sahib_en.txt
+    - assets/path/sukhmani_sahib_hi.txt
+    - assets/path/dukh_bhanjani_sahib_pa.txt
+    - assets/path/dukh_bhanjani_sahib_en.txt
+    - assets/path/dukh_bhanjani_sahib_hi.txt    
+
+  fonts:
+    - family: RobotoSlab
+      fonts:
+        - asset: assets/fonts/RobotoSlab/RobotoSlab-Regular.ttf
+        - asset: assets/fonts/RobotoSlab/RobotoSlab-Bold.ttf
+
+    - family: Sansation
+      fonts:
+        - asset: assets/fonts/Sansation/Sansation-Regular.ttf
+        - asset: assets/fonts/Sansation/Sansation-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Sansation/Sansation-BoldItalic.ttf
+          style: italic
+        - asset: assets/fonts/Sansation/Sansation-Bold.ttf
+
+    - family: Kingthings
+      fonts:
+        - asset: assets/fonts/Kingthings/Kingthings_Calligraphica_Light.ttf
+        - asset: assets/fonts/Kingthings/Kingthings_Calligraphica_Italic.ttf
+          style: italic
+        - asset: assets/fonts/Kingthings/Kingthings_Calligraphica_2.ttf
+          weight: 700
+
+    - family: Gurakhar
+      fonts:
+        - asset: assets/fonts/Gurakhar/GURAKHAR.ttf
+        - asset: assets/fonts/Gurakhar/GURAKH_L.ttf
+          weight: 400
+        - asset: assets/fonts/Gurakhar/GUAK_TH.ttf
+          weight: 700    
+          
+    - family: Gurbanihindi
+      fonts:
+        - asset: assets/fonts/Gurbanihindi/Gurbanihindi.ttf
