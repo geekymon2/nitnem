@@ -46,7 +46,7 @@ class AppConstants {
   static const double READERTHEME_BACK_OPACITY = 0.40;
 
   //Others
-  static const String FEEDBACK_URL = 'https://github.com/manssster/nitnem/issues/new';
+  static const String FEEDBACK_URL = 'https://github.com/debuggdapps/nitnem/issues/new';
   static const String OPTIONS_SHAREDPREF_KEY = 'OPTIONS';
   static const int DEVICE_SMALL_RES = 320;
   static const bool LOGGING_ENABLED = !kReleaseMode;

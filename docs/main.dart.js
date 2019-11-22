@@ -11232,7 +11232,7 @@ p=$.a2d().$2(a.x,b)
 s=$.a2l().$2(a.f,b)
 n=Z.VX($.a22().$2(a.r,b),u,r,t,p,o,q,s)}else n=null
 if(!!m.$imE)n=a.fE(b.a)
-if(!!m.$itT){T.Vo("https://github.com/manssster/nitnem/issues/new",!1)
+if(!!m.$itT){T.Vo("https://github.com/debuggdapps/nitnem/issues/new",!1)
 n=a}J.bE(n)
 return n}},B={eJ:function eJ(){},dQ:function dQ(){},A7:function A7(a){this.a=a},o1:function o1(a){this.a=a},uw:function uw(a,b){this.a=a
 this.ac$=b},ad:function ad(){},f6:function f6(a,b,c){this.a=a
@@ -43971,7 +43971,7 @@ A:function(a){var u=null
 return M.bc(u,U.YY(64,new L.j8("assets/images/khanda.png",u,u),64),u,u,u,u,u,u,u,u,u)}}
 A.UL.prototype={
 $1:function(a){var u=null,t=[N.L],s=this.a
-return new E.l3(T.ef(H.b([new A.Gd(u),new T.bG(C.rp,L.bw("About Nitnem",u,u,C.bm),u)],t),C.aa,C.ad,C.a2),new T.bG(C.rn,T.WO(u,u,C.ae,!0,u,Q.kr(H.b([Q.kr(u,s,"Waheguruji ka Khalsa, Waheguruji ki Fateh, Sangat Ji, For any mistakes please sent an email to manssster@gmail.com so that they can be corrected.\n"),Q.kr(u,s,"\n[CREDITS]\n"),Q.kr(u,s,"Khanda Icon: www.flaticon.com\nForest Background: by kotkoa - www.freepik.com\nStars Bacground: by 0melapics - www.freepik.com\nWood Bacground: by Olga_spb - www.freepik.com\nFloral Bacground: by visnezh - www.freepik.com\nEthnic Background: by visnezh - www.freepik.com\n")],[Q.uk]),u,u),C.aU,u,1,C.S),u),H.b([N.YN(L.bw("Ok",u,u,u),new A.UK(a),u)],t),u)},
+return new E.l3(T.ef(H.b([new A.Gd(u),new T.bG(C.rp,L.bw("About Nitnem",u,u,C.bm),u)],t),C.aa,C.ad,C.a2),new T.bG(C.rn,T.WO(u,u,C.ae,!0,u,Q.kr(H.b([Q.kr(u,s,"Waheguruji ka Khalsa, Waheguruji ki Fateh, Sangat Ji, For any mistakes please sent an email to debuggdapps@gmail.com so that they can be corrected.\n"),Q.kr(u,s,"\n[CREDITS]\n"),Q.kr(u,s,"Khanda Icon: www.flaticon.com\nForest Background: by kotkoa - www.freepik.com\nStars Bacground: by 0melapics - www.freepik.com\nWood Bacground: by Olga_spb - www.freepik.com\nFloral Bacground: by visnezh - www.freepik.com\nEthnic Background: by visnezh - www.freepik.com\n")],[Q.uk]),u,u),C.aU,u,1,C.S),u),H.b([N.YN(L.bw("Ok",u,u,u),new A.UK(a),u)],t),u)},
 $S:194}
 A.UK.prototype={
 $0:function(){return K.ia(this.a,!1).tM("Ok")},

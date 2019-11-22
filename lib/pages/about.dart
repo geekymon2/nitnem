@@ -35,7 +35,7 @@ void aboutNitnem(BuildContext context) {
             children: <TextSpan>[
               TextSpan(
                 style: aboutTextStyle,
-                text: 'Waheguruji ka Khalsa, Waheguruji ki Fateh, Sangat Ji, For any mistakes please sent an email to manssster@gmail.com so that they can be corrected.\n',
+                text: 'Waheguruji ka Khalsa, Waheguruji ki Fateh, Sangat Ji, For any mistakes please sent an email to debuggdapps@gmail.com so that they can be corrected.\n',
               ),
               TextSpan(
                 style: aboutTextStyle,
