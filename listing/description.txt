@@ -18,4 +18,4 @@ Other features of Nitnem App.
 * Bold and Unbold Reading Text.
 * Settings saved automatically.
 
-Nitnem App sewa by Manpreet Sushil. Bhul chuk maaf, for any correction, suggestions or feedback please contact me at debuggdapps@gmail.com.
+Nitnem App sewa by Debuggd Apps. Bhul chuk maaf, for any correction, suggestions or feedback please contact me at debuggdapps@gmail.com.
