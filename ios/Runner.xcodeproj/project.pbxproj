@@ -400,8 +400,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.debuggdapps.nitnem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "479a19bf-84a9-4805-92a5-f18d9e21b380";
-				PROVISIONING_PROFILE_SPECIFIER = "Nitnem App Store Distribution";
+				PROVISIONING_PROFILE = "0b2289d0-9775-43d2-a63e-799ad8a5387d";
+				PROVISIONING_PROFILE_SPECIFIER = "Nitnem Gurbani Production Profile";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Profile;
@@ -534,8 +534,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.debuggdapps.nitnem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3d96f562-f132-402b-9cc9-1b0e928f1f21";
-				PROVISIONING_PROFILE_SPECIFIER = "Nitnem App Store Distribution Development";
+				PROVISIONING_PROFILE = "381a8410-ce31-4b85-b6e1-f48f6f258a13";
+				PROVISIONING_PROFILE_SPECIFIER = "Nitnem Gurbani Development Profile";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -563,8 +563,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.debuggdapps.nitnem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "479a19bf-84a9-4805-92a5-f18d9e21b380";
-				PROVISIONING_PROFILE_SPECIFIER = "Nitnem App Store Distribution";
+				PROVISIONING_PROFILE = "0b2289d0-9775-43d2-a63e-799ad8a5387d";
+				PROVISIONING_PROFILE_SPECIFIER = "Nitnem Gurbani Production Profile";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
