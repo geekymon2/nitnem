@@ -400,8 +400,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.manpreet.nitnem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0b2289d0-9775-43d2-a63e-799ad8a5387d";
-				PROVISIONING_PROFILE_SPECIFIER = "Nitnem Gurbani Production Profile";
+				PROVISIONING_PROFILE = "60c86f8a-d102-4d95-8a07-05f20a877b96";
+				PROVISIONING_PROFILE_SPECIFIER = "Nitnem App Production Profile";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Profile;
@@ -534,8 +534,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.manpreet.nitnem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "381a8410-ce31-4b85-b6e1-f48f6f258a13";
-				PROVISIONING_PROFILE_SPECIFIER = "Nitnem Gurbani Development Profile";
+				PROVISIONING_PROFILE = "15310bda-69c8-4fdd-b521-a87bde79ae5b";
+				PROVISIONING_PROFILE_SPECIFIER = "Nitnem App Development Profile";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -563,8 +563,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.manpreet.nitnem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0b2289d0-9775-43d2-a63e-799ad8a5387d";
-				PROVISIONING_PROFILE_SPECIFIER = "Nitnem Gurbani Production Profile";
+				PROVISIONING_PROFILE = "60c86f8a-d102-4d95-8a07-05f20a877b96";
+				PROVISIONING_PROFILE_SPECIFIER = "Nitnem App Production Profile";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
