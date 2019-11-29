@@ -6,7 +6,7 @@
 | [[Google Play]] | [[App Store]] |
 | -------------      | -------------    |
 | 
-<a href="https://play.google.com/store/apps/details?id=com.debuggdapps.nitnem">
+<a href="https://play.google.com/store/apps/details?id=com.manpreet.nitnem">
   <img alt="Get it on Google Play"
       src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
 </a>               | [![](https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2019-06-04&kind=iossoftware&bubble=ios_apps)](https://itunes.apple.com/us/app/nitnem/id1464489806?mt=8)               |

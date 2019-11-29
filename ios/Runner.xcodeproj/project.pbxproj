@@ -398,7 +398,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.debuggdapps.nitnem;
+				PRODUCT_BUNDLE_IDENTIFIER = com.manpreet.nitnem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0b2289d0-9775-43d2-a63e-799ad8a5387d";
 				PROVISIONING_PROFILE_SPECIFIER = "Nitnem Gurbani Production Profile";
@@ -532,7 +532,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.debuggdapps.nitnem;
+				PRODUCT_BUNDLE_IDENTIFIER = com.manpreet.nitnem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "381a8410-ce31-4b85-b6e1-f48f6f258a13";
 				PROVISIONING_PROFILE_SPECIFIER = "Nitnem Gurbani Development Profile";
@@ -561,7 +561,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.debuggdapps.nitnem;
+				PRODUCT_BUNDLE_IDENTIFIER = com.manpreet.nitnem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0b2289d0-9775-43d2-a63e-799ad8a5387d";
 				PROVISIONING_PROFILE_SPECIFIER = "Nitnem Gurbani Production Profile";

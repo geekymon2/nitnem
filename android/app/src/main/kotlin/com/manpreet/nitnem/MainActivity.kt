@@ -1,4 +1,4 @@
-package com.debuggdapps.nitnem
+package com.manpreet.nitnem
 
 import android.os.Bundle
 import io.flutter.app.FlutterActivity
