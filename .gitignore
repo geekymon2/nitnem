@@ -78,3 +78,4 @@ android/.project
 android/.settings/org.eclipse.buildship.core.prefs
 android/app/.project
 ios/Flutter/flutter_export_environment.sh
+.flutter-plugins-dependencies
