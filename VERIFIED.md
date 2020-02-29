@@ -17,3 +17,4 @@
 ## tavprasad_savaiye_hi.txt = Verified 14/06/2019
 ## rehraas_sahib_hi.txt = Verified 14/06/2019
 ## jaap_sahib_hi.txt = Verified 15/06/2019
+## sukhmani_sahib_hi.txt = Verified 29/02/2020 upto ashtapati 4
