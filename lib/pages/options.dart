@@ -94,7 +94,7 @@ class _FlatButton extends StatelessWidget {
       padding: EdgeInsets.zero,
       onPressed: onPressed,
       child: DefaultTextStyle(
-        style: Theme.of(context).primaryTextTheme.subhead,
+        style: Theme.of(context).primaryTextTheme.subtitle1,
         child: child,
       ),
     );
@@ -110,7 +110,7 @@ class _Heading extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     return _OptionsItem(
       child: DefaultTextStyle(
-        style: theme.textTheme.body1.copyWith(
+        style: theme.textTheme.bodyText2.copyWith(
           fontFamily: 'GoogleSans',
           color: theme.accentColor,
         ),
@@ -227,7 +227,7 @@ class _TextScaleFactorItem extends StatelessWidget {
                 const Text('Text size'),
                 Text(
                   '${StoreProvider.of<AppState>(context).state.options.textScaleValue.toStringAsFixed(2)}',
-                  style: Theme.of(context).primaryTextTheme.body1,
+                  style: Theme.of(context).primaryTextTheme.bodyText2,
                 ),
                 Slider(
                   min: AppConstants.TEXTSCALE_MIN,
@@ -263,7 +263,7 @@ class _LanguageItem extends StatelessWidget {
                 const Text('Language'),
                 Text(
                   '${StoreProvider.of<AppState>(context).state.options.languageName}',
-                  style: Theme.of(context).primaryTextTheme.body1,
+                  style: Theme.of(context).primaryTextTheme.bodyText2,
                 ),
               ],
             ),
@@ -332,7 +332,7 @@ class OptionsPage extends StatelessWidget {
     ];
 
     return DefaultTextStyle(
-      style: theme.primaryTextTheme.subhead,
+      style: theme.primaryTextTheme.subtitle1,
       child: ListView (
         padding: const EdgeInsets.only(bottom: 124.0),
         children: this.readerMode ? optWidgets : optWidgets + aboutWidgets      
