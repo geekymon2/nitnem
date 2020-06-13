@@ -8,6 +8,7 @@
 ## anand_sahib_en.txt = Verified 11/06/2019
 ## ardas_en.txt = Verified 11/06/2019
 ## rehraas_sahib_en.txt = Verified 12/06/2019
+## sukhmani_sahib_en.txt = Verified till astpati 7 4/03/2020
 
 # Hindi
 ## anand_sahib_hi.txt = Verified 12/06/2019
