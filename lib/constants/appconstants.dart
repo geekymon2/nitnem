@@ -30,7 +30,7 @@ class AppConstants {
   //Reader Screen
   static const double READER_PADDING = 15.0;
   static const double TEXTSCALE_MIN = 0.5;
-  static const double TEXTSCALE_MAX = 2.0;
+  static const double TEXTSCALE_MAX = 3.0;
   static const double EXPANDED_APP_BAR = 600.0;
   static const double COLLAPSED_APP_BAR = 40.0;
   static const String EMPTY_STRING = '';
