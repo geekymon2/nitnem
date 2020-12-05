@@ -11,7 +11,7 @@ description: Nitnem App. Please respectfully cover you head and remove your shoe
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.2.50+50
+version: 1.2.51+51
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -19,6 +19,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  backdrop: ^0.4.7
   url_launcher: 5.0.2
   package_info: ^0.4.0+11
   shared_preferences: ^0.5.2

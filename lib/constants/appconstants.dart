@@ -19,8 +19,8 @@ class AppConstants {
   //Home Screen
   static const String HOME_TITLE_TEXT = 'ੴ ਸਤਿ ਗੁਰ ਪ੍ਰਸਾਦਿ';
   static const String HOME_TITLE_FONT = 'Roboto';
-  static const double HOME_TITLE_FONT_SIZE = 20.0;
-  static const double HOME_TITLE_FONT_SIZE_SMALL = 15.0;
+  static const double HOME_TITLE_FONT_SIZE = 18.0;
+  static const double HOME_TITLE_FONT_SIZE_SMALL = 12.0;
   static const String HOME_LISTITEM_FONT = 'Kingthings';
   static const double HOME_LISTITEM_FONT_SIZE = 26.0;
   static const String HOME_LISTSUBITEM_FONT = 'Gurakhar';

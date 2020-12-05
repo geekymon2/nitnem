@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:nitnem/common/printmessage.dart';
 import 'package:nitnem/redux/actions/actions.dart';
 import 'package:nitnem/models/language.dart';
 import 'package:nitnem/data/languagedata.dart';
@@ -10,10 +11,11 @@ import 'package:nitnem/state/appstate.dart';
 import 'about.dart';
 
 const double _kItemHeight = 48.0;
-const EdgeInsetsDirectional _kItemPadding = EdgeInsetsDirectional.only(start: 56.0);
+const EdgeInsetsDirectional _kItemPadding =
+    EdgeInsetsDirectional.only(start: 56.0);
 
 class _OptionsItem extends StatelessWidget {
-  const _OptionsItem({ Key key, this.child }) : super(key: key);
+  const _OptionsItem({Key key, this.child}) : super(key: key);
 
   final Widget child;
 
@@ -39,8 +41,9 @@ class _OptionsItem extends StatelessWidget {
     );
   }
 }
+
 class _BooleanItem extends StatelessWidget {
-  const _BooleanItem(this.title, this.value, this.onChanged, { this.switchKey });
+  const _BooleanItem(this.title, this.value, this.onChanged, {this.switchKey});
 
   final String title;
   final bool value;
@@ -66,6 +69,7 @@ class _BooleanItem extends StatelessWidget {
     );
   }
 }
+
 class _ActionItem extends StatelessWidget {
   const _ActionItem(this.text, this.onTap);
 
@@ -82,8 +86,9 @@ class _ActionItem extends StatelessWidget {
     );
   }
 }
+
 class _FlatButton extends StatelessWidget {
-  const _FlatButton({ Key key, this.onPressed, this.child }) : super(key: key);
+  const _FlatButton({Key key, this.onPressed, this.child}) : super(key: key);
 
   final VoidCallback onPressed;
   final Widget child;
@@ -100,6 +105,7 @@ class _FlatButton extends StatelessWidget {
     );
   }
 }
+
 class _Heading extends StatelessWidget {
   const _Heading(this.text);
 
@@ -122,6 +128,7 @@ class _Heading extends StatelessWidget {
     );
   }
 }
+
 class _BoldItem extends StatelessWidget {
   const _BoldItem();
 
@@ -137,6 +144,7 @@ class _BoldItem extends StatelessWidget {
     );
   }
 }
+
 class _KeepScreenAwakeItem extends StatelessWidget {
   const _KeepScreenAwakeItem();
 
@@ -146,12 +154,14 @@ class _KeepScreenAwakeItem extends StatelessWidget {
       'Keep Screen Awake',
       StoreProvider.of<AppState>(context).state.options.screenAwake == true,
       (bool value) {
-        StoreProvider.of<AppState>(context).dispatch(ToggleScreenAwakeAction(value));
+        StoreProvider.of<AppState>(context)
+            .dispatch(ToggleScreenAwakeAction(value));
       },
       switchKey: const Key('screenAwake'),
     );
   }
 }
+
 class _SaveScrollPosItem extends StatelessWidget {
   const _SaveScrollPosItem();
 
@@ -159,14 +169,17 @@ class _SaveScrollPosItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return _BooleanItem(
       'Save Scroll Position',
-      StoreProvider.of<AppState>(context).state.options.saveScrollPosition == true,
+      StoreProvider.of<AppState>(context).state.options.saveScrollPosition ==
+          true,
       (bool value) {
-        StoreProvider.of<AppState>(context).dispatch(ToggleReadingPositionSaveAction(value));
+        StoreProvider.of<AppState>(context)
+            .dispatch(ToggleReadingPositionSaveAction(value));
       },
       switchKey: const Key('saveScrollPosition'),
     );
   }
 }
+
 class _ShowStatusItem extends StatelessWidget {
   const _ShowStatusItem();
 
@@ -182,6 +195,7 @@ class _ShowStatusItem extends StatelessWidget {
     );
   }
 }
+
 class _ThemeChoices extends StatelessWidget {
   _ThemeChoices();
 
@@ -192,10 +206,14 @@ class _ThemeChoices extends StatelessWidget {
       choices.add(Container(
         padding: const EdgeInsets.all(2.0),
         child: ChoiceChip(
-          label: Text(item.toString().replaceAll(item.runtimeType.toString() + ".", AppConstants.EMPTY_STRING)),
-          selected: StoreProvider.of<AppState>(context).state.options.themeName == item.toString(),
+          label: Text(item.toString().replaceAll(
+              item.runtimeType.toString() + ".", AppConstants.EMPTY_STRING)),
+          selected:
+              StoreProvider.of<AppState>(context).state.options.themeName ==
+                  item.toString(),
           onSelected: (selected) {
-            StoreProvider.of<AppState>(context).dispatch(ChangeThemeAction(item.toString()));
+            StoreProvider.of<AppState>(context)
+                .dispatch(ChangeThemeAction(item.toString()));
           },
         ),
       ));
@@ -205,13 +223,15 @@ class _ThemeChoices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding (padding: EdgeInsets.only(left:50.0),
+    return Padding(
+      padding: EdgeInsets.only(left: 50.0),
       child: Wrap(
         children: _buildChoiceList(context),
       ),
     );
   }
 }
+
 class _TextScaleFactorItem extends StatelessWidget {
   const _TextScaleFactorItem();
 
@@ -233,20 +253,24 @@ class _TextScaleFactorItem extends StatelessWidget {
                   min: AppConstants.TEXTSCALE_MIN,
                   max: AppConstants.TEXTSCALE_MAX,
                   divisions: 15,
-                  value: StoreProvider.of<AppState>(context).state.options.textScaleValue, 
+                  value: StoreProvider.of<AppState>(context)
+                      .state
+                      .options
+                      .textScaleValue,
                   onChanged: (double value) {
-                    StoreProvider.of<AppState>(context).dispatch(TextScaleAction(value));
+                    StoreProvider.of<AppState>(context)
+                        .dispatch(TextScaleAction(value));
                   },
                 ),
               ],
             ),
           ),
-          
         ],
       ),
     );
   }
 }
+
 class _LanguageItem extends StatelessWidget {
   final bool readerMode;
   const _LanguageItem(this.readerMode);
@@ -281,10 +305,15 @@ class _LanguageItem extends StatelessWidget {
             },
             onSelected: (LanguageMenuItem selectedValue) {
               if (readerMode) {
-                StoreProvider.of<AppState>(context).dispatch(ChangeLanguageAndFetchNitnemPathAction(selectedValue.title, StoreProvider.of<AppState>(context).state.pathFilePrefix));
-              }
-              else {
-                StoreProvider.of<AppState>(context).dispatch(ChangeLanguageAction(selectedValue.title));
+                StoreProvider.of<AppState>(context).dispatch(
+                    ChangeLanguageAndFetchNitnemPathAction(
+                        selectedValue.title,
+                        StoreProvider.of<AppState>(context)
+                            .state
+                            .pathFilePrefix));
+              } else {
+                StoreProvider.of<AppState>(context)
+                    .dispatch(ChangeLanguageAction(selectedValue.title));
               }
             },
           ),
@@ -293,6 +322,7 @@ class _LanguageItem extends StatelessWidget {
     );
   }
 }
+
 class OptionsPage extends StatelessWidget {
   const OptionsPage({
     Key key,
@@ -303,8 +333,10 @@ class OptionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    printInfoMessage('[BUILD] Options');
+
     final ThemeData theme = Theme.of(context);
-    
+
     //define options widgets.
     final optWidgets = <Widget>[
       const _Heading('Themes'),
@@ -313,7 +345,9 @@ class OptionsPage extends StatelessWidget {
       _BoldItem(),
       _ShowStatusItem(),
       _TextScaleFactorItem(),
-      (defaultTargetPlatform == TargetPlatform.android) ? _KeepScreenAwakeItem() : Container(),
+      (defaultTargetPlatform == TargetPlatform.android)
+          ? _KeepScreenAwakeItem()
+          : Container(),
       const _Heading('Gurbani'),
       _LanguageItem(readerMode),
       _SaveScrollPosItem(),
@@ -324,19 +358,19 @@ class OptionsPage extends StatelessWidget {
       const Divider(),
       const _Heading('About'),
       _ActionItem('About Nitnem', () {
-          aboutNitnem(context);
+        aboutNitnem(context);
       }),
-      _ActionItem('Send feedback', () { 
+      _ActionItem('Send feedback', () {
         StoreProvider.of<AppState>(context).dispatch(SendFeedbackAction());
       }),
     ];
 
+    printInfoMessage('[BUILD] Options Completed');
     return DefaultTextStyle(
       style: theme.primaryTextTheme.subtitle1,
-      child: ListView (
-        padding: const EdgeInsets.only(bottom: 124.0),
-        children: this.readerMode ? optWidgets : optWidgets + aboutWidgets      
-      ),
+      child: ListView(
+          padding: const EdgeInsets.only(bottom: 124.0),
+          children: this.readerMode ? optWidgets : optWidgets + aboutWidgets),
     );
   }
 }
