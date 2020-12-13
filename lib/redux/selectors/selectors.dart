@@ -37,6 +37,11 @@ bool saveScrollPositionSelector(AppState state) =>
     (state != null) ? state.options.saveScrollPosition : false;
 
 double getScrollOffsetForThisPath(Map<String, ScrollInfo> scrollPos, int id) {
+  //set scroll position for path with does not exist previously in saved options.
+  if (id > scrollPos.length) {
+    scrollPos[id.toString()] = ScrollInfo(id, 0.0, 0.0);
+  }
+
   return scrollPos[id.toString()].scrollOffset;
 }
 
