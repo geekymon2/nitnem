@@ -85,6 +85,9 @@ flutter:
     - assets/path/dukh_bhanjani_sahib_pa.txt
     - assets/path/dukh_bhanjani_sahib_en.txt
     - assets/path/dukh_bhanjani_sahib_hi.txt    
+    - assets/path/sohila_sahib_pa.txt
+    - assets/path/sohila_sahib_en.txt
+    - assets/path/sohila_sahib_hi.txt    
 
   fonts:
     - family: RobotoSlab
