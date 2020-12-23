@@ -275,6 +275,20 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                   Expanded(
                                     flex: 1,
                                     child: Text(
+                                      (vm.dnd) ? "DND" : "",
+                                      textAlign: TextAlign.right,
+                                      style: new TextStyle(
+                                        fontFamily:
+                                            AppConstants.STATUSBAR_FONT_FAMILY,
+                                        fontSize: AppConstants
+                                            .STATUSBAR_FONT_SIZE_SMALL,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Text(
                                       _calculateScrollPerc(
                                               vm.scrollOffset, vm.maxOffset) +
                                           "%",
@@ -287,7 +301,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -339,22 +353,23 @@ class _ViewModel {
   final String statusTime;
   final int batteryPerc;
   final bool saveScrollPosition;
+  final bool dnd;
 
-  _ViewModel({
-    @required this.onToggleReaderOptions,
-    @required this.languageName,
-    @required this.showReaderOptions,
-    @required this.textScaleValue,
-    @required this.isBold,
-    @required this.showStatus,
-    @required this.pathData,
-    @required this.nitnemPathTitle,
-    @required this.scrollOffset,
-    @required this.maxOffset,
-    @required this.statusTime,
-    @required this.batteryPerc,
-    @required this.saveScrollPosition,
-  });
+  _ViewModel(
+      {@required this.onToggleReaderOptions,
+      @required this.languageName,
+      @required this.showReaderOptions,
+      @required this.textScaleValue,
+      @required this.isBold,
+      @required this.showStatus,
+      @required this.pathData,
+      @required this.nitnemPathTitle,
+      @required this.scrollOffset,
+      @required this.maxOffset,
+      @required this.statusTime,
+      @required this.batteryPerc,
+      @required this.saveScrollPosition,
+      @required this.dnd});
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
@@ -373,6 +388,7 @@ class _ViewModel {
       statusTime: timeStringSelector(store.state),
       batteryPerc: batteryPercSelector(store.state),
       saveScrollPosition: saveScrollPositionSelector(store.state),
+      dnd: dndStatusSelector(store.state),
     );
   }
 

@@ -36,6 +36,9 @@ int batteryPercSelector(AppState state) =>
 bool saveScrollPositionSelector(AppState state) =>
     (state != null) ? state.options.saveScrollPosition : false;
 
+bool dndStatusSelector(AppState state) =>
+    (state != null) ? state.options.doNotDisturb : false;
+
 double getScrollOffsetForThisPath(Map<String, ScrollInfo> scrollPos, int id) {
   //set scroll position for path with does not exist previously in saved options.
   if (id > scrollPos.length) {

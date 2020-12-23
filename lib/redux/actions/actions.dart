@@ -10,23 +10,29 @@ class ChangeThemeAction {
 
 class ChangeLanguageAction {
   final String language;
-  ChangeLanguageAction(this.language);  
+  ChangeLanguageAction(this.language);
 }
 
 class ChangeLanguageAndFetchNitnemPathAction {
   final String language;
   final String pathFilePrefix;
-  ChangeLanguageAndFetchNitnemPathAction(this.language, this.pathFilePrefix);  
+  ChangeLanguageAndFetchNitnemPathAction(this.language, this.pathFilePrefix);
 }
 
 class TextScaleAction {
   final double scale;
-  TextScaleAction(this.scale);  
+  TextScaleAction(this.scale);
 }
 
 class ToggleBoldAction {
   final bool isBold;
   ToggleBoldAction(this.isBold);
+}
+
+class ToggleDNDAction {
+  final bool isDnd;
+  final bool hasNPAccess;
+  ToggleDNDAction(this.isDnd, this.hasNPAccess);
 }
 
 class ToggleStatusAction {
@@ -48,7 +54,7 @@ class ToggleReaderOptionsAction {}
 
 class ClearReaderOptionsToggleAction {}
 
-class NitnemPathLoadedAction{
+class NitnemPathLoadedAction {
   final String pathData;
 
   NitnemPathLoadedAction(this.pathData);
@@ -57,10 +63,10 @@ class NitnemPathLoadedAction{
 class FetchNitnemPathAction {
   final PathTile path;
   final String languageName;
-  FetchNitnemPathAction(this.path, this.languageName);  
+  FetchNitnemPathAction(this.path, this.languageName);
 }
 
-class SendFeedbackAction{}
+class SendFeedbackAction {}
 
 class UpdateStatusScrollPercentageAction {
   ScrollInfo scrollInfo;

@@ -20,17 +20,29 @@ import 'languagereducer.dart';
 import 'statusreducer.dart';
 import 'textscalereducer.dart';
 import 'themereducer.dart';
+import 'dndreducer.dart';
 
 AppState appReducer(AppState state, dynamic action) {
   AppState newState;
 
   printInfoMessage('[ACTION] ${action.runtimeType}');
-  if (action is TextScaleAction || action is ToggleBoldAction || action is ToggleStatusAction || 
-  action is ChangeThemeAction || action is ChangeLanguageAndFetchNitnemPathAction || 
-  action is ToggleReaderOptionsAction || action is NitnemPathLoadedAction ||
-  action is FetchOptionsAction || action is FetchNitnemPathAction || action is ChangeLanguageAction ||
-  action is UpdateStatusScrollPercentageAction || action is UpdateStatusTimeAction ||
-  action is UpdateStatusBatteryPercAction || action is ToggleScreenAwakeAction || action is ClearReaderOptionsToggleAction || action is ToggleReadingPositionSaveAction) {
+  if (action is TextScaleAction ||
+      action is ToggleBoldAction ||
+      action is ToggleStatusAction ||
+      action is ChangeThemeAction ||
+      action is ChangeLanguageAndFetchNitnemPathAction ||
+      action is ToggleReaderOptionsAction ||
+      action is NitnemPathLoadedAction ||
+      action is FetchOptionsAction ||
+      action is FetchNitnemPathAction ||
+      action is ChangeLanguageAction ||
+      action is UpdateStatusScrollPercentageAction ||
+      action is UpdateStatusTimeAction ||
+      action is UpdateStatusBatteryPercAction ||
+      action is ToggleScreenAwakeAction ||
+      action is ClearReaderOptionsToggleAction ||
+      action is ToggleReadingPositionSaveAction ||
+      action is ToggleDNDAction) {
     newState = AppState(
       options: AppOptions(
         themeName: themeReducer(state.options.themeName, action),
@@ -39,8 +51,10 @@ AppState appReducer(AppState state, dynamic action) {
         textScaleValue: textScaleReducer(state.options.textScaleValue, action),
         languageName: languageReducer(state.options.languageName, action),
         screenAwake: screenAwakeReducer(state.options.screenAwake, action),
-        saveScrollPosition: saveScrollPosReducer(state.options.saveScrollPosition, action),
+        saveScrollPosition:
+            saveScrollPosReducer(state.options.saveScrollPosition, action),
         scrollOffset: scrollPercReducer(state.options.scrollOffset, action),
+        doNotDisturb: dndReducer(state.options.doNotDisturb, action),
       ),
       showReaderOptions: readerOptionsReducer(state.showReaderOptions, action),
       pathData: pathDataReducer(state.pathData, action),
@@ -50,9 +64,9 @@ AppState appReducer(AppState state, dynamic action) {
       statusTime: statusTimeReducer(state.statusTime, action),
       batteryPerc: batteryPercReducer(state.batteryPerc, action),
     );
-    printInfoMessage('Option Changed');    
+    printInfoMessage('Option Changed');
   }
-  
+
   if (action is OptionsLoadedAction) {
     newState = state.copyWith(options: action.options);
     printInfoMessage('Options Loaded');
