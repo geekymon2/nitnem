@@ -9,11 +9,13 @@ final dndReducer = combineReducers<bool>([
 bool _activeDNDReducer(bool isDND, ToggleDNDAction action) {
   if (action.isDnd) {
     if (action.hasNPAccess) {
-        FlutterDnd.setInterruptionFilter(
-            FlutterDnd.INTERRUPTION_FILTER_ALL); //Turn on DND
-      } else {
-        FlutterDnd.gotoPolicySettings();
-      }
+      FlutterDnd.setInterruptionFilter(
+          FlutterDnd.INTERRUPTION_FILTER_ALL); //Turn on DND
+    } else {
+      FlutterDnd.gotoPolicySettings();
+    }
+  } else {
+    FlutterDnd.setInterruptionFilter(FlutterDnd.INTERRUPTION_FILTER_NONE);
   }
 
   return action.isDnd;

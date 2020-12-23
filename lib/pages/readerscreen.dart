@@ -310,15 +310,18 @@ class _MyReaderPageState extends State<ReaderScreen> {
                       : null,
                   floatingActionButton: Visibility(
                       visible: _checkTopActionVisibility(),
-                      child: FloatingActionButton.extended(
-                        onPressed: () {
-                          _controller.animateTo(0.0,
-                              duration: new Duration(milliseconds: 500),
-                              curve: Curves.ease);
-                        },
-                        icon: Icon(Icons.vertical_align_top),
-                        label: Text("Top"),
-                        backgroundColor: Colors.blue,
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: FloatingActionButton(
+                          onPressed: () {
+                            _controller.animateTo(0.0,
+                                duration: new Duration(milliseconds: 500),
+                                curve: Curves.ease);
+                          },
+                          child: Icon(Icons.vertical_align_top_rounded),
+                          backgroundColor: Colors.blue,
+                        ),
                       )));
             }));
     return result;
