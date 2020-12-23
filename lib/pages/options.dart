@@ -43,9 +43,11 @@ class _OptionsItem extends StatelessWidget {
 }
 
 class _BooleanItem extends StatelessWidget {
-  const _BooleanItem(this.title, this.value, this.onChanged, {this.switchKey});
+  const _BooleanItem(this.title, this.subtitle, this.value, this.onChanged,
+      {this.switchKey});
 
   final String title;
+  final String subtitle;
   final bool value;
   final ValueChanged<bool> onChanged;
   // [switchKey] is used for accessing the switch from driver tests.
@@ -58,6 +60,13 @@ class _BooleanItem extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Expanded(child: Text(title)),
+          Expanded(
+              child: Text(
+            subtitle,
+            style: TextStyle(
+              fontSize: AppConstants.OPTIONS_SUBTITLE_FONT_SIZE,
+            ),
+          )),
           Switch(
             key: switchKey,
             value: value,
@@ -136,6 +145,7 @@ class _BoldItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return _BooleanItem(
       'Bold Text',
+      '',
       StoreProvider.of<AppState>(context).state.options.bold == true,
       (bool value) {
         StoreProvider.of<AppState>(context).dispatch(ToggleBoldAction(value));
@@ -152,6 +162,7 @@ class _KeepScreenAwakeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return _BooleanItem(
       'Keep Screen Awake',
+      'Requires Wake Lock Permission',
       StoreProvider.of<AppState>(context).state.options.screenAwake == true,
       (bool value) {
         StoreProvider.of<AppState>(context)
@@ -169,6 +180,7 @@ class _SaveScrollPosItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return _BooleanItem(
       'Save Scroll Position',
+      '',
       StoreProvider.of<AppState>(context).state.options.saveScrollPosition ==
           true,
       (bool value) {
@@ -187,6 +199,7 @@ class _ShowStatusItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return _BooleanItem(
       'Show Status Bar',
+      '',
       StoreProvider.of<AppState>(context).state.options.showStatus == true,
       (bool value) {
         StoreProvider.of<AppState>(context).dispatch(ToggleStatusAction(value));
@@ -330,6 +343,7 @@ class _DoNotDisturbItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return _BooleanItem(
       'Do Not Disturb',
+      'Requires Notification Permission',
       StoreProvider.of<AppState>(context).state.options.doNotDisturb == true,
       (bool value) {
         StoreProvider.of<AppState>(context).dispatch(ToggleDNDAction(value,

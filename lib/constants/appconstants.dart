@@ -50,6 +50,7 @@ class AppConstants {
   static const String FEEDBACK_URL =
       'https://github.com/debuggdapps/nitnem/issues/new';
   static const String OPTIONS_SHAREDPREF_KEY = 'OPTIONS';
+  static const double OPTIONS_SUBTITLE_FONT_SIZE = 10.0;
   static const int DEVICE_SMALL_RES = 320;
   static const bool LOGGING_ENABLED = !kReleaseMode;
 }
