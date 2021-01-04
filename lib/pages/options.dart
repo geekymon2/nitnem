@@ -382,7 +382,9 @@ class OptionsPage extends StatelessWidget {
       const _Heading('Gurbani'),
       _LanguageItem(readerMode),
       _SaveScrollPosItem(),
-      _DoNotDisturbItem(),
+      (defaultTargetPlatform == TargetPlatform.android)
+          ? _DoNotDisturbItem()
+          : Container(),
     ];
 
     //define all widgets including all options widgets first.
