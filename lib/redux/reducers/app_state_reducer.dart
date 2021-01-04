@@ -55,6 +55,7 @@ AppState appReducer(AppState state, dynamic action) {
             saveScrollPosReducer(state.options.saveScrollPosition, action),
         scrollOffset: scrollPercReducer(state.options.scrollOffset, action),
         doNotDisturb: dndReducer(state.options.doNotDisturb, action),
+        hasNPAccess: state.options.hasNPAccess,
       ),
       showReaderOptions: readerOptionsReducer(state.showReaderOptions, action),
       pathData: pathDataReducer(state.pathData, action),
