@@ -10,12 +10,13 @@ bool _activeDNDReducer(bool isDND, ToggleDNDAction action) {
   if (action.isDnd) {
     if (action.hasNPAccess) {
       FlutterDnd.setInterruptionFilter(
-          FlutterDnd.INTERRUPTION_FILTER_ALL); //Turn on DND
+          FlutterDnd.INTERRUPTION_FILTER_NONE); //Supress All Notifications
     } else {
       FlutterDnd.gotoPolicySettings();
     }
   } else {
-    FlutterDnd.setInterruptionFilter(FlutterDnd.INTERRUPTION_FILTER_NONE);
+    FlutterDnd.setInterruptionFilter(
+        FlutterDnd.INTERRUPTION_FILTER_ALL); //No notifications are supressed
   }
 
   return action.isDnd;
