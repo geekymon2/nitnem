@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:nitnem/common/printmessage.dart';
 import 'package:nitnem/constants/appconstants.dart';
@@ -123,7 +124,9 @@ void saveOptionsToPrefs(AppOptions options) async {
 Future<AppOptions> loadOptionsFromPrefs() async {
   bool hasNPAccess = false;
   AppOptions options = AppOptions.initial();
-  hasNPAccess = await FlutterDnd.isNotificationPolicyAccessGranted;
+  if (defaultTargetPlatform == TargetPlatform.android) {
+    hasNPAccess = await FlutterDnd.isNotificationPolicyAccessGranted;
+  }
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var stateString = preferences.getString(AppConstants.OPTIONS_SHAREDPREF_KEY);
   if (stateString != null) {
