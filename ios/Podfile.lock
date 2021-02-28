@@ -1,6 +1,10 @@
 PODS:
+  - battery (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - package_info (0.0.1):
+    - Flutter
+  - screen (0.0.1):
     - Flutter
   - shared_preferences (0.0.1):
     - Flutter
@@ -8,27 +12,35 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - Flutter (from `.symlinks/flutter/ios`)
+  - battery (from `.symlinks/plugins/battery/ios`)
+  - Flutter (from `Flutter`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
+  - screen (from `.symlinks/plugins/screen/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
 
 EXTERNAL SOURCES:
+  battery:
+    :path: ".symlinks/plugins/battery/ios"
   Flutter:
-    :path: ".symlinks/flutter/ios"
+    :path: Flutter
   package_info:
     :path: ".symlinks/plugins/package_info/ios"
+  screen:
+    :path: ".symlinks/plugins/screen/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
   url_launcher:
     :path: ".symlinks/plugins/url_launcher/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
-  package_info: 78cabb3c322943c55d39676f4a5bfc748c01d055
-  shared_preferences: 1feebfa37bb57264736e16865e7ffae7fc99b523
+  battery: 6b19dafdbba590f03b1f0cd2f1224e3ffedadbe6
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  package_info: 873975fc26034f0b863a300ad47e7f1ac6c7ec62
+  screen: abd91ca7bf3426e1cc3646d27e9b2358d6bf07b0
+  shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   url_launcher: 0067ddb8f10d36786672aa0722a21717dba3a298
 
-PODFILE CHECKSUM: aff02bfeed411c636180d6812254b2daeea14d09
+PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.10.0

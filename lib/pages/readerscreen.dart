@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -39,16 +40,18 @@ class _MyReaderPageState extends State<ReaderScreen> {
         (Timer t) => _updateStatusTime());
 
     //init status bar battery indicator
-    _battery = Battery();
-    _battery.batteryLevel.then((level) {
-      store.dispatch(UpdateStatusBatteryPercAction(level));
-    });
-
-    _battery.onBatteryStateChanged.listen((BatteryState state) {
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      _battery = Battery();
       _battery.batteryLevel.then((level) {
         store.dispatch(UpdateStatusBatteryPercAction(level));
       });
-    });
+
+      _battery.onBatteryStateChanged.listen((BatteryState state) {
+        _battery.batteryLevel.then((level) {
+          store.dispatch(UpdateStatusBatteryPercAction(level));
+        });
+      });
+    }
 
     //init the scroll controller, lets set the initial state to beginning.
     //wait a bit to let all async actions to finish before scrolling to position.
@@ -222,6 +225,10 @@ class _MyReaderPageState extends State<ReaderScreen> {
                             textScaleFactor: 1.0,
                           ),
                           child: new Container(
+                            height: (defaultTargetPlatform ==
+                                    TargetPlatform.android)
+                                ? 20.0
+                                : 50.0,
                             child: Padding(
                               padding: const EdgeInsets.all(
                                   AppConstants.STATUSBAR_PADDING),
@@ -231,9 +238,17 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                       flex: 1,
                                       child: new Row(
                                         children: <Widget>[
-                                          Icon(Icons.battery_std, size: 12),
+                                          (defaultTargetPlatform ==
+                                                  TargetPlatform.android)
+                                              ? Icon(Icons.battery_std,
+                                                  size: 12)
+                                              : Container(),
                                           Text(
-                                            vm.batteryPerc.toString() + "%",
+                                            (defaultTargetPlatform ==
+                                                    TargetPlatform.android)
+                                                ? vm.batteryPerc.toString() +
+                                                    "%"
+                                                : "",
                                             textAlign: TextAlign.left,
                                             style: new TextStyle(
                                               fontFamily: AppConstants
@@ -287,12 +302,15 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                     ),
                                   ),
                                   Expanded(
-                                    flex: 1,
+                                    flex: (defaultTargetPlatform ==
+                                            TargetPlatform.android)
+                                        ? 1
+                                        : 2,
                                     child: Text(
                                       _calculateScrollPerc(
                                               vm.scrollOffset, vm.maxOffset) +
                                           "%",
-                                      textAlign: TextAlign.right,
+                                      textAlign: TextAlign.center,
                                       style: new TextStyle(
                                         fontFamily:
                                             AppConstants.STATUSBAR_FONT_FAMILY,
