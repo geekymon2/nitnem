@@ -14,5 +14,6 @@ class PathTileData {
     new PathTile(
         9, 'Dukh Bhanjani Sahib', 'duK BMjnI swihb', 'dukh_bhanjani_sahib'),
     new PathTile(10, 'Sohila Sahib', 'soihlw swihb', 'sohila_sahib'),
+    new PathTile(11, 'Aarti-Aarta', 'AwrqI-Awrqw', 'aarti_aarta'),
   ];
 }
