@@ -19,25 +19,25 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  backdrop: ^0.5.1
-  url_launcher: 5.0.2
-  package_info: ^0.4.0+11
-  shared_preferences: ^0.5.2
-  json_serializable: ^2.2.2
-  intl: ^0.15.8
-  redux: ^3.0.0
-  flutter_redux: ^0.5.3
-  battery: ^1.0.11
-  provider: ^3.0.0
+  backdrop: ^0.6.1
+  url_launcher: ^6.0.6
+  package_info: ^2.0.2
+  shared_preferences: ^2.0.6
+  json_serializable: ^4.1.3
+  intl: ^0.17.0
+  redux: ^5.0.0
+  flutter_redux: ^0.8.2
+  battery: ^2.0.3
+  provider: ^5.0.0
   screen: ^0.0.5
   flutter_dnd: ^0.1.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
+  cupertino_icons: ^1.0.2
 
 dev_dependencies:
-  flutter_launcher_icons: "^0.7.0"
+  flutter_launcher_icons: "^0.9.0"
   flutter_test:
     sdk: flutter
 
@@ -80,6 +80,9 @@ flutter:
     - assets/path/ardas_pa.txt
     - assets/path/ardas_en.txt
     - assets/path/ardas_hi.txt
+    - assets/path/aarti_aarta_pa.txt
+    - assets/path/aarti_aarta_en.txt
+    - assets/path/aarti_aarta_hi.txt    
     - assets/path/sukhmani_sahib_pa.txt
     - assets/path/sukhmani_sahib_en.txt
     - assets/path/sukhmani_sahib_hi.txt

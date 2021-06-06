@@ -25,15 +25,12 @@ ThemeData buildForestTheme() {
   
   final ThemeData base = ThemeData(
     brightness: Brightness.light,
-    accentColorBrightness: Brightness.dark,
     colorScheme: colorScheme,
     primaryColor: primaryColor,
-    buttonColor: primaryColor,
     indicatorColor: Colors.white,
     toggleableActiveColor: const Color(0xff81c784),
     splashColor: Colors.white24,
     splashFactory: InkRipple.splashFactory,
-    accentColor: secondaryColor,
     canvasColor: Colors.white,
     scaffoldBackgroundColor: Colors.white,
     backgroundColor: Colors.white,
@@ -70,6 +67,5 @@ ThemeData buildForestTheme() {
   return base.copyWith(
     textTheme: buildTextTheme(base.textTheme),
     primaryTextTheme: buildTextTheme(base.primaryTextTheme),
-    accentTextTheme: buildTextTheme(base.accentTextTheme),
   );
 }

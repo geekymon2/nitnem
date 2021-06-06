@@ -55,7 +55,7 @@ void aboutNitnem(BuildContext context) {
         ),
       ),
       actions: <Widget>[
-        FlatButton(child: Text('Ok'),
+        TextButton(child: Text('Ok'),
           onPressed: () => Navigator.pop(context, 'Ok')
         )
       ]

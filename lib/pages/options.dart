@@ -2,12 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:nitnem/common/printmessage.dart';
-import 'package:nitnem/redux/actions/actions.dart';
-import 'package:nitnem/models/language.dart';
-import 'package:nitnem/data/languagedata.dart';
-import 'package:nitnem/models/themes.dart';
 import 'package:nitnem/constants/appconstants.dart';
+import 'package:nitnem/data/languagedata.dart';
+import 'package:nitnem/models/language.dart';
+import 'package:nitnem/models/themes.dart';
+import 'package:nitnem/redux/actions/actions.dart';
 import 'package:nitnem/state/appstate.dart';
+
 import 'about.dart';
 
 const double _kItemHeight = 48.0;
@@ -104,8 +105,7 @@ class _FlatButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
-      padding: EdgeInsets.zero,
+    return TextButton(
       onPressed: onPressed,
       child: DefaultTextStyle(
         style: Theme.of(context).primaryTextTheme.subtitle1,
@@ -127,7 +127,7 @@ class _Heading extends StatelessWidget {
       child: DefaultTextStyle(
         style: theme.textTheme.bodyText2.copyWith(
           fontFamily: 'GoogleSans',
-          color: theme.accentColor,
+          color: theme.colorScheme.secondary,
         ),
         child: Semantics(
           child: Text(text),
@@ -214,7 +214,7 @@ class _ThemeChoices extends StatelessWidget {
 
   // this function will build and return the choice list
   _buildChoiceList(BuildContext context) {
-    List<Widget> choices = List();
+    List<Widget> choices = [];
     ThemeName.values.forEach((item) {
       choices.add(Container(
         padding: const EdgeInsets.all(2.0),
@@ -368,6 +368,10 @@ class OptionsPage extends StatelessWidget {
 
     final ThemeData theme = Theme.of(context);
 
+    //a blank heading is needed to fix display overlap
+    final blankWidgets = <Widget>[
+      const _Heading(''),
+    ];
     //define options widgets.
     final optWidgets = <Widget>[
       const _Heading('Themes'),
@@ -404,7 +408,9 @@ class OptionsPage extends StatelessWidget {
       style: theme.primaryTextTheme.subtitle1,
       child: ListView(
           padding: const EdgeInsets.only(bottom: 124.0),
-          children: this.readerMode ? optWidgets : optWidgets + aboutWidgets),
+          children: this.readerMode
+              ? blankWidgets + optWidgets
+              : optWidgets + aboutWidgets),
     );
   }
 }

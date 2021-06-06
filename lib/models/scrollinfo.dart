@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class ScrollInfo {
   int _id;
   double _scrollOffset;

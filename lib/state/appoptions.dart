@@ -9,7 +9,7 @@ import 'package:nitnem/models/themes.dart';
 import 'dart:convert';
 
 @immutable
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class AppOptions {
   AppOptions(
       {this.themeName,
