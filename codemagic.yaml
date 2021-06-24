@@ -27,17 +27,14 @@ workflows:
           include: true
     scripts:
       - |
-        # set up debug keystore
-        rm -f ~/.android/debug.keystore
-        keytool -genkeypair \
-          -alias androiddebugkey \
-          -keypass android \
-          -keystore ~/.android/debug.keystore \
-          -storepass android \
-          -dname 'CN=Android Debug,O=Android,C=US' \
-          -keyalg 'RSA' \
-          -keysize 2048 \
-          -validity 10000
+        # set up release keystore
+        echo $FCI_KEYSTORE | base64 --decode > $FCI_KEYSTORE_PATH
+        cat >> "$FCI_BUILD_DIR/project_directory/android/key.properties" <<EOF
+        storePassword=$FCI_KEYSTORE_PASSWORD
+        keyPassword=$FCI_KEY_PASSWORD
+        keyAlias=$FCI_KEY_ALIAS
+        storeFile=$FCI_KEYSTORE_PATH
+        EOF    
       - |
         # set up local properties
         echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
