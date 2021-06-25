@@ -1,6 +1,3 @@
-# Automatically generated on 2021-06-23 UTC from https://codemagic.io/app/60bc8fed639c3efcd5c9e4eb/settings
-# Note that this configuration is not an exact match to UI settings. Review and adjust as necessary.
-
 workflows:
   release-build---google-play-and-app-store:
     name: Release Build - Google Play and App Store
