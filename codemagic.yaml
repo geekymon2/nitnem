@@ -39,7 +39,7 @@ workflows:
       - flutter packages pub get
       - flutter config --enable-web
       - flutter test
-      - flutter build appbundle --release --build-name=2.0.$BUILD_NUMBER --build-number=$BUILD_NUMBER+100
+      - flutter build appbundle --release --build-name=2.0.$BUILD_NUMBER --build-number=$(($BUILD_NUMBER + 100))
       - find . -name "Podfile" -execdir pod install \;
       - flutter build ios --release --no-codesign
       - |
