@@ -39,11 +39,12 @@ void main() {
               6, 'Tav-Prasad Savaiye', 'qÍ pRswid sv`X', 'tavprasad_savaiye'),
           new PathTile(7, 'Ardas', 'Ardws', 'ardas'),
           new PathTile(8, 'Sukhmani Sahib', 'suKmnI swihb', 'sukhmani_sahib'),
-          //For some reason the last tile cannot be found.
-          //new PathTile(9, 'Dukh Bhanjani Sahib', 'duK BMjnI swihb', 'dukh_bhanjani_sahib'),
+          new PathTile(9, 'Dukh Bhanjani Sahib', 'duK BMjnI swihb', 'dukh_bhanjani_sahib'),
+          new PathTile(10, 'Sohila Sahib', 'soihlw swihb', 'sohila_sahib'),
+          new PathTile(11, 'Aarti', 'AwrqI', 'aarti_aarta'),          
         ];
         // Verify that our home screen has the expected components.
-        items.forEach((item) => expect(find.text(item.title), findsOneWidget));
+        items.forEach((item) => expect(find.text(item.title, skipOffstage: false), findsOneWidget));
       });
     },
   );
