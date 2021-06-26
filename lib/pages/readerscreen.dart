@@ -1,22 +1,22 @@
 import 'dart:async';
 
+import 'package:battery/battery.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:intl/intl.dart';
 import 'package:nitnem/common/printmessage.dart';
+import 'package:nitnem/constants/appconstants.dart';
 import 'package:nitnem/data/themedata.dart';
 import 'package:nitnem/models/language.dart';
-import 'package:nitnem/constants/appconstants.dart';
-import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:nitnem/models/scrollinfo.dart';
 import 'package:nitnem/pages/options.dart';
 import 'package:nitnem/redux/actions/actions.dart';
 import 'package:nitnem/redux/selectors/selectors.dart';
 import 'package:nitnem/state/appstate.dart';
 import 'package:redux/redux.dart';
-import 'package:battery/battery.dart';
 
 class ReaderScreen extends StatefulWidget {
   ReaderScreen({
@@ -255,7 +255,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                                   .STATUSBAR_FONT_FAMILY,
                                               fontSize: AppConstants
                                                   .STATUSBAR_FONT_SIZE,
-                                              fontWeight: FontWeight.bold,
+                                              fontWeight: FontWeight.normal,
                                             ),
                                           )
                                         ],
@@ -270,7 +270,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                               .STATUSBAR_FONT_FAMILY,
                                           fontSize:
                                               AppConstants.STATUSBAR_FONT_SIZE,
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.normal,
                                         ),
                                       )),
                                   Expanded(
@@ -316,7 +316,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                             AppConstants.STATUSBAR_FONT_FAMILY,
                                         fontSize:
                                             AppConstants.STATUSBAR_FONT_SIZE,
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.normal,
                                       ),
                                     ),
                                   ),

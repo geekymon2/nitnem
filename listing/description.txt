@@ -1,8 +1,8 @@
 Pyari Sangat Ji, Waheguru ji ka Khalsa, Waheguru ji ki Fateh.
 
-Nitnem App contains the following baanis.
+Nitnem App contains the following Baanis.
 
-Please respectfully cover you head and remove your shoes before reciting gurbani.
+Please respectfully cover you head and remove your shoes before reciting Gurbani.
 
 * Japji Sahib
 * Jaap Sahib
@@ -11,11 +11,20 @@ Please respectfully cover you head and remove your shoes before reciting gurbani
 * Rehras Sahib
 * Tav-Prasad Savaiye
 * Ardas
+* Sukhmani Sahib
+* Dukh Bhanjani Sahib
+* Kirtan Sohila Sahib
+* Aarti Arta
 
 Other features of Nitnem App.
 * Change font size.
-* Change theme to dark mode.
-* Bold and Unbold Reading Text.
+* Change themes.
+* Bold/Unbold Reading Text.
 * Settings saved automatically.
+* Scrollbar on the reading screen.
+* Save scrolling position.
+* Keep screen awake.
+* Statusbar to display time, battery and scroll position.
+* Enable Do not Disturb
 
-Nitnem App sewa by Debuggd Apps. Bhul chuk maaf, for any correction, suggestions or feedback please contact me at debuggdapps@gmail.com.
+Nitnem App sewa. Bhul chuk maaf, for any correction, suggestions or feedback please contact at geekymon2@gmail.com.

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nitnem/constants/appconstants.dart';
 
 class NitnemIcon extends StatelessWidget {
   @override
@@ -35,7 +36,7 @@ void aboutNitnem(BuildContext context) {
             children: <TextSpan>[
               TextSpan(
                 style: aboutTextStyle,
-                text: 'Waheguruji ka Khalsa, Waheguruji ki Fateh, Sangat Ji, For any mistakes please sent an email to debuggdapps@gmail.com so that they can be corrected.\n',
+                text: 'Waheguruji ka Khalsa, Waheguruji ki Fateh, Sangat Ji, For any mistakes please sent an email to ' + AppConstants.CONTACT_EMAIL + ' so that they can be corrected.\n',
               ),
               TextSpan(
                 style: aboutTextStyle,

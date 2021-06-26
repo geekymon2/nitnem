@@ -17645,7 +17645,7 @@ f=$.ahy().$2(a.e,b)
 e=$.ahx().$2(a.x,b)
 d=new Z.bZ(new G.jn(s,q,p,o,n,m,l,k,j,r.z),i,h,g,f,$.ahF().$2(a.f,b),$.ahm().$2(a.r,b),e)}else d=null
 if(b instanceof U.u8)d=a.hf(b.a)
-if(b instanceof U.Ex){T.a7f("https://github.com/debuggdapps/nitnem/issues/new",!1)
+if(b instanceof U.Ex){T.a7f("https://github.com/geekymon2/nitnem/issues/new",!1)
 d=a}J.bI(d)
 return d}},B={
 aml:function(a){return new B.fV(a,new P.bE(t.E))},
@@ -59461,7 +59461,7 @@ E:function(a,b){var s=null
 return M.bD(s,U.abR(64,new L.jo("assets/images/khanda.png",s,s),64),C.m,s,s,s,s,s,s,s,s,s,s,s)}}
 A.a6z.prototype={
 $1:function(a){var s=null,r=t.Z,q=this.a
-return new E.n6(T.mc(H.c([new A.Cq(s),new T.cg(C.zS,L.cl("About Nitnem",s,s,C.c6),s)],r),C.ap,C.aq,C.a7),new T.cg(C.zQ,T.a8M(s,s,C.av,!0,s,new Q.f5(s,H.c([new Q.f5("Waheguruji ka Khalsa, Waheguruji ki Fateh, Sangat Ji, For any mistakes please sent an email to debuggdapps@gmail.com so that they can be corrected.\n",s,q),new Q.f5("\n[CREDITS]\n",s,q),new Q.f5("Khanda Icon: www.flaticon.com\nForest Background: by kotkoa - www.freepik.com\nStars Bacground: by 0melapics - www.freepik.com\nWood Bacground: by Olga_spb - www.freepik.com\nFloral Bacground: by visnezh - www.freepik.com\nEthnic Background: by visnezh - www.freepik.com\n",s,q)],t.hv),s),C.aV,s,s,1,C.V),s),H.c([N.abz(L.cl("Ok",s,s,s),new A.a6y(a),s)],r),s)},
+return new E.n6(T.mc(H.c([new A.Cq(s),new T.cg(C.zS,L.cl("About Nitnem",s,s,C.c6),s)],r),C.ap,C.aq,C.a7),new T.cg(C.zQ,T.a8M(s,s,C.av,!0,s,new Q.f5(s,H.c([new Q.f5("Waheguruji ka Khalsa, Waheguruji ki Fateh, Sangat Ji, For any mistakes please sent an email to geekymon2@gmail.com so that they can be corrected.\n",s,q),new Q.f5("\n[CREDITS]\n",s,q),new Q.f5("Khanda Icon: www.flaticon.com\nForest Background: by kotkoa - www.freepik.com\nStars Bacground: by 0melapics - www.freepik.com\nWood Bacground: by Olga_spb - www.freepik.com\nFloral Bacground: by visnezh - www.freepik.com\nEthnic Background: by visnezh - www.freepik.com\n",s,q)],t.hv),s),C.aV,s,s,1,C.V),s),H.c([N.abz(L.cl("Ok",s,s,s),new A.a6y(a),s)],r),s)},
 $S:366}
 A.a6y.prototype={
 $0:function(){K.hs(this.a,!1).ot(0,"Ok")
