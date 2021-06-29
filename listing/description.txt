@@ -1,3 +1,7 @@
+Nitnem Path - Gurbani
+
+Nitnem Path - Gurbani Shabad in Gurmukhi, Hindi and English
+
 Pyari Sangat Ji, Waheguru ji ka Khalsa, Waheguru ji ki Fateh.
 
 Nitnem App contains the following Baanis.
@@ -14,7 +18,7 @@ Please respectfully cover you head and remove your shoes before reciting Gurbani
 * Sukhmani Sahib
 * Dukh Bhanjani Sahib
 * Kirtan Sohila Sahib
-* Aarti Arta
+* Aarti
 
 Other features of Nitnem App.
 * Change font size.
@@ -25,6 +29,5 @@ Other features of Nitnem App.
 * Save scrolling position.
 * Keep screen awake.
 * Statusbar to display time, battery and scroll position.
-* Enable Do not Disturb
 
-Nitnem App sewa. Bhul chuk maaf, for any correction, suggestions or feedback please contact at geekymon2@gmail.com.
+Nitnem App sewa bhul chuk maaf, for any correction, suggestions or feedback please contact at geekymon2@gmail.com.
