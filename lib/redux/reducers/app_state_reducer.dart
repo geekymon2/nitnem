@@ -51,8 +51,7 @@ AppState? appReducer(AppState? state, dynamic action) {
         textScaleValue: textScaleReducer(state?.options?.textScaleValue, action),
         languageName: languageReducer(state?.options?.languageName, action),
         screenAwake: screenAwakeReducer(state?.options?.screenAwake, action),
-        saveScrollPosition:
-            saveScrollPosReducer(state?.options?.saveScrollPosition, action),
+        saveScrollPosition: saveScrollPosReducer(state?.options?.saveScrollPosition, action),
         scrollOffset: scrollPercReducer(state?.options?.scrollOffset, action),
         doNotDisturb: dndReducer(state?.options?.doNotDisturb, action),
         hasNPAccess: state?.options?.hasNPAccess,
@@ -75,7 +74,9 @@ AppState? appReducer(AppState? state, dynamic action) {
 
   if (action is SendFeedbackAction) {
     newState = state;
-    launch(AppConstants.FEEDBACK_URL, forceSafariVC: false);
+    Uri uri = Uri.https(
+        AppConstants.FEEDBACK_URI_DOMAIN, AppConstants.FEEDBACK_URI_PATH);
+    launchUrl(uri);
     printInfoMessage('Sending feedback');
   }
 

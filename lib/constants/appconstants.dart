@@ -47,8 +47,8 @@ class AppConstants {
   static const double READERTHEME_BACK_OPACITY = 0.40;
 
   //Others
-  static const String FEEDBACK_URL =
-      'https://github.com/geekymon2/nitnem/issues/new';
+  static const String FEEDBACK_URI_PATH = '/geekymon2/nitnem/issues/new';
+  static const String FEEDBACK_URI_DOMAIN = 'github.com';
   static const String CONTACT_EMAIL = 'geekymon2@gmail.com';
   static const String OPTIONS_SHAREDPREF_KEY = 'OPTIONS';
   static const double OPTIONS_SUBTITLE_FONT_SIZE = 10.0;

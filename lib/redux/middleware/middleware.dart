@@ -12,8 +12,7 @@ import 'package:nitnem/state/appoptions.dart';
 import 'package:nitnem/state/appstate.dart';
 import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:screen/screen.dart';
+import 'package:wakelock/wakelock.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_dnd/flutter_dnd.dart';
 
@@ -22,7 +21,7 @@ void storeOptionsMiddleware(
   AppState? state = store.state;
 
   if (action is ToggleScreenAwakeAction) {
-    Screen.keepOn(action.isAwake);
+    Wakelock.toggle(enable: action.isAwake);
     state = state!.copyWith(
         options: state.options!.copyWith(screenAwake: action.isAwake));
     saveOptionsToPrefs(state.options);
@@ -35,8 +34,8 @@ void storeOptionsMiddleware(
   }
 
   if (action is ToggleDNDAction) {
-    state = state!.copyWith(
-        options: state.options!.copyWith(doNotDisturb: action.isDnd));
+    state = state!
+        .copyWith(options: state.options!.copyWith(doNotDisturb: action.isDnd));
     saveOptionsToPrefs(state.options);
   }
 
@@ -109,7 +108,7 @@ void storeOptionsMiddleware(
   }
 
   if (action is OptionsLoadedAction) {
-    Screen.keepOn(action.options!.screenAwake);
+    Wakelock.toggle(enable: action.options!.screenAwake!);
   }
 
   next(action);
