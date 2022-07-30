@@ -22,8 +22,8 @@ import 'textscalereducer.dart';
 import 'themereducer.dart';
 import 'dndreducer.dart';
 
-AppState? appReducer(AppState? state, dynamic action) {
-  AppState? newState;
+AppState appReducer(AppState state, dynamic action) {
+  AppState newState = AppState(options: AppOptions.initial());
 
   printInfoMessage('[ACTION] ${action.runtimeType}');
   if (action is TextScaleAction ||
@@ -45,30 +45,30 @@ AppState? appReducer(AppState? state, dynamic action) {
       action is ToggleDNDAction) {
     newState = AppState(
       options: AppOptions(
-        themeName: themeReducer(state?.options?.themeName, action),
-        bold: boldReducer(state?.options?.bold, action),
-        showStatus: statusReducer(state?.options?.showStatus, action),
-        textScaleValue: textScaleReducer(state?.options?.textScaleValue, action),
-        languageName: languageReducer(state?.options?.languageName, action),
-        screenAwake: screenAwakeReducer(state?.options?.screenAwake, action),
-        saveScrollPosition: saveScrollPosReducer(state?.options?.saveScrollPosition, action),
-        scrollOffset: scrollPercReducer(state?.options?.scrollOffset, action),
-        doNotDisturb: dndReducer(state?.options?.doNotDisturb, action),
-        hasNPAccess: state?.options?.hasNPAccess,
+        themeName: themeReducer(state.options.themeName, action),
+        bold: boldReducer(state.options.bold, action),
+        showStatus: statusReducer(state.options.showStatus, action),
+        textScaleValue: textScaleReducer(state.options.textScaleValue, action),
+        languageName: languageReducer(state.options.languageName, action),
+        screenAwake: screenAwakeReducer(state.options.screenAwake, action),
+        saveScrollPosition: saveScrollPosReducer(state.options.saveScrollPosition, action),
+        scrollOffset: scrollPercReducer(state.options.scrollOffset, action),
+        doNotDisturb: dndReducer(state.options.doNotDisturb, action),
+        hasNPAccess: state.options.hasNPAccess,
       ),
-      showReaderOptions: readerOptionsReducer(state?.showReaderOptions, action),
-      pathData: pathDataReducer(state?.pathData, action),
-      pathFilePrefix: pathFilePrefixReducer(state?.pathFilePrefix, action),
-      pathTitle: pathTitleReducer(state?.pathTitle, action),
-      pathId: pathIdReducer(state?.pathId, action),
-      statusTime: statusTimeReducer(state?.statusTime, action),
-      batteryPerc: batteryPercReducer(state?.batteryPerc, action),
+      showReaderOptions: readerOptionsReducer(state.showReaderOptions, action),
+      pathData: pathDataReducer(state.pathData, action),
+      pathFilePrefix: pathFilePrefixReducer(state.pathFilePrefix, action),
+      pathTitle: pathTitleReducer(state.pathTitle, action),
+      pathId: pathIdReducer(state.pathId, action),
+      statusTime: statusTimeReducer(state.statusTime, action),
+      batteryPerc: batteryPercReducer(state.batteryPerc, action),
     );
     printInfoMessage('Option Changed');
   }
 
   if (action is OptionsLoadedAction) {
-    newState = state?.copyWith(options: action.options);
+    newState = state.copyWith(options: action.options);
     printInfoMessage('Options Loaded');
   }
 

@@ -43,7 +43,7 @@ class ToggleStatusAction {
 class OptionsNotLoadedAction {}
 
 class OptionsLoadedAction {
-  final AppOptions? options;
+  final AppOptions options;
 
   OptionsLoadedAction(this.options);
 }

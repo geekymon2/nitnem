@@ -11,15 +11,15 @@ import 'dart:convert';
 class AppOptions {
   AppOptions(
       {this.themeName,
-       this.bold,
-       this.showStatus,
-       this.textScaleValue,
-       this.languageName,
-       this.screenAwake,
-       this.saveScrollPosition,
-       this.scrollOffset,
-       this.doNotDisturb,
-       this.hasNPAccess});
+      this.bold,
+      this.showStatus,
+      this.textScaleValue,
+      this.languageName,
+      this.screenAwake,
+      this.saveScrollPosition,
+      this.scrollOffset,
+      this.doNotDisturb,
+      this.hasNPAccess});
 
   final String? themeName;
   final bool? bold;
@@ -46,7 +46,7 @@ class AppOptions {
       doNotDisturb: false,
       hasNPAccess: false);
 
-  AppOptions? copyWith(
+  AppOptions copyWith(
       {String? themeName,
       bool? bold,
       bool? showStatus,
@@ -57,7 +57,7 @@ class AppOptions {
       Map<String, ScrollInfo>? scrollOffset,
       bool? doNotDisturb,
       bool? hasNPAccess}) {
-    AppOptions(
+    return AppOptions(
         themeName: themeName,
         bold: bold,
         showStatus: showStatus,
@@ -68,7 +68,6 @@ class AppOptions {
         scrollOffset: scrollOffset,
         doNotDisturb: doNotDisturb,
         hasNPAccess: hasNPAccess);
-    return null;
   }
 
   @override

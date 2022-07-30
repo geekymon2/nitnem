@@ -12,14 +12,14 @@ import 'package:nitnem/pages/homescreen.dart';
 import 'models/themes.dart';
 
 class NitnemApp extends StatelessWidget {
-  final Store<AppState?> store;
+  final Store<AppState> store;
   NitnemApp(this.store);
 
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState?>(
       store: store,
-      child: new StoreConnector<AppState, _ViewModel>(
+      child: new StoreConnector<AppState?, _ViewModel>(
         converter: _ViewModel.fromStore,
         onInit: (store) => store.dispatch(FetchOptionsAction()),
         builder: (context, vm) => MaterialApp (
@@ -68,9 +68,9 @@ class _ViewModel {
   final String themeName;
   _ViewModel({required this.themeName});
 
-  static _ViewModel fromStore(Store<AppState> store) {
+  static _ViewModel fromStore(Store<AppState?> store) {
     return _ViewModel(
-      themeName: themeSelector(store.state)!,
+      themeName: themeSelector(store.state!)!,
     );
   }
 

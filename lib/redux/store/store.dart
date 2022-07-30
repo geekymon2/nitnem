@@ -4,7 +4,7 @@ import 'package:redux/redux.dart';
 import 'package:nitnem/redux/reducers/app_state_reducer.dart';
 
 
-Future<Store<AppState?>> createStore() async {
+Future<Store<AppState>> createStore() async {
   return Store(
     appReducer,
     initialState: new AppState.initial(),

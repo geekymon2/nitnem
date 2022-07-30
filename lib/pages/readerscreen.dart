@@ -67,10 +67,10 @@ class _MyReaderPageState extends State<ReaderScreen> {
   _navigateToScrollPositionForFirstTime() {
     final int id = StoreProvider.of<AppState>(context).state.pathId!;
     final bool savePos =
-        StoreProvider.of<AppState>(context).state.options!.saveScrollPosition!;
+        StoreProvider.of<AppState>(context).state.options.saveScrollPosition!;
     final double loadedScrollOffset = StoreProvider.of<AppState>(context)
         .state
-        .options!
+        .options
         .scrollOffset![id.toString()]!
         .scrollOffset;
     final double offset = savePos ? loadedScrollOffset : 0.0;
@@ -147,7 +147,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                       image: new AssetImage("assets/themes/" +
                           StoreProvider.of<AppState>(context)
                               .state
-                              .options!
+                              .options
                               .themeName! +
                           ".jpg"),
                       repeat: ImageRepeat.repeat,

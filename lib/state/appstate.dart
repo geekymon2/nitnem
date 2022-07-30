@@ -5,7 +5,7 @@ import 'appoptions.dart';
 
 class AppState {
   AppState({
-    this.options,
+    required this.options,
     this.showReaderOptions,
     this.pathData,
     this.pathFilePrefix,
@@ -15,7 +15,7 @@ class AppState {
     this.pathId
   });
 
-  final AppOptions? options;
+  final AppOptions options;
   final bool? showReaderOptions;
   final String? pathData;
   final String? pathFilePrefix;
@@ -36,7 +36,7 @@ class AppState {
     );
 
   AppState copyWith({
-    AppOptions? options,
+    required AppOptions options,
     bool? showReaderOptions,
     String? pathData,
     String? pathFilePrefix,

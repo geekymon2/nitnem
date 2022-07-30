@@ -146,7 +146,7 @@ class _BoldItem extends StatelessWidget {
     return _BooleanItem(
       'Bold Text',
       '',
-      StoreProvider.of<AppState>(context).state.options!.bold == true,
+      StoreProvider.of<AppState>(context).state.options.bold == true,
       (bool value) {
         StoreProvider.of<AppState>(context).dispatch(ToggleBoldAction(value));
       },
@@ -163,7 +163,7 @@ class _KeepScreenAwakeItem extends StatelessWidget {
     return _BooleanItem(
       'Keep Screen Awake',
       'Requires Wake Lock Permission',
-      StoreProvider.of<AppState>(context).state.options!.screenAwake == true,
+      StoreProvider.of<AppState>(context).state.options.screenAwake == true,
       (bool value) {
         StoreProvider.of<AppState>(context)
             .dispatch(ToggleScreenAwakeAction(value));
@@ -181,7 +181,7 @@ class _SaveScrollPosItem extends StatelessWidget {
     return _BooleanItem(
       'Save Scroll Position',
       '',
-      StoreProvider.of<AppState>(context).state.options!.saveScrollPosition ==
+      StoreProvider.of<AppState>(context).state.options.saveScrollPosition ==
           true,
       (bool value) {
         StoreProvider.of<AppState>(context)
@@ -200,7 +200,7 @@ class _ShowStatusItem extends StatelessWidget {
     return _BooleanItem(
       'Show Status Bar',
       '',
-      StoreProvider.of<AppState>(context).state.options!.showStatus == true,
+      StoreProvider.of<AppState>(context).state.options.showStatus == true,
       (bool value) {
         StoreProvider.of<AppState>(context).dispatch(ToggleStatusAction(value));
       },
@@ -222,7 +222,7 @@ class _ThemeChoices extends StatelessWidget {
           label: Text(item.toString().replaceAll(
               item.runtimeType.toString() + ".", AppConstants.EMPTY_STRING)),
           selected:
-              StoreProvider.of<AppState>(context).state.options!.themeName ==
+              StoreProvider.of<AppState>(context).state.options.themeName ==
                   item.toString(),
           onSelected: (selected) {
             StoreProvider.of<AppState>(context)
@@ -259,7 +259,7 @@ class _TextScaleFactorItem extends StatelessWidget {
               children: <Widget>[
                 const Text('Text size'),
                 Text(
-                  '${StoreProvider.of<AppState>(context).state.options!.textScaleValue!.toStringAsFixed(2)}',
+                  '${StoreProvider.of<AppState>(context).state.options.textScaleValue!.toStringAsFixed(2)}',
                   style: Theme.of(context).primaryTextTheme.bodyText2,
                 ),
                 Slider(
@@ -268,7 +268,7 @@ class _TextScaleFactorItem extends StatelessWidget {
                   divisions: 15,
                   value: StoreProvider.of<AppState>(context)
                       .state
-                      .options!
+                      .options
                       .textScaleValue!,
                   onChanged: (double value) {
                     StoreProvider.of<AppState>(context)
@@ -299,7 +299,7 @@ class _LanguageItem extends StatelessWidget {
               children: <Widget>[
                 const Text('Language'),
                 Text(
-                  '${StoreProvider.of<AppState>(context).state.options!.languageName}',
+                  '${StoreProvider.of<AppState>(context).state.options.languageName}',
                   style: Theme.of(context).primaryTextTheme.bodyText2,
                 ),
               ],
@@ -344,10 +344,10 @@ class _DoNotDisturbItem extends StatelessWidget {
     return _BooleanItem(
       'Do Not Disturb',
       'Requires Notification Permission',
-      StoreProvider.of<AppState>(context).state.options!.doNotDisturb == true,
+      StoreProvider.of<AppState>(context).state.options.doNotDisturb == true,
       (bool value) {
         StoreProvider.of<AppState>(context).dispatch(ToggleDNDAction(value,
-            StoreProvider.of<AppState>(context).state.options!.hasNPAccess!));
+            StoreProvider.of<AppState>(context).state.options.hasNPAccess!));
       },
       switchKey: const Key('dnd'),
     );

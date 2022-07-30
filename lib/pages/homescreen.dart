@@ -124,7 +124,7 @@ class _ViewModel {
     return _ViewModel(
       onPathClickAction: (BuildContext ctx, PathTile path) {
         store.dispatch(
-            FetchNitnemPathAction(path, store.state.options!.languageName!));
+            FetchNitnemPathAction(path, store.state.options.languageName!));
         AppNavigator.goToReader(ctx);
       },
     );
