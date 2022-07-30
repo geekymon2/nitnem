@@ -9,9 +9,7 @@ ThemeData buildForestTheme() {
  
   final ColorScheme colorScheme = const ColorScheme.light().copyWith(
     primary: primaryColor,
-    primaryVariant: Color( 0xff388e3c ),
     secondary: secondaryColor,
-    secondaryVariant: Color( 0xff388e3c ),
     surface: Color( 0xffffffff ),
     background: Color( 0xffa5d6a7 ),
     error: Color( 0xffd32f2f ),

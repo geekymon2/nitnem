@@ -12,7 +12,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  Timer _splashTimer;
+  Timer? _splashTimer;
   String _versionName = ' ';
 
   @override

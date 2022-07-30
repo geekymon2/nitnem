@@ -14,8 +14,8 @@ class ChangeLanguageAction {
 }
 
 class ChangeLanguageAndFetchNitnemPathAction {
-  final String language;
-  final String pathFilePrefix;
+  final String? language;
+  final String? pathFilePrefix;
   ChangeLanguageAndFetchNitnemPathAction(this.language, this.pathFilePrefix);
 }
 
@@ -43,7 +43,7 @@ class ToggleStatusAction {
 class OptionsNotLoadedAction {}
 
 class OptionsLoadedAction {
-  final AppOptions options;
+  final AppOptions? options;
 
   OptionsLoadedAction(this.options);
 }

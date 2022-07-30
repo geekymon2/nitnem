@@ -12,82 +12,84 @@ import 'package:nitnem/state/appoptions.dart';
 import 'package:nitnem/state/appstate.dart';
 import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:screen/screen.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_dnd/flutter_dnd.dart';
 
 void storeOptionsMiddleware(
-    Store<AppState> store, dynamic action, NextDispatcher next) {
-  AppState state = store.state;
+    Store<AppState?> store, dynamic action, NextDispatcher next) {
+  AppState? state = store.state;
 
   if (action is ToggleScreenAwakeAction) {
     Screen.keepOn(action.isAwake);
-    state = state.copyWith(
-        options: state.options.copyWith(screenAwake: action.isAwake));
+    state = state!.copyWith(
+        options: state.options!.copyWith(screenAwake: action.isAwake));
     saveOptionsToPrefs(state.options);
   }
 
   if (action is ToggleBoldAction) {
     state =
-        state.copyWith(options: state.options.copyWith(bold: action.isBold));
+        state!.copyWith(options: state.options!.copyWith(bold: action.isBold));
     saveOptionsToPrefs(state.options);
   }
 
   if (action is ToggleDNDAction) {
-    state = state.copyWith(
-        options: state.options.copyWith(doNotDisturb: action.isDnd));
+    state = state!.copyWith(
+        options: state.options!.copyWith(doNotDisturb: action.isDnd));
     saveOptionsToPrefs(state.options);
   }
 
   if (action is UpdateStatusScrollPercentageAction) {
-    Map<String, ScrollInfo> scrollPos = state.options.scrollOffset;
+    Map<String, ScrollInfo> scrollPos = state!.options!.scrollOffset!;
     scrollPos.update(
         action.scrollInfo.id.toString(), (ScrollInfo val) => action.scrollInfo);
     state = state.copyWith(
-        options: state.options.copyWith(scrollOffset: scrollPos));
+        options: state.options!.copyWith(scrollOffset: scrollPos));
     saveOptionsToPrefs(state.options);
   }
 
   if (action is ToggleStatusAction) {
-    state = state.copyWith(
-        options: state.options.copyWith(showStatus: action.showStatus));
+    state = state!.copyWith(
+        options: state.options!.copyWith(showStatus: action.showStatus));
     saveOptionsToPrefs(state.options);
   }
 
   if (action is ToggleReadingPositionSaveAction) {
-    state = state.copyWith(
-        options: state.options.copyWith(saveScrollPosition: action.savePos));
+    state = state!.copyWith(
+        options: state.options!.copyWith(saveScrollPosition: action.savePos));
     saveOptionsToPrefs(state.options);
   }
 
   if (action is TextScaleAction) {
-    state = state.copyWith(
-        options: state.options.copyWith(textScaleValue: action.scale));
+    state = state!.copyWith(
+        options: state.options!.copyWith(textScaleValue: action.scale));
     saveOptionsToPrefs(state.options);
   }
 
   if (action is ChangeLanguageAction) {
-    state = state.copyWith(
-        options: state.options.copyWith(languageName: action.language));
+    state = state!.copyWith(
+        options: state.options!.copyWith(languageName: action.language));
     saveOptionsToPrefs(state.options);
   }
 
   if (action is ChangeLanguageAndFetchNitnemPathAction) {
-    loadAsset(action.pathFilePrefix +
+    loadAsset(action.pathFilePrefix! +
             '_' +
             getLanguageMenuItemValueByName(action.language).langCode)
         .then((pathData) {
-      state = state.copyWith(
+      state = state!.copyWith(
           pathData: pathData,
-          options: state.options.copyWith(languageName: action.language));
-      saveOptionsToPrefs(state.options);
+          options: state!.options!.copyWith(languageName: action.language));
+      saveOptionsToPrefs(state!.options);
       store.dispatch(NitnemPathLoadedAction(pathData));
     });
   }
 
   if (action is ChangeThemeAction) {
-    state = state.copyWith(
-        options: state.options.copyWith(themeName: action.themeName));
-    saveOptionsToPrefs(state.options);
+    state = state!.copyWith(
+        options: state!.options!.copyWith(themeName: action.themeName));
+    saveOptionsToPrefs(state!.options);
   }
 
   if (action is FetchOptionsAction) {
@@ -101,29 +103,29 @@ void storeOptionsMiddleware(
         getLanguageMenuItemValueByName(action.languageName).langCode;
 
     loadAsset(action.path.filePrefix + '_' + langCode).then((pathData) {
-      state = state.copyWith(pathData: pathData);
+      state = state!.copyWith(pathData: pathData);
       store.dispatch(NitnemPathLoadedAction(pathData));
     });
   }
 
   if (action is OptionsLoadedAction) {
-    Screen.keepOn(action.options.screenAwake);
+    Screen.keepOn(action.options!.screenAwake);
   }
 
   next(action);
 }
 
-void saveOptionsToPrefs(AppOptions options) async {
+void saveOptionsToPrefs(AppOptions? options) async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
-  var optionsString = json.encode(options.toJson());
+  var optionsString = json.encode(options!.toJson());
   await preferences.setString(
       AppConstants.OPTIONS_SHAREDPREF_KEY, optionsString);
   printInfoMessage('[OPTIONS SAVED]: ${options.toString()}');
 }
 
-Future<AppOptions> loadOptionsFromPrefs() async {
-  bool hasNPAccess = false;
-  AppOptions options = AppOptions.initial();
+Future<AppOptions?> loadOptionsFromPrefs() async {
+  bool? hasNPAccess = false;
+  AppOptions? options = AppOptions.initial();
   if (defaultTargetPlatform == TargetPlatform.android) {
     hasNPAccess = await FlutterDnd.isNotificationPolicyAccessGranted;
   }
@@ -150,7 +152,7 @@ Future<AppOptions> loadOptionsFromPrefs() async {
   return options;
 }
 
-Map<String, ScrollInfo> constructScrollPosMap(String scrollPosString) {
+Map<String, ScrollInfo> constructScrollPosMap(String? scrollPosString) {
   Map<String, dynamic> rawInfo;
   Map<String, ScrollInfo> scrollInfo = new Map<String, ScrollInfo>();
 

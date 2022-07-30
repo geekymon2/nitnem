@@ -16,9 +16,9 @@ const EdgeInsetsDirectional _kItemPadding =
     EdgeInsetsDirectional.only(start: 56.0);
 
 class _OptionsItem extends StatelessWidget {
-  const _OptionsItem({Key key, this.child}) : super(key: key);
+  const _OptionsItem({Key? key, this.child}) : super(key: key);
 
-  final Widget child;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class _OptionsItem extends StatelessWidget {
           overflow: TextOverflow.fade,
           child: IconTheme(
             data: Theme.of(context).primaryIconTheme,
-            child: child,
+            child: child!,
           ),
         ),
       ),
@@ -52,7 +52,7 @@ class _BooleanItem extends StatelessWidget {
   final bool value;
   final ValueChanged<bool> onChanged;
   // [switchKey] is used for accessing the switch from driver tests.
-  final Key switchKey;
+  final Key? switchKey;
 
   @override
   Widget build(BuildContext context) {
@@ -98,18 +98,18 @@ class _ActionItem extends StatelessWidget {
 }
 
 class _FlatButton extends StatelessWidget {
-  const _FlatButton({Key key, this.onPressed, this.child}) : super(key: key);
+  const _FlatButton({Key? key, this.onPressed, this.child}) : super(key: key);
 
-  final VoidCallback onPressed;
-  final Widget child;
+  final VoidCallback? onPressed;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
       child: DefaultTextStyle(
-        style: Theme.of(context).primaryTextTheme.subtitle1,
-        child: child,
+        style: Theme.of(context).primaryTextTheme.subtitle1!,
+        child: child!,
       ),
     );
   }
@@ -125,7 +125,7 @@ class _Heading extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     return _OptionsItem(
       child: DefaultTextStyle(
-        style: theme.textTheme.bodyText2.copyWith(
+        style: theme.textTheme.bodyText2!.copyWith(
           fontFamily: 'GoogleSans',
           color: theme.colorScheme.secondary,
         ),
@@ -146,7 +146,7 @@ class _BoldItem extends StatelessWidget {
     return _BooleanItem(
       'Bold Text',
       '',
-      StoreProvider.of<AppState>(context).state.options.bold == true,
+      StoreProvider.of<AppState>(context).state.options!.bold == true,
       (bool value) {
         StoreProvider.of<AppState>(context).dispatch(ToggleBoldAction(value));
       },
@@ -163,7 +163,7 @@ class _KeepScreenAwakeItem extends StatelessWidget {
     return _BooleanItem(
       'Keep Screen Awake',
       'Requires Wake Lock Permission',
-      StoreProvider.of<AppState>(context).state.options.screenAwake == true,
+      StoreProvider.of<AppState>(context).state.options!.screenAwake == true,
       (bool value) {
         StoreProvider.of<AppState>(context)
             .dispatch(ToggleScreenAwakeAction(value));
@@ -181,7 +181,7 @@ class _SaveScrollPosItem extends StatelessWidget {
     return _BooleanItem(
       'Save Scroll Position',
       '',
-      StoreProvider.of<AppState>(context).state.options.saveScrollPosition ==
+      StoreProvider.of<AppState>(context).state.options!.saveScrollPosition ==
           true,
       (bool value) {
         StoreProvider.of<AppState>(context)
@@ -200,7 +200,7 @@ class _ShowStatusItem extends StatelessWidget {
     return _BooleanItem(
       'Show Status Bar',
       '',
-      StoreProvider.of<AppState>(context).state.options.showStatus == true,
+      StoreProvider.of<AppState>(context).state.options!.showStatus == true,
       (bool value) {
         StoreProvider.of<AppState>(context).dispatch(ToggleStatusAction(value));
       },
@@ -222,7 +222,7 @@ class _ThemeChoices extends StatelessWidget {
           label: Text(item.toString().replaceAll(
               item.runtimeType.toString() + ".", AppConstants.EMPTY_STRING)),
           selected:
-              StoreProvider.of<AppState>(context).state.options.themeName ==
+              StoreProvider.of<AppState>(context).state.options!.themeName ==
                   item.toString(),
           onSelected: (selected) {
             StoreProvider.of<AppState>(context)
@@ -259,7 +259,7 @@ class _TextScaleFactorItem extends StatelessWidget {
               children: <Widget>[
                 const Text('Text size'),
                 Text(
-                  '${StoreProvider.of<AppState>(context).state.options.textScaleValue.toStringAsFixed(2)}',
+                  '${StoreProvider.of<AppState>(context).state.options!.textScaleValue!.toStringAsFixed(2)}',
                   style: Theme.of(context).primaryTextTheme.bodyText2,
                 ),
                 Slider(
@@ -268,8 +268,8 @@ class _TextScaleFactorItem extends StatelessWidget {
                   divisions: 15,
                   value: StoreProvider.of<AppState>(context)
                       .state
-                      .options
-                      .textScaleValue,
+                      .options!
+                      .textScaleValue!,
                   onChanged: (double value) {
                     StoreProvider.of<AppState>(context)
                         .dispatch(TextScaleAction(value));
@@ -299,7 +299,7 @@ class _LanguageItem extends StatelessWidget {
               children: <Widget>[
                 const Text('Language'),
                 Text(
-                  '${StoreProvider.of<AppState>(context).state.options.languageName}',
+                  '${StoreProvider.of<AppState>(context).state.options!.languageName}',
                   style: Theme.of(context).primaryTextTheme.bodyText2,
                 ),
               ],
@@ -344,10 +344,10 @@ class _DoNotDisturbItem extends StatelessWidget {
     return _BooleanItem(
       'Do Not Disturb',
       'Requires Notification Permission',
-      StoreProvider.of<AppState>(context).state.options.doNotDisturb == true,
+      StoreProvider.of<AppState>(context).state.options!.doNotDisturb == true,
       (bool value) {
         StoreProvider.of<AppState>(context).dispatch(ToggleDNDAction(value,
-            StoreProvider.of<AppState>(context).state.options.hasNPAccess));
+            StoreProvider.of<AppState>(context).state.options!.hasNPAccess!));
       },
       switchKey: const Key('dnd'),
     );
@@ -356,8 +356,8 @@ class _DoNotDisturbItem extends StatelessWidget {
 
 class OptionsPage extends StatelessWidget {
   const OptionsPage({
-    Key key,
-    @required this.readerMode,
+    Key? key,
+    required this.readerMode,
   }) : super(key: key);
 
   final bool readerMode;
@@ -405,7 +405,7 @@ class OptionsPage extends StatelessWidget {
 
     printInfoMessage('[BUILD] Options Completed');
     return DefaultTextStyle(
-      style: theme.primaryTextTheme.subtitle1,
+      style: theme.primaryTextTheme.subtitle1!,
       child: ListView(
           padding: const EdgeInsets.only(bottom: 124.0),
           children: this.readerMode

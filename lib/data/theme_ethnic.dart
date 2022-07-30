@@ -9,9 +9,7 @@ ThemeData buildEthnicTheme() {
  
   final ColorScheme colorScheme = const ColorScheme.light().copyWith(
         primary: primaryColor,
-        primaryVariant: Color( 0xfff57c00 ),
         secondary: secondaryColor,
-        secondaryVariant: Color( 0xfff57c00 ),
         surface: Color( 0xffffffff ),
         background: Color( 0xffffcc80 ),
         error: Color( 0xffd32f2f ),

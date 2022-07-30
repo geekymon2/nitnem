@@ -15,14 +15,14 @@ class AppState {
     this.pathId
   });
 
-  final AppOptions options;
-  final bool showReaderOptions;
-  final String pathData;
-  final String pathFilePrefix;
-  final String pathTitle;
-  final String statusTime;
-  final int batteryPerc;
-  final int pathId;
+  final AppOptions? options;
+  final bool? showReaderOptions;
+  final String? pathData;
+  final String? pathFilePrefix;
+  final String? pathTitle;
+  final String? statusTime;
+  final int? batteryPerc;
+  final int? pathId;
 
   factory AppState.initial() => AppState(
     options: AppOptions.initial(),
@@ -36,19 +36,19 @@ class AppState {
     );
 
   AppState copyWith({
-    AppOptions options,
-    bool showReaderOptions,
-    String pathData,
-    String pathFilePrefix,
-    String pathTitle,
-    double scrollPerc,
-    String statusTime,
-    int batteryPerc,
-    int pathId,
+    AppOptions? options,
+    bool? showReaderOptions,
+    String? pathData,
+    String? pathFilePrefix,
+    String? pathTitle,
+    double? scrollPerc,
+    String? statusTime,
+    int? batteryPerc,
+    int? pathId,
     }) {
     return AppState(
-      options: options ?? this.options,
-      showReaderOptions: showReaderOptions ?? this.showReaderOptions,
+      options: options,
+      showReaderOptions: showReaderOptions,
       pathData: pathData ?? this.pathData,
       pathFilePrefix: pathFilePrefix ?? this.pathFilePrefix,
       pathTitle: pathTitle ?? this.pathTitle,

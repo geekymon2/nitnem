@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:nitnem/redux/actions/actions.dart';
@@ -13,12 +12,12 @@ import 'package:nitnem/pages/homescreen.dart';
 import 'models/themes.dart';
 
 class NitnemApp extends StatelessWidget {
-  final Store<AppState> store;
+  final Store<AppState?> store;
   NitnemApp(this.store);
 
   @override
   Widget build(BuildContext context) {
-    return StoreProvider<AppState>(
+    return StoreProvider<AppState?>(
       store: store,
       child: new StoreConnector<AppState, _ViewModel>(
         converter: _ViewModel.fromStore,
@@ -30,20 +29,6 @@ class NitnemApp extends StatelessWidget {
           color: Colors.grey,
           home: SplashScreen(),
           routes: _buildRoutes(),
-          builder: (BuildContext context, Widget child) {
-            return Directionality(
-              child: CupertinoTheme (
-                // Specifically use a blank Cupertino theme here and do not transfer
-                // over the Material primary color etc except the brightness to
-                // showcase standard iOS looks.
-                data: CupertinoThemeData (
-                  brightness: getThemeByName(vm.themeName).data.brightness,
-                ),
-                child: child
-              ),
-              textDirection: TextDirection.ltr,
-            );
-          },
         ),
       )
     );
@@ -81,11 +66,11 @@ class NitnemApp extends StatelessWidget {
 
 class _ViewModel {
   final String themeName;
-  _ViewModel({@required this.themeName});
+  _ViewModel({required this.themeName});
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
-      themeName: themeSelector(store.state),
+      themeName: themeSelector(store.state)!,
     );
   }
 

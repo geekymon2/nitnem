@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:nitnem/data/languagedata.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:nitnem/data/pathtiledata.dart';
@@ -13,26 +11,26 @@ import 'dart:convert';
 class AppOptions {
   AppOptions(
       {this.themeName,
-      this.bold,
-      this.showStatus,
-      this.textScaleValue,
-      this.languageName,
-      this.screenAwake,
-      this.saveScrollPosition,
-      this.scrollOffset,
-      this.doNotDisturb,
-      this.hasNPAccess});
+       this.bold,
+       this.showStatus,
+       this.textScaleValue,
+       this.languageName,
+       this.screenAwake,
+       this.saveScrollPosition,
+       this.scrollOffset,
+       this.doNotDisturb,
+       this.hasNPAccess});
 
-  final String themeName;
-  final bool bold;
-  final bool showStatus;
-  final double textScaleValue;
-  final String languageName;
-  final bool screenAwake;
-  final bool saveScrollPosition;
-  final Map<String, ScrollInfo> scrollOffset;
-  final bool doNotDisturb;
-  final bool hasNPAccess;
+  final String? themeName;
+  final bool? bold;
+  final bool? showStatus;
+  final double? textScaleValue;
+  final String? languageName;
+  final bool? screenAwake;
+  final bool? saveScrollPosition;
+  final Map<String, ScrollInfo>? scrollOffset;
+  final bool? doNotDisturb;
+  final bool? hasNPAccess;
 
   factory AppOptions.initial() => AppOptions(
       themeName: ThemeName.Default.toString(),
@@ -48,28 +46,29 @@ class AppOptions {
       doNotDisturb: false,
       hasNPAccess: false);
 
-  AppOptions copyWith(
-      {String themeName,
-      bool bold,
-      bool showStatus,
-      double textScaleValue,
-      String languageName,
-      bool screenAwake,
-      bool saveScrollPosition,
-      Map<String, ScrollInfo> scrollOffset,
-      bool doNotDisturb,
-      bool hasNPAccess}) {
-    return AppOptions(
-        themeName: themeName ?? this.themeName,
-        bold: bold ?? this.bold,
-        showStatus: showStatus ?? this.showStatus,
-        textScaleValue: textScaleValue ?? this.textScaleValue,
-        languageName: languageName ?? this.languageName,
-        screenAwake: screenAwake ?? this.screenAwake,
-        saveScrollPosition: saveScrollPosition ?? this.saveScrollPosition,
-        scrollOffset: scrollOffset ?? this.scrollOffset,
-        doNotDisturb: doNotDisturb ?? this.doNotDisturb,
-        hasNPAccess: hasNPAccess ?? this.hasNPAccess);
+  AppOptions? copyWith(
+      {String? themeName,
+      bool? bold,
+      bool? showStatus,
+      double? textScaleValue,
+      String? languageName,
+      bool? screenAwake,
+      bool? saveScrollPosition,
+      Map<String, ScrollInfo>? scrollOffset,
+      bool? doNotDisturb,
+      bool? hasNPAccess}) {
+    AppOptions(
+        themeName: themeName,
+        bold: bold,
+        showStatus: showStatus,
+        textScaleValue: textScaleValue,
+        languageName: languageName,
+        screenAwake: screenAwake,
+        saveScrollPosition: saveScrollPosition,
+        scrollOffset: scrollOffset,
+        doNotDisturb: doNotDisturb,
+        hasNPAccess: hasNPAccess);
+    return null;
   }
 
   @override
@@ -119,7 +118,7 @@ class AppOptions {
   String toString() {
     //construct scroll position offsets
     String pos = "";
-    scrollOffset.forEach((k, v) => pos += "$k: ${v.scrollOffset}, ");
+    scrollOffset!.forEach((k, v) => pos += "$k: ${v.scrollOffset}, ");
 
     return '[theme: $themeName, bold: $bold, status: $showStatus, scale: $textScaleValue, lang: $languageName, awake: $screenAwake, savepos: $saveScrollPosition, pos: $pos], dnd: $doNotDisturb';
   }

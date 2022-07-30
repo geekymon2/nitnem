@@ -1,13 +1,14 @@
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_dnd/flutter_dnd.dart';
 import 'package:nitnem/redux/actions/actions.dart';
 import 'package:redux/redux.dart';
 
-final dndReducer = combineReducers<bool>([
-  TypedReducer<bool, ToggleDNDAction>(_activeDNDReducer),
+final dndReducer = combineReducers<bool?>([
+  TypedReducer<bool?, ToggleDNDAction?>(_activeDNDReducer),
 ]);
 
-bool _activeDNDReducer(bool isDND, ToggleDNDAction action) {
-  if (action.isDnd) {
+bool _activeDNDReducer(bool? isDND, ToggleDNDAction? action) {
+  if (action!.isDnd) {
     if (action.hasNPAccess) {
       FlutterDnd.setInterruptionFilter(
           FlutterDnd.INTERRUPTION_FILTER_NONE); //Supress All Notifications

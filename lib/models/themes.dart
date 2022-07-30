@@ -25,17 +25,11 @@ NitnemTheme getThemeByName(String name) {
 
     switch (enumName) {
       case ThemeName.Default: return defaultTheme;
-      break;
       case ThemeName.Stars: return starsTheme;
-      break;
       case ThemeName.Forest: return forestTheme;
-      break;
       case ThemeName.Ethnic: return ethnicTheme;
-      break;
       case ThemeName.Floral: return floralTheme;
-      break;
       case ThemeName.Wood: return woodTheme;
-      break;
       default: return defaultTheme;
     }
   }

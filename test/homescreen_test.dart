@@ -24,7 +24,7 @@ void main() {
             HomeScreen(optionsPage: OptionsPage(readerMode: false));
         var store = await createStore();
         await tester.pumpWidget(makeTestableWidget(
-            child: StoreProvider<AppState>(store: store, child: screen)));
+            child: StoreProvider<AppState?>(store: store, child: screen)));
 
         await tester.idle();
         await tester.pump();

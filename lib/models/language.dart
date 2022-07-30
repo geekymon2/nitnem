@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:nitnem/data/languagedata.dart';
 
 class LanguageMenuItem {
-  LanguageMenuItem({this.title, this.icon, this.langCode, this.fontName, this.fontSize});
+  LanguageMenuItem({
+    required this.title, 
+    required this.icon,
+    required this.langCode,
+    required this.fontName,
+    required this.fontSize
+    });
  
   String title;
   IconData icon;
@@ -15,7 +21,7 @@ class LanguageMenuItem {
   }
 }
 
-LanguageMenuItem getLanguageMenuItemValueByName(String name) {
+LanguageMenuItem getLanguageMenuItemValueByName(String? name) {
   return languages.firstWhere((e) => e.title == name);
 }
 
