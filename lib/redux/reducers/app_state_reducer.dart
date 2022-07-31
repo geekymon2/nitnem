@@ -23,7 +23,7 @@ import 'themereducer.dart';
 import 'dndreducer.dart';
 
 AppState appReducer(AppState state, dynamic action) {
-  AppState newState = AppState(options: AppOptions.initial());
+  AppState newState = state;
 
   printInfoMessage('[ACTION] ${action.runtimeType}');
   if (action is TextScaleAction ||

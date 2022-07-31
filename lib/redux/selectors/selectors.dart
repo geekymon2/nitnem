@@ -1,5 +1,3 @@
-import 'package:nitnem/constants/appconstants.dart';
-import 'package:nitnem/data/languagedata.dart';
 import 'package:nitnem/models/scrollinfo.dart';
 import 'package:nitnem/state/appstate.dart';
 
@@ -11,27 +9,17 @@ bool? isBoldSelector(AppState state) => state.options.bold;
 bool? showStatusSelector(AppState state) => state.options.showStatus;
 
 //AppState Volatile Options
-String? languageSelector(AppState? state) =>
-    (state != null) ? state.options.languageName : languages[0].title;
-String? pathDataSelector(AppState? state) =>
-    (state != null) ? state.pathData : AppConstants.EMPTY_STRING;
-String? pathTitleSelector(AppState? state) =>
-    (state != null) ? state.pathTitle : AppConstants.EMPTY_STRING;
-double? scrollOffsetSelector(AppState? state) => (state != null)
-    ? getScrollOffsetForThisPath(state.options.scrollOffset!, state.pathId!)
-    : 0.0;
-double? maxOffsetSelector(AppState? state) => (state != null)
-    ? getMaxOffsetForThisPath(state.options.scrollOffset!, state.pathId!)
-    : 0.0;
-String? timeStringSelector(AppState? state) =>
-    (state != null) ? state.statusTime : AppConstants.EMPTY_STRING;
-int? batteryPercSelector(AppState? state) =>
-    (state != null) ? state.batteryPerc : 0;
-bool? saveScrollPositionSelector(AppState? state) =>
-    (state != null) ? state.options.saveScrollPosition : false;
-
-bool? dndStatusSelector(AppState? state) =>
-    (state != null) ? state.options.doNotDisturb : false;
+String? languageSelector(AppState state) => state.options.languageName;
+String? pathDataSelector(AppState state) => state.pathData;
+String? pathTitleSelector(AppState state) => state.pathTitle;
+double? scrollOffsetSelector(AppState state) =>
+    getScrollOffsetForThisPath(state.options.scrollOffset!, state.pathId!);
+double? maxOffsetSelector(AppState state) =>
+    getMaxOffsetForThisPath(state.options.scrollOffset!, state.pathId!);
+String? timeStringSelector(AppState state) => state.statusTime;
+int? batteryPercSelector(AppState state) =>state.batteryPerc;
+bool? saveScrollPositionSelector(AppState state) => state.options.saveScrollPosition;
+bool? dndStatusSelector(AppState state) => state.options.doNotDisturb;
 
 double? getScrollOffsetForThisPath(Map<String, ScrollInfo> scrollPos, int id) {
   //set scroll position for path with does not exist previously in saved options.
