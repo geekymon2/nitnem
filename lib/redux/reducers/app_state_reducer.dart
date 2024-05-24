@@ -23,7 +23,7 @@ import 'themereducer.dart';
 import 'dndreducer.dart';
 
 AppState appReducer(AppState state, dynamic action) {
-  AppState newState;
+  AppState newState = state.copyWith();
 
   printInfoMessage('[ACTION] ${action.runtimeType}');
   if (action is TextScaleAction ||
@@ -75,7 +75,7 @@ AppState appReducer(AppState state, dynamic action) {
 
   if (action is SendFeedbackAction) {
     newState = state;
-    launch(AppConstants.FEEDBACK_URL, forceSafariVC: false);
+    launchUrl(Uri.http(AppConstants.FEEDBACK_URL));
     printInfoMessage('Sending feedback');
   }
 

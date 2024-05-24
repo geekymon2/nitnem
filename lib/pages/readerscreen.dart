@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:battery/battery.dart';
 import 'package:flutter/foundation.dart';
+import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:intl/intl.dart';
 import 'package:nitnem/common/printmessage.dart';
@@ -20,7 +21,7 @@ import 'package:redux/redux.dart';
 
 class ReaderScreen extends StatefulWidget {
   ReaderScreen({
-    Key key,
+    required Key key,
   }) : super(key: key);
 
   @override
@@ -28,10 +29,10 @@ class ReaderScreen extends StatefulWidget {
 }
 
 class _MyReaderPageState extends State<ReaderScreen> {
-  ScrollController _controller;
-  Timer _statusTimer;
-  Battery _battery;
-  Timer _timer;
+  late ScrollController _controller;
+  late Timer _statusTimer;
+  late Battery _battery;
+  late Timer _timer;
 
   void initReaderScreen(Store<AppState> store) {
     //init status bar time.
@@ -72,7 +73,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
     final double loadedScrollOffset = StoreProvider.of<AppState>(context)
         .state
         .options
-        .scrollOffset[id.toString()]
+        .scrollOffset[id.toString()]!
         .scrollOffset;
     final double offset = savePos ? loadedScrollOffset : 0.0;
     _controller.animateTo(offset,
@@ -123,7 +124,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
 
     printInfoMessage('[BUILD] ReaderScreen');
     //Only the bottom UI overlay is enabled, hiding the system status bar when in reading pane
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
 
     var result = WillPopScope(
         onWillPop: () {
@@ -175,7 +176,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                   title: Text((vm.showReaderOptions)
                                       ? AppConstants.EMPTY_STRING
                                       : vm.nitnemPathTitle),
-                                  background: OptionsPage(readerMode: true),
+                                  background: OptionsPage(readerMode: true, key: UniqueKey(),),
                                 ),
                               ),
                               SliverToBoxAdapter(
@@ -350,12 +351,9 @@ class _MyReaderPageState extends State<ReaderScreen> {
   @mustCallSuper
   void dispose() {
     //All overlays are enabled with the system status bar when in home screen
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-    _statusTimer?.cancel();
-    _statusTimer = null;
-    _timer?.cancel();
-    _timer = null;
-    _battery = null;
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    _statusTimer.cancel();
+    _timer.cancel();
     super.dispose();
   }
 }
@@ -377,20 +375,20 @@ class _ViewModel {
   final bool dnd;
 
   _ViewModel(
-      {@required this.onToggleReaderOptions,
-      @required this.languageName,
-      @required this.showReaderOptions,
-      @required this.textScaleValue,
-      @required this.isBold,
-      @required this.showStatus,
-      @required this.pathData,
-      @required this.nitnemPathTitle,
-      @required this.scrollOffset,
-      @required this.maxOffset,
-      @required this.statusTime,
-      @required this.batteryPerc,
-      @required this.saveScrollPosition,
-      @required this.dnd});
+      {required this.onToggleReaderOptions,
+      required this.languageName,
+      required this.showReaderOptions,
+      required this.textScaleValue,
+      required this.isBold,
+      required this.showStatus,
+      required this.pathData,
+      required this.nitnemPathTitle,
+      required this.scrollOffset,
+      required this.maxOffset,
+      required this.statusTime,
+      required this.batteryPerc,
+      required this.saveScrollPosition,
+      required this.dnd});
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(

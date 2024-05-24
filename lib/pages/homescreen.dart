@@ -13,8 +13,8 @@ import 'package:backdrop/backdrop.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({
-    Key key,
-    @required this.optionsPage,
+    required Key key,
+    required this.optionsPage,
   }) : super(key: key);
 
   final Widget optionsPage;
@@ -117,7 +117,7 @@ class _ViewModel {
   final void Function(BuildContext, PathTile) onPathClickAction;
 
   _ViewModel({
-    @required this.onPathClickAction,
+    required this.onPathClickAction,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {

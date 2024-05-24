@@ -12,16 +12,16 @@ import 'dart:convert';
 @JsonSerializable()
 class AppOptions {
   AppOptions(
-      {this.themeName,
-      this.bold,
-      this.showStatus,
-      this.textScaleValue,
-      this.languageName,
-      this.screenAwake,
-      this.saveScrollPosition,
-      this.scrollOffset,
-      this.doNotDisturb,
-      this.hasNPAccess});
+      {required this.themeName,
+      required this.bold,
+      required this.showStatus,
+      required this.textScaleValue,
+      required this.languageName,
+      required this.screenAwake,
+      required this.saveScrollPosition,
+      required this.scrollOffset,
+      required this.doNotDisturb,
+      required this.hasNPAccess});
 
   final String themeName;
   final bool bold;
@@ -49,16 +49,16 @@ class AppOptions {
       hasNPAccess: false);
 
   AppOptions copyWith(
-      {String themeName,
-      bool bold,
-      bool showStatus,
-      double textScaleValue,
-      String languageName,
-      bool screenAwake,
-      bool saveScrollPosition,
-      Map<String, ScrollInfo> scrollOffset,
-      bool doNotDisturb,
-      bool hasNPAccess}) {
+      {String? themeName,
+      bool? bold,
+      bool? showStatus,
+      double? textScaleValue,
+      String? languageName,
+      bool? screenAwake,
+      bool? saveScrollPosition,
+      Map<String, ScrollInfo>? scrollOffset,
+      bool? doNotDisturb,
+      bool? hasNPAccess}) {
     return AppOptions(
         themeName: themeName ?? this.themeName,
         bold: bold ?? this.bold,
@@ -72,34 +72,36 @@ class AppOptions {
         hasNPAccess: hasNPAccess ?? this.hasNPAccess);
   }
 
-  @override
-  bool operator ==(dynamic other) {
-    if (runtimeType != other.runtimeType) return false;
-    final AppOptions typedOther = other;
-    return themeName == typedOther.themeName &&
-        bold == typedOther.bold &&
-        showStatus == typedOther.showStatus &&
-        textScaleValue == typedOther.textScaleValue &&
-        languageName == typedOther.languageName &&
-        screenAwake == typedOther.screenAwake &&
-        saveScrollPosition == typedOther.saveScrollPosition &&
-        scrollOffset == typedOther.scrollOffset &&
-        doNotDisturb == typedOther.doNotDisturb &&
-        hasNPAccess == typedOther.hasNPAccess;
-  }
+  // TODO: not sure if this is needed.
+  // @override
+  // bool operator ==(dynamic other) {
+  //   if (runtimeType != other.runtimeType) return false;
+  //   final AppOptions typedOther = other;
+  //   return themeName == typedOther.themeName &&
+  //       bold == typedOther.bold &&
+  //       showStatus == typedOther.showStatus &&
+  //       textScaleValue == typedOther.textScaleValue &&
+  //       languageName == typedOther.languageName &&
+  //       screenAwake == typedOther.screenAwake &&
+  //       saveScrollPosition == typedOther.saveScrollPosition &&
+  //       scrollOffset == typedOther.scrollOffset &&
+  //       doNotDisturb == typedOther.doNotDisturb &&
+  //       hasNPAccess == typedOther.hasNPAccess;
+  // }
 
   @override
-  int get hashCode => hashValues(
-      themeName,
-      bold,
-      showStatus,
-      textScaleValue,
-      languageName,
-      screenAwake,
-      saveScrollPosition,
-      scrollOffset,
-      doNotDisturb,
-      hasNPAccess);
+  int get hashCode => Object.hashAll([
+        themeName,
+        bold,
+        showStatus,
+        textScaleValue,
+        languageName,
+        screenAwake,
+        saveScrollPosition,
+        scrollOffset,
+        doNotDisturb,
+        hasNPAccess
+      ]);
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = new Map();

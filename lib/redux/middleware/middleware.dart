@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:nitnem/common/printmessage.dart';
 import 'package:nitnem/constants/appconstants.dart';
-import 'package:nitnem/data/pathtiledata.dart';
 import 'package:nitnem/models/language.dart';
 import 'package:nitnem/models/scrollinfo.dart';
 import 'package:nitnem/redux/actions/actions.dart';
@@ -12,7 +11,7 @@ import 'package:nitnem/state/appoptions.dart';
 import 'package:nitnem/state/appstate.dart';
 import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:screen/screen.dart';
+//import 'package:screen/screen.dart';
 import 'package:flutter_dnd/flutter_dnd.dart';
 
 void storeOptionsMiddleware(
@@ -20,7 +19,7 @@ void storeOptionsMiddleware(
   AppState state = store.state;
 
   if (action is ToggleScreenAwakeAction) {
-    Screen.keepOn(action.isAwake);
+    //Screen.keepOn(action.isAwake);
     state = state.copyWith(
         options: state.options.copyWith(screenAwake: action.isAwake));
     saveOptionsToPrefs(state.options);
@@ -97,17 +96,18 @@ void storeOptionsMiddleware(
   }
 
   if (action is FetchNitnemPathAction) {
-    final String langCode =
+    final String? langCode =
         getLanguageMenuItemValueByName(action.languageName).langCode;
 
-    loadAsset(action.path.filePrefix + '_' + langCode).then((pathData) {
+    loadAsset(action.path.filePrefix + '_' + langCode!).then((pathData) {
       state = state.copyWith(pathData: pathData);
       store.dispatch(NitnemPathLoadedAction(pathData));
     });
   }
 
   if (action is OptionsLoadedAction) {
-    Screen.keepOn(action.options.screenAwake);
+    //TODO - need to implement screen wake
+    //Screen.keepOn(action.options.screenAwake);
   }
 
   next(action);
@@ -125,7 +125,7 @@ Future<AppOptions> loadOptionsFromPrefs() async {
   bool hasNPAccess = false;
   AppOptions options = AppOptions.initial();
   if (defaultTargetPlatform == TargetPlatform.android) {
-    hasNPAccess = await FlutterDnd.isNotificationPolicyAccessGranted;
+    hasNPAccess = (await FlutterDnd.isNotificationPolicyAccessGranted)!;
   }
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var stateString = preferences.getString(AppConstants.OPTIONS_SHAREDPREF_KEY);
@@ -154,16 +154,17 @@ Map<String, ScrollInfo> constructScrollPosMap(String scrollPosString) {
   Map<String, dynamic> rawInfo;
   Map<String, ScrollInfo> scrollInfo = new Map<String, ScrollInfo>();
 
-  if (scrollPosString != null) {
-    //Raw data contains maps, convert map info into ScrollInfo
-    rawInfo = json.decode(scrollPosString);
-    rawInfo.forEach((k, v) => scrollInfo.putIfAbsent(
-        k, () => new ScrollInfo(v["id"], v["scrollOffset"], v["maxOffset"])));
-  } else {
-    scrollInfo = new Map.fromIterable(PathTileData.items,
-        key: (v) => v.id.toString(),
-        value: (v) => new ScrollInfo(v.id, 0.0, 0.0));
-  }
+  //TODO: can never be null so else is never called.
+  // if (scrollPosString != null) {
+  //Raw data contains maps, convert map info into ScrollInfo
+  rawInfo = json.decode(scrollPosString);
+  rawInfo.forEach((k, v) => scrollInfo.putIfAbsent(
+      k, () => new ScrollInfo(v["id"], v["scrollOffset"], v["maxOffset"])));
+  // } else {
+  //   scrollInfo = new Map.fromIterable(PathTileData.items,
+  //       key: (v) => v.id.toString(),
+  //       value: (v) => new ScrollInfo(v.id, 0.0, 0.0));
+  // }
 
   return scrollInfo;
 }
