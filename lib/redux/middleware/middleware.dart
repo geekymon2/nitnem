@@ -11,8 +11,7 @@ import 'package:nitnem/state/appoptions.dart';
 import 'package:nitnem/state/appstate.dart';
 import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-//import 'package:screen/screen.dart';
-import 'package:flutter_dnd/flutter_dnd.dart';
+
 
 void storeOptionsMiddleware(
     Store<AppState> store, dynamic action, NextDispatcher next) {
@@ -125,7 +124,7 @@ Future<AppOptions> loadOptionsFromPrefs() async {
   bool hasNPAccess = false;
   AppOptions options = AppOptions.initial();
   if (defaultTargetPlatform == TargetPlatform.android) {
-    hasNPAccess = (await FlutterDnd.isNotificationPolicyAccessGranted)!;
+    // hasNPAccess = (await FlutterDnd.isNotificationPolicyAccessGranted)!;
   }
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var stateString = preferences.getString(AppConstants.OPTIONS_SHAREDPREF_KEY);
