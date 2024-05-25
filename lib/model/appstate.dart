@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:nitnem/constants/appconstants.dart';
 
 import 'appoptions.dart';
@@ -56,23 +57,22 @@ class AppState {
     );
   }
 
-  //TODO: not sure if this is needed.
-  // @override
-  // bool operator ==(dynamic other) {
-  //   if (runtimeType != other.runtimeType) return false;
-  //   final AppState typedOther = other;
-  //   return options == typedOther.options &&
-  //       showReaderOptions == typedOther.showReaderOptions &&
-  //       pathData == typedOther.pathData &&
-  //       pathFilePrefix == typedOther.pathFilePrefix &&
-  //       pathTitle == typedOther.pathTitle &&
-  //       statusTime == typedOther.statusTime &&
-  //       batteryPerc == typedOther.batteryPerc &&
-  //       pathId == typedOther.pathId;
-  // }
+  @override
+  bool operator ==(dynamic other) {
+    if (runtimeType != other.runtimeType) return false;
+    final AppState typedOther = other;
+    return options == typedOther.options &&
+        showReaderOptions == typedOther.showReaderOptions &&
+        pathData == typedOther.pathData &&
+        pathFilePrefix == typedOther.pathFilePrefix &&
+        pathTitle == typedOther.pathTitle &&
+        statusTime == typedOther.statusTime &&
+        batteryPerc == typedOther.batteryPerc &&
+        pathId == typedOther.pathId;
+  }
 
   @override
-  int get hashCode => Object.hashAll([
+  int get hashCode => hashValues(
         options,
         showReaderOptions,
         pathData,
@@ -80,8 +80,8 @@ class AppState {
         pathTitle,
         statusTime,
         batteryPerc,
-        pathId
-      ]);
+        pathId,
+      );
 
   @override
   String toString() {

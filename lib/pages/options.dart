@@ -7,7 +7,7 @@ import 'package:nitnem/data/languagedata.dart';
 import 'package:nitnem/models/language.dart';
 import 'package:nitnem/models/themes.dart';
 import 'package:nitnem/redux/actions/actions.dart';
-import 'package:nitnem/state/appstate.dart';
+import 'package:nitnem/model/appstate.dart';
 
 import 'about.dart';
 

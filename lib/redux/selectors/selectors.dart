@@ -1,5 +1,5 @@
 import 'package:nitnem/models/scrollinfo.dart';
-import 'package:nitnem/state/appstate.dart';
+import 'package:nitnem/model/appstate.dart';
 
 //AppState Persistent Options
 String themeSelector(AppState state) => state.options.themeName;

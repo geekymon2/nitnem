@@ -10,8 +10,8 @@ import 'package:nitnem/redux/reducers/savescrollposreducer.dart';
 import 'package:nitnem/redux/reducers/screenawakereducer.dart';
 import 'package:nitnem/redux/reducers/scrollpercreducer.dart';
 import 'package:nitnem/redux/reducers/statustimereducer.dart';
-import 'package:nitnem/state/appoptions.dart';
-import 'package:nitnem/state/appstate.dart';
+import 'package:nitnem/model/appoptions.dart';
+import 'package:nitnem/model/appstate.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'batterypercreducer.dart';
@@ -23,7 +23,7 @@ import 'themereducer.dart';
 import 'dndreducer.dart';
 
 AppState appReducer(AppState state, dynamic action) {
-  AppState newState = state.copyWith();
+  AppState newState;
 
   printInfoMessage('[ACTION] ${action.runtimeType}');
   if (action is TextScaleAction ||
@@ -67,6 +67,9 @@ AppState appReducer(AppState state, dynamic action) {
     );
     printInfoMessage('Option Changed');
   }
+  else {
+    newState = state;
+  }
 
   if (action is OptionsLoadedAction) {
     newState = state.copyWith(options: action.options);
@@ -75,7 +78,7 @@ AppState appReducer(AppState state, dynamic action) {
 
   if (action is SendFeedbackAction) {
     newState = state;
-    launchUrl(Uri.http(AppConstants.FEEDBACK_URL));
+    launch(AppConstants.FEEDBACK_URL, forceSafariVC: false);
     printInfoMessage('Sending feedback');
   }
 

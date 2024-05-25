@@ -7,8 +7,8 @@ import 'package:nitnem/constants/appconstants.dart';
 import 'package:nitnem/models/language.dart';
 import 'package:nitnem/models/scrollinfo.dart';
 import 'package:nitnem/redux/actions/actions.dart';
-import 'package:nitnem/state/appoptions.dart';
-import 'package:nitnem/state/appstate.dart';
+import 'package:nitnem/model/appoptions.dart';
+import 'package:nitnem/model/appstate.dart';
 import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,6 +16,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 void storeOptionsMiddleware(
     Store<AppState> store, dynamic action, NextDispatcher next) {
   AppState state = store.state;
+
+  if (action is UpdateStatusBatteryPercAction) {
+    state = state.copyWith(batteryPerc: action.batteryLevel);
+  }
 
   if (action is ToggleScreenAwakeAction) {
     //Screen.keepOn(action.isAwake);

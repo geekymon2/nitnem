@@ -5,6 +5,7 @@ final batteryPercReducer = combineReducers<int>([
   TypedReducer<int, UpdateStatusBatteryPercAction>(_activeBatteryPercReducer),
 ]);
 
-int _activeBatteryPercReducer(int batteryLevel, UpdateStatusBatteryPercAction action) {
+int _activeBatteryPercReducer(
+    int batteryLevel, UpdateStatusBatteryPercAction action) {
   return action.batteryLevel;
 }

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -14,7 +13,7 @@ import 'package:nitnem/models/scrollinfo.dart';
 import 'package:nitnem/pages/options.dart';
 import 'package:nitnem/redux/actions/actions.dart';
 import 'package:nitnem/redux/selectors/selectors.dart';
-import 'package:nitnem/state/appstate.dart';
+import 'package:nitnem/model/appstate.dart';
 import 'package:redux/redux.dart';
 
 class ReaderScreen extends StatefulWidget {
@@ -28,35 +27,40 @@ class ReaderScreen extends StatefulWidget {
 
 class _MyReaderPageState extends State<ReaderScreen> {
   ScrollController _controller = ScrollController(initialScrollOffset: 0.0);
-  // Battery _battery = Battery();
+  //Timer _statusTimer;
+  //Battery _battery;
+  //Timer _timer;
 
   void initReaderScreen(Store<AppState> store) {
-    //   //init status bar time.
-    //   Timer.periodic(
-    //       Duration(seconds: AppConstants.STATUS_TIME_UPDATE_INTERVAL_SECONDS),
-    //       (Timer t) => _updateStatusTime());
+    //store.dispatch(UpdateStatusBatteryPercAction(33));
+    // //init status bar time.
+    // _statusTimer = Timer.periodic(
+    //     Duration(seconds: AppConstants.STATUS_TIME_UPDATE_INTERVAL_SECONDS),
+    //     (Timer t) => _updateStatusTime());
 
-    //   //init status bar battery indicator
-    //   if (defaultTargetPlatform == TargetPlatform.android) {
+    // //init status bar battery indicator
+    // if (defaultTargetPlatform == TargetPlatform.android) {
+    //   _battery = Battery();
+    //   _battery.batteryLevel.then((level) {
+    //     store.dispatch(UpdateStatusBatteryPercAction(level));
+    //   });
+
+    //   _battery.onBatteryStateChanged.listen((BatteryState state) {
     //     _battery.batteryLevel.then((level) {
     //       store.dispatch(UpdateStatusBatteryPercAction(level));
     //     });
+    //   });
+    // }
 
-    //     _battery.onBatteryStateChanged.listen((BatteryState state) {
-    //       _battery.batteryLevel.then((level) {
-    //         store.dispatch(UpdateStatusBatteryPercAction(level));
-    //       });
-    //     });
-    //   }
-
-    //init the scroll controller, lets set the initial state to beginning.
-    //wait a bit to let all async actions to finish before scrolling to position.
-    // Timer(Duration(milliseconds: 1500), () {
-    //   //_navigateToScrollPositionForFirstTime();
+    // //init the scroll controller, lets set the initial state to beginning.
+    // //wait a bit to let all async actions to finish before scrolling to position.
+    // //_controller = ScrollController(initialScrollOffset: 0.0);
+    // Timer(Duration(milliseconds: 500), () {
+    //   _navigateToScrollPositionForFirstTime();
     // });
 
     // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   //_updateStatusTime();
+    //   _updateStatusTime();
     // });
   }
 
@@ -67,7 +71,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
   //   final double loadedScrollOffset = StoreProvider.of<AppState>(context)
   //       .state
   //       .options
-  //       .scrollOffset[id.toString()]!
+  //       .scrollOffset[id.toString()]
   //       .scrollOffset;
   //   final double offset = savePos ? loadedScrollOffset : 0.0;
   //   _controller.animateTo(offset,
@@ -99,11 +103,11 @@ class _MyReaderPageState extends State<ReaderScreen> {
     // }
   }
 
-  // String _calculateScrollPerc(double offset, double maxoffset) {
-  //   final double scrollPerc =
-  //       (offset != 0.0) ? (offset / maxoffset) * 100 : 0.0;
-  //   return scrollPerc.toStringAsFixed(2);
-  // }
+  String _calculateScrollPerc(double offset, double maxoffset) {
+    final double scrollPerc =
+        (offset != 0.0) ? (offset / maxoffset) * 100 : 0.0;
+    return scrollPerc.toStringAsFixed(2);
+  }
 
   // void _updateStatusTime() {
   //   var now = new DateTime.now();
@@ -119,17 +123,18 @@ class _MyReaderPageState extends State<ReaderScreen> {
 
     printInfoMessage('[BUILD] ReaderScreen');
     //Only the bottom UI overlay is enabled, hiding the system status bar when in reading pane
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.bottom]);
+    //SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
 
-    var result = PopScope(
-        onPopInvoked: (didPop) {
+    var result = WillPopScope(
+        onWillPop: () {
           StoreProvider.of<AppState>(context)
               .dispatch(ClearReaderOptionsToggleAction());
+          return new Future.value(true);
         },
         child: StoreConnector<AppState, _ViewModel>(
             converter: _ViewModel.fromStore,
-            onInit: (store) => initReaderScreen(store),
+            //onInit: (store) => initReaderScreen(store),
+            onInit: (store) => store.dispatch(UpdateStatusBatteryPercAction(33)),
             builder: (context, vm) {
               return Scaffold(
                   body: Container(
@@ -184,8 +189,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                         AppConstants.READER_PADDING),
                                     child: MediaQuery(
                                       data: MediaQuery.of(context).copyWith(
-                                        textScaler: TextScaler.linear(
-                                            vm.textScaleValue),
+                                        textScaleFactor: vm.textScaleValue,
                                       ),
                                       child: Text(
                                         vm.pathData,
@@ -222,7 +226,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                   bottomNavigationBar: vm.showStatus
                       ? MediaQuery(
                           data: MediaQuery.of(context).copyWith(
-                            textScaler: TextScaler.linear(1.0),
+                            textScaleFactor: 1.0,
                           ),
                           child: new Container(
                             height: (defaultTargetPlatform ==
@@ -307,9 +311,9 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                         ? 1
                                         : 2,
                                     child: Text(
-                                      //_calculateScrollPerc(
-                                      //        vm.scrollOffset, vm.maxOffset) +
-                                      "2%",
+                                      _calculateScrollPerc(
+                                              vm.scrollOffset, vm.maxOffset) +
+                                          "%",
                                       textAlign: TextAlign.center,
                                       style: new TextStyle(
                                         fontFamily:
@@ -350,8 +354,12 @@ class _MyReaderPageState extends State<ReaderScreen> {
   @mustCallSuper
   void dispose() {
     //All overlays are enabled with the system status bar when in home screen
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
+    // SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    // _statusTimer?.cancel();
+    // _statusTimer = null;
+    // _timer?.cancel();
+    // _timer = null;
+    // _battery = null;
     super.dispose();
   }
 }

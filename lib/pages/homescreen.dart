@@ -7,7 +7,7 @@ import 'package:nitnem/models/pathtile.dart';
 import 'package:nitnem/data/pathtiledata.dart';
 import 'package:nitnem/navigation/appnavigator.dart';
 import 'package:nitnem/redux/actions/actions.dart';
-import 'package:nitnem/state/appstate.dart';
+import 'package:nitnem/model/appstate.dart';
 import 'package:redux/redux.dart';
 import 'package:backdrop/backdrop.dart';
 

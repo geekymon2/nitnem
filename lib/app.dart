@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:nitnem/redux/actions/actions.dart';
 import 'package:nitnem/redux/selectors/selectors.dart';
-import 'package:nitnem/state/appstate.dart';
+import 'package:nitnem/model/appstate.dart';
 import 'package:redux/redux.dart';
 import 'package:nitnem/navigation/approute.dart';
 import 'package:nitnem/pages/options.dart';

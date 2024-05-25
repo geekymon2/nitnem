@@ -1,6 +1,6 @@
 import 'package:nitnem/models/pathtile.dart';
 import 'package:nitnem/models/scrollinfo.dart';
-import 'package:nitnem/state/appoptions.dart';
+import 'package:nitnem/model/appoptions.dart';
 
 class ChangeThemeAction {
   final String themeName;
