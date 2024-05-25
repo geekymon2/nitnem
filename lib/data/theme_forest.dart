@@ -11,12 +11,10 @@ ThemeData buildForestTheme() {
     primary: primaryColor,
     secondary: secondaryColor,
     surface: Color( 0xffffffff ),
-    background: Color( 0xffa5d6a7 ),
     error: Color( 0xffd32f2f ),
     onPrimary: Color( 0xffffffff ),
     onSecondary: Color( 0xffffffff ),
     onSurface: Color( 0xff000000 ),
-    onBackground: Color( 0xffffffff ),
     onError: Color( 0xffffffff ),
     brightness: Brightness.light,
   );

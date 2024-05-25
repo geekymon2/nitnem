@@ -22,7 +22,7 @@ class _OptionsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double textScaleFactor = MediaQuery.textScaleFactorOf(context);
+    final double textScaleFactor = MediaQuery.textScalerOf(context).scale(10);
 
     return MergeSemantics(
       child: Container(
@@ -99,7 +99,9 @@ class _ActionItem extends StatelessWidget {
 }
 
 class _FlatButton extends StatelessWidget {
-  const _FlatButton({required Key key, required this.onPressed, required this.child}) : super(key: key);
+  const _FlatButton(
+      {required Key key, required this.onPressed, required this.child})
+      : super(key: key);
 
   final VoidCallback onPressed;
   final Widget child;

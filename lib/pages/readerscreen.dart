@@ -3,9 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:intl/intl.dart';
 import 'package:nitnem/common/printmessage.dart';
@@ -29,20 +27,17 @@ class ReaderScreen extends StatefulWidget {
 }
 
 class _MyReaderPageState extends State<ReaderScreen> {
-  late ScrollController _controller;
-  late Timer _statusTimer;
-  late Battery _battery;
-  late Timer _timer;
+  ScrollController _controller = ScrollController(initialScrollOffset: 0.0);
+  Battery _battery = Battery();
 
   void initReaderScreen(Store<AppState> store) {
     //init status bar time.
-    _statusTimer = Timer.periodic(
+    Timer.periodic(
         Duration(seconds: AppConstants.STATUS_TIME_UPDATE_INTERVAL_SECONDS),
         (Timer t) => _updateStatusTime());
 
     //init status bar battery indicator
     if (defaultTargetPlatform == TargetPlatform.android) {
-      _battery = Battery();
       _battery.batteryLevel.then((level) {
         store.dispatch(UpdateStatusBatteryPercAction(level));
       });
@@ -56,7 +51,6 @@ class _MyReaderPageState extends State<ReaderScreen> {
 
     //init the scroll controller, lets set the initial state to beginning.
     //wait a bit to let all async actions to finish before scrolling to position.
-    _controller = ScrollController(initialScrollOffset: 0.0);
     Timer(Duration(milliseconds: 500), () {
       _navigateToScrollPositionForFirstTime();
     });
@@ -64,6 +58,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _updateStatusTime();
     });
+    
   }
 
   _navigateToScrollPositionForFirstTime() {
@@ -124,13 +119,13 @@ class _MyReaderPageState extends State<ReaderScreen> {
 
     printInfoMessage('[BUILD] ReaderScreen');
     //Only the bottom UI overlay is enabled, hiding the system status bar when in reading pane
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.bottom]);
 
-    var result = WillPopScope(
-        onWillPop: () {
+    var result = PopScope(
+        onPopInvoked: (didPop) {
           StoreProvider.of<AppState>(context)
               .dispatch(ClearReaderOptionsToggleAction());
-          return new Future.value(true);
         },
         child: StoreConnector<AppState, _ViewModel>(
             converter: _ViewModel.fromStore,
@@ -176,7 +171,10 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                   title: Text((vm.showReaderOptions)
                                       ? AppConstants.EMPTY_STRING
                                       : vm.nitnemPathTitle),
-                                  background: OptionsPage(readerMode: true, key: UniqueKey(),),
+                                  background: OptionsPage(
+                                    readerMode: true,
+                                    key: UniqueKey(),
+                                  ),
                                 ),
                               ),
                               SliverToBoxAdapter(
@@ -186,7 +184,8 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                         AppConstants.READER_PADDING),
                                     child: MediaQuery(
                                       data: MediaQuery.of(context).copyWith(
-                                        textScaleFactor: vm.textScaleValue,
+                                        textScaler: TextScaler.linear(
+                                            vm.textScaleValue),
                                       ),
                                       child: Text(
                                         vm.pathData,
@@ -223,7 +222,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                   bottomNavigationBar: vm.showStatus
                       ? MediaQuery(
                           data: MediaQuery.of(context).copyWith(
-                            textScaleFactor: 1.0,
+                            textScaler: TextScaler.linear(1.0),
                           ),
                           child: new Container(
                             height: (defaultTargetPlatform ==
@@ -351,9 +350,8 @@ class _MyReaderPageState extends State<ReaderScreen> {
   @mustCallSuper
   void dispose() {
     //All overlays are enabled with the system status bar when in home screen
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
-    _statusTimer.cancel();
-    _timer.cancel();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
     super.dispose();
   }
 }
