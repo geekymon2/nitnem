@@ -73,9 +73,9 @@ class AppOptions {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (runtimeType != other.runtimeType) return false;
-    final AppOptions typedOther = other;
+    final AppOptions typedOther = other as AppOptions;
     return themeName == typedOther.themeName &&
         bold == typedOther.bold &&
         showStatus == typedOther.showStatus &&

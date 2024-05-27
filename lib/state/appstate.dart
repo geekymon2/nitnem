@@ -47,9 +47,9 @@ class AppState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (runtimeType != other.runtimeType) return false;
-    final AppState typedOther = other;
+    final AppState typedOther = other as AppState;
     return options == typedOther.options &&
         showReaderOptions == typedOther.showReaderOptions &&
         pathData == typedOther.pathData &&
