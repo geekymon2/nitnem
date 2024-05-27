@@ -74,6 +74,7 @@ class HomeScreen extends StatelessWidget {
             key: scaffoldKey,
             backgroundColor: isDark ? kFlutterBlue : theme.primaryColor,
             appBar: BackdropAppBar(
+              backgroundColor: theme.primaryColor,
               title: Padding(
                   padding: const EdgeInsets.only(top: 15.0),
                   child: Row(
