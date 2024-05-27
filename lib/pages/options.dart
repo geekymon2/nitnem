@@ -11,9 +11,9 @@ import 'package:nitnem/state/appstate.dart';
 
 import 'about.dart';
 
-const double _kItemHeight = 48.0;
+const double _kItemHeight = 4.0;
 const EdgeInsetsDirectional _kItemPadding =
-    EdgeInsetsDirectional.only(start: 56.0);
+    EdgeInsetsDirectional.only(start: 45.0);
 
 class _OptionsItem extends StatelessWidget {
   const _OptionsItem({Key? key, required this.child}) : super(key: key);
@@ -408,7 +408,7 @@ class OptionsPage extends StatelessWidget {
 
     printInfoMessage('[BUILD] Options Completed');
     return DefaultTextStyle(
-      style: theme.primaryTextTheme.labelMedium!,
+      style: theme.primaryTextTheme.bodySmall!,
       child: ListView(
           padding: const EdgeInsets.only(bottom: 124.0),
           children: this.readerMode
