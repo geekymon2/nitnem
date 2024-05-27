@@ -33,6 +33,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
   String _batteryLevel = '';
   String _currentTime = '';
   bool _topButtonVisible = false;
+  double _scrollPerc = 0.0;
 
   @override
   void setState(VoidCallback fn) {
@@ -66,6 +67,15 @@ class _MyReaderPageState extends State<ReaderScreen> {
             _controller.offset == _controller.position.maxScrollExtent;
       });
     }
+  }
+
+  void _updateScrollPerc() {
+    //return scrollPerc.toStringAsFixed(2);
+    setState(() {
+      _scrollPerc = (_controller.offset != 0.0)
+          ? (_controller.offset / _controller.position.maxScrollExtent) * 100
+          : 0.0;
+    });
   }
 
   void initReaderScreen(Store<AppState> store) {
@@ -103,25 +113,20 @@ class _MyReaderPageState extends State<ReaderScreen> {
   //           ScrollInfo(id, offset, _controller.position.maxScrollExtent)));
   // }
 
-  // _updateScrollPosition() {
-  //   final int id = StoreProvider.of<AppState>(context).state.pathId;
-  //   //distpatch action to update scroll position indicator
-  //   final double maxOffset = _controller.position.maxScrollExtent;
-  //   final double offset = _controller.offset;
-  //   StoreProvider.of<AppState>(context).dispatch(
-  //       UpdateStatusScrollPercentageAction(ScrollInfo(id, offset, maxOffset)));
-  // }
+  _updateScrollPosition() {
+    final int id = StoreProvider.of<AppState>(context).state.pathId;
+    //distpatch action to update scroll position indicator
+    final double maxOffset = _controller.position.maxScrollExtent;
+    final double offset = _controller.offset;
+    StoreProvider.of<AppState>(context).dispatch(
+        UpdateStatusScrollPercentageAction(ScrollInfo(id, offset, maxOffset)));
+  }
 
   _onEndScroll(ScrollMetrics metrics) {
     _updateTopButtonVisibility();
     //_updateScrollPosition();
+    _updateScrollPerc();
   }
-
-  // String _calculateScrollPerc(double offset, double maxoffset) {
-  //   final double scrollPerc =
-  //       (offset != 0.0) ? (offset / maxoffset) * 100 : 0.0;
-  //   return scrollPerc.toStringAsFixed(2);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -314,9 +319,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                         ? 1
                                         : 2,
                                     child: Text(
-                                      //_calculateScrollPerc(
-                                      //        vm.scrollOffset, vm.maxOffset) +
-                                      "2%",
+                                      _scrollPerc.toStringAsFixed(2),
                                       textAlign: TextAlign.center,
                                       style: new TextStyle(
                                         fontFamily:
