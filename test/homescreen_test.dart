@@ -6,6 +6,7 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 //import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nitnem/redux/store/store.dart';
@@ -20,8 +21,10 @@ void main() {
     'TEST - [HomeScreen]',
     (WidgetTester tester) async {
       await tester.runAsync(() async {
-        HomeScreen screen =
-            HomeScreen(optionsPage: OptionsPage(readerMode: false));
+        HomeScreen screen = HomeScreen(
+          optionsPage: OptionsPage(key: UniqueKey(), readerMode: false),
+          key: UniqueKey(),
+        );
         var store = await createStore();
         await tester.pumpWidget(makeTestableWidget(
             child: StoreProvider<AppState>(store: store, child: screen)));
@@ -39,12 +42,14 @@ void main() {
               6, 'Tav-Prasad Savaiye', 'qÍ pRswid sv`X', 'tavprasad_savaiye'),
           new PathTile(7, 'Ardas', 'Ardws', 'ardas'),
           new PathTile(8, 'Sukhmani Sahib', 'suKmnI swihb', 'sukhmani_sahib'),
-          new PathTile(9, 'Dukh Bhanjani Sahib', 'duK BMjnI swihb', 'dukh_bhanjani_sahib'),
+          new PathTile(9, 'Dukh Bhanjani Sahib', 'duK BMjnI swihb',
+              'dukh_bhanjani_sahib'),
           new PathTile(10, 'Sohila Sahib', 'soihlw swihb', 'sohila_sahib'),
-          new PathTile(11, 'Aarti', 'AwrqI', 'aarti_aarta'),          
+          new PathTile(11, 'Aarti', 'AwrqI', 'aarti_aarta'),
         ];
         // Verify that our home screen has the expected components.
-        items.forEach((item) => expect(find.text(item.title, skipOffstage: false), findsOneWidget));
+        items.forEach((item) =>
+            expect(find.text(item.title, skipOffstage: false), findsOneWidget));
       });
     },
   );

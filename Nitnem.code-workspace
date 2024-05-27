@@ -1,10 +1,13 @@
 {
-	"folders": [
-		{
-			"path": "../nitnem"
-		}
-	],
-	"settings": {
-		"java.configuration.updateBuildConfiguration": "automatic"
-	}
+  "folders": [
+    {
+      "path": "../nitnem"
+    }
+  ],
+  "settings": {
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "yaml.schemas": {
+      "https://json.schemastore.org/pubspec.json": "file:///c%3A/Users/manpr/Projects/GitHub/nitnem/pubspec.yaml"
+    }
+  }
 }

@@ -1,9 +1,7 @@
 import 'dart:async';
-
-import 'package:battery/battery.dart';
 import 'package:flutter/foundation.dart';
+import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:intl/intl.dart';
@@ -20,7 +18,7 @@ import 'package:redux/redux.dart';
 
 class ReaderScreen extends StatefulWidget {
   ReaderScreen({
-    Key key,
+    required Key key,
   }) : super(key: key);
 
   @override
@@ -28,59 +26,92 @@ class ReaderScreen extends StatefulWidget {
 }
 
 class _MyReaderPageState extends State<ReaderScreen> {
-  ScrollController _controller;
-  Timer _statusTimer;
-  Battery _battery;
-  Timer _timer;
+  final Battery _battery = Battery();
+  ScrollController _controller = ScrollController(initialScrollOffset: 0.0);
 
-  void initReaderScreen(Store<AppState> store) {
-    //init status bar time.
-    _statusTimer = Timer.periodic(
-        Duration(seconds: AppConstants.STATUS_TIME_UPDATE_INTERVAL_SECONDS),
-        (Timer t) => _updateStatusTime());
+  //Ephimeral State
+  String _batteryLevel = '';
+  String _currentTime = '';
+  bool _topButtonVisible = false;
+  double _scrollPerc = 0.0;
 
-    //init status bar battery indicator
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      _battery = Battery();
-      _battery.batteryLevel.then((level) {
-        store.dispatch(UpdateStatusBatteryPercAction(level));
+  @override
+  void setState(VoidCallback fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  void _updateBatteryLevel() {
+    _battery.batteryLevel.then((level) {
+      setState(() {
+        _batteryLevel = level.toString();
       });
+    });
+  }
 
-      _battery.onBatteryStateChanged.listen((BatteryState state) {
-        _battery.batteryLevel.then((level) {
-          store.dispatch(UpdateStatusBatteryPercAction(level));
-        });
+  void _updateCurrentTime() {
+    DateTime dateTime = DateTime.now();
+    final timeFormatter = DateFormat('HH:mm a');
+    final formattedTime = timeFormatter.format(dateTime);
+
+    setState(() {
+      _currentTime = formattedTime.toString();
+    });
+  }
+
+  void _updateTopButtonVisibility() {
+    if (_controller.hasClients && _controller.position.maxScrollExtent > 0.0) {
+      setState(() {
+        _topButtonVisible =
+            _controller.offset == _controller.position.maxScrollExtent;
       });
     }
+  }
+
+  void _updateScrollPerc() {
+    //return scrollPerc.toStringAsFixed(2);
+    setState(() {
+      _scrollPerc = (_controller.offset != 0.0)
+          ? (_controller.offset / _controller.position.maxScrollExtent) * 100
+          : 0.0;
+    });
+  }
+
+  void initReaderScreen(Store<AppState> store) {
+    _updateBatteryLevel();
+    //init status bar time.
+    Timer.periodic(
+        Duration(seconds: AppConstants.STATUS_TIME_UPDATE_INTERVAL_SECONDS),
+        (Timer t) => _updateCurrentTime());
 
     //init the scroll controller, lets set the initial state to beginning.
     //wait a bit to let all async actions to finish before scrolling to position.
-    _controller = ScrollController(initialScrollOffset: 0.0);
-    Timer(Duration(milliseconds: 500), () {
-      _navigateToScrollPositionForFirstTime();
-    });
+    // Timer(Duration(milliseconds: 1500), () {
+    //   //_navigateToScrollPositionForFirstTime();
+    // });
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _updateStatusTime();
+      _updateCurrentTime();
     });
   }
 
-  _navigateToScrollPositionForFirstTime() {
-    final int id = StoreProvider.of<AppState>(context).state.pathId;
-    final bool savePos =
-        StoreProvider.of<AppState>(context).state.options.saveScrollPosition;
-    final double loadedScrollOffset = StoreProvider.of<AppState>(context)
-        .state
-        .options
-        .scrollOffset[id.toString()]
-        .scrollOffset;
-    final double offset = savePos ? loadedScrollOffset : 0.0;
-    _controller.animateTo(offset,
-        duration: new Duration(milliseconds: 500), curve: Curves.ease);
-    StoreProvider.of<AppState>(context).dispatch(
-        UpdateStatusScrollPercentageAction(
-            ScrollInfo(id, offset, _controller.position.maxScrollExtent)));
-  }
+  // _navigateToScrollPositionForFirstTime() {
+  //   final int id = StoreProvider.of<AppState>(context).state.pathId;
+  //   final bool savePos =
+  //       StoreProvider.of<AppState>(context).state.options.saveScrollPosition;
+  //   final double loadedScrollOffset = StoreProvider.of<AppState>(context)
+  //       .state
+  //       .options
+  //       .scrollOffset[id.toString()]!
+  //       .scrollOffset;
+  //   final double offset = savePos ? loadedScrollOffset : 0.0;
+  //   _controller.animateTo(offset,
+  //       duration: new Duration(milliseconds: 500), curve: Curves.ease);
+  //   StoreProvider.of<AppState>(context).dispatch(
+  //       UpdateStatusScrollPercentageAction(
+  //           ScrollInfo(id, offset, _controller.position.maxScrollExtent)));
+  // }
 
   _updateScrollPosition() {
     final int id = StoreProvider.of<AppState>(context).state.pathId;
@@ -92,28 +123,9 @@ class _MyReaderPageState extends State<ReaderScreen> {
   }
 
   _onEndScroll(ScrollMetrics metrics) {
-    _updateScrollPosition();
-  }
-
-  bool _checkTopActionVisibility() {
-    if (_controller.hasClients && _controller.position.maxScrollExtent > 0.0) {
-      return _controller.offset == _controller.position.maxScrollExtent;
-    } else {
-      return false;
-    }
-  }
-
-  String _calculateScrollPerc(double offset, double maxoffset) {
-    final double scrollPerc =
-        (offset != 0.0) ? (offset / maxoffset) * 100 : 0.0;
-    return scrollPerc.toStringAsFixed(2);
-  }
-
-  void _updateStatusTime() {
-    var now = new DateTime.now();
-    String timeString = new DateFormat().add_jm().format(now);
-    StoreProvider.of<AppState>(context)
-        .dispatch(UpdateStatusTimeAction(timeString));
+    _updateTopButtonVisibility();
+    //_updateScrollPosition();
+    _updateScrollPerc();
   }
 
   @override
@@ -123,13 +135,13 @@ class _MyReaderPageState extends State<ReaderScreen> {
 
     printInfoMessage('[BUILD] ReaderScreen');
     //Only the bottom UI overlay is enabled, hiding the system status bar when in reading pane
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.bottom]);
 
-    var result = WillPopScope(
-        onWillPop: () {
+    var result = PopScope(
+        onPopInvoked: (didPop) {
           StoreProvider.of<AppState>(context)
               .dispatch(ClearReaderOptionsToggleAction());
-          return new Future.value(true);
         },
         child: StoreConnector<AppState, _ViewModel>(
             converter: _ViewModel.fromStore,
@@ -175,7 +187,10 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                   title: Text((vm.showReaderOptions)
                                       ? AppConstants.EMPTY_STRING
                                       : vm.nitnemPathTitle),
-                                  background: OptionsPage(readerMode: true),
+                                  background: OptionsPage(
+                                    readerMode: true,
+                                    key: UniqueKey(),
+                                  ),
                                 ),
                               ),
                               SliverToBoxAdapter(
@@ -185,7 +200,8 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                         AppConstants.READER_PADDING),
                                     child: MediaQuery(
                                       data: MediaQuery.of(context).copyWith(
-                                        textScaleFactor: vm.textScaleValue,
+                                        textScaler: TextScaler.linear(
+                                            vm.textScaleValue),
                                       ),
                                       child: Text(
                                         vm.pathData,
@@ -222,7 +238,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                   bottomNavigationBar: vm.showStatus
                       ? MediaQuery(
                           data: MediaQuery.of(context).copyWith(
-                            textScaleFactor: 1.0,
+                            textScaler: TextScaler.linear(1.0),
                           ),
                           child: new Container(
                             height: (defaultTargetPlatform ==
@@ -244,11 +260,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                                   size: 12)
                                               : Container(),
                                           Text(
-                                            (defaultTargetPlatform ==
-                                                    TargetPlatform.android)
-                                                ? vm.batteryPerc.toString() +
-                                                    "%"
-                                                : "",
+                                            _batteryLevel + "%",
                                             textAlign: TextAlign.left,
                                             style: new TextStyle(
                                               fontFamily: AppConstants
@@ -263,7 +275,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                   Expanded(
                                       flex: 1,
                                       child: Text(
-                                        vm.statusTime,
+                                        _currentTime,
                                         textAlign: TextAlign.left,
                                         style: new TextStyle(
                                           fontFamily: AppConstants
@@ -307,9 +319,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                         ? 1
                                         : 2,
                                     child: Text(
-                                      _calculateScrollPerc(
-                                              vm.scrollOffset, vm.maxOffset) +
-                                          "%",
+                                      _scrollPerc.toStringAsFixed(2),
                                       textAlign: TextAlign.center,
                                       style: new TextStyle(
                                         fontFamily:
@@ -327,7 +337,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                           ))
                       : null,
                   floatingActionButton: Visibility(
-                      visible: _checkTopActionVisibility(),
+                      visible: _topButtonVisible,
                       child: SizedBox(
                         width: 50,
                         height: 50,
@@ -350,12 +360,8 @@ class _MyReaderPageState extends State<ReaderScreen> {
   @mustCallSuper
   void dispose() {
     //All overlays are enabled with the system status bar when in home screen
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-    _statusTimer?.cancel();
-    _statusTimer = null;
-    _timer?.cancel();
-    _timer = null;
-    _battery = null;
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
     super.dispose();
   }
 }
@@ -371,26 +377,22 @@ class _ViewModel {
   final String nitnemPathTitle;
   final double scrollOffset;
   final double maxOffset;
-  final String statusTime;
-  final int batteryPerc;
   final bool saveScrollPosition;
   final bool dnd;
 
   _ViewModel(
-      {@required this.onToggleReaderOptions,
-      @required this.languageName,
-      @required this.showReaderOptions,
-      @required this.textScaleValue,
-      @required this.isBold,
-      @required this.showStatus,
-      @required this.pathData,
-      @required this.nitnemPathTitle,
-      @required this.scrollOffset,
-      @required this.maxOffset,
-      @required this.statusTime,
-      @required this.batteryPerc,
-      @required this.saveScrollPosition,
-      @required this.dnd});
+      {required this.onToggleReaderOptions,
+      required this.languageName,
+      required this.showReaderOptions,
+      required this.textScaleValue,
+      required this.isBold,
+      required this.showStatus,
+      required this.pathData,
+      required this.nitnemPathTitle,
+      required this.scrollOffset,
+      required this.maxOffset,
+      required this.saveScrollPosition,
+      required this.dnd});
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
@@ -406,8 +408,6 @@ class _ViewModel {
       nitnemPathTitle: pathTitleSelector(store.state),
       scrollOffset: scrollOffsetSelector(store.state),
       maxOffset: maxOffsetSelector(store.state),
-      statusTime: timeStringSelector(store.state),
-      batteryPerc: batteryPercSelector(store.state),
       saveScrollPosition: saveScrollPositionSelector(store.state),
       dnd: dndStatusSelector(store.state),
     );
@@ -426,8 +426,6 @@ class _ViewModel {
           pathData == other.pathData &&
           nitnemPathTitle == other.nitnemPathTitle &&
           scrollOffset == other.scrollOffset &&
-          statusTime == other.statusTime &&
-          batteryPerc == other.batteryPerc &&
           saveScrollPosition == other.saveScrollPosition;
 
   @override
@@ -441,7 +439,5 @@ class _ViewModel {
       pathData.hashCode ^
       nitnemPathTitle.hashCode ^
       scrollOffset.hashCode ^
-      statusTime.hashCode ^
-      batteryPerc.hashCode ^
       saveScrollPosition.hashCode;
 }

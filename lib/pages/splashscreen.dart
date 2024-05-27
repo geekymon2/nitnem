@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nitnem/common/printmessage.dart';
 import 'package:nitnem/navigation/appnavigator.dart';
 import 'package:nitnem/constants/appconstants.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -12,7 +12,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  Timer _splashTimer;
+  late Timer _splashTimer;
   String _versionName = ' ';
 
   @override
@@ -24,8 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void dispose() {
-    _splashTimer?.cancel();
-    _splashTimer = null;
+    _splashTimer.cancel();
     super.dispose();
   }
 

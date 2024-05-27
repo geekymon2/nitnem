@@ -9,12 +9,10 @@ import 'package:nitnem/redux/reducers/readoptionsreducer.dart';
 import 'package:nitnem/redux/reducers/savescrollposreducer.dart';
 import 'package:nitnem/redux/reducers/screenawakereducer.dart';
 import 'package:nitnem/redux/reducers/scrollpercreducer.dart';
-import 'package:nitnem/redux/reducers/statustimereducer.dart';
 import 'package:nitnem/state/appoptions.dart';
 import 'package:nitnem/state/appstate.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'batterypercreducer.dart';
 import 'boldreducer.dart';
 import 'languagereducer.dart';
 import 'statusreducer.dart';
@@ -23,7 +21,7 @@ import 'themereducer.dart';
 import 'dndreducer.dart';
 
 AppState appReducer(AppState state, dynamic action) {
-  AppState newState;
+  AppState newState = state.copyWith();
 
   printInfoMessage('[ACTION] ${action.runtimeType}');
   if (action is TextScaleAction ||
@@ -37,8 +35,6 @@ AppState appReducer(AppState state, dynamic action) {
       action is FetchNitnemPathAction ||
       action is ChangeLanguageAction ||
       action is UpdateStatusScrollPercentageAction ||
-      action is UpdateStatusTimeAction ||
-      action is UpdateStatusBatteryPercAction ||
       action is ToggleScreenAwakeAction ||
       action is ClearReaderOptionsToggleAction ||
       action is ToggleReadingPositionSaveAction ||
@@ -62,8 +58,6 @@ AppState appReducer(AppState state, dynamic action) {
       pathFilePrefix: pathFilePrefixReducer(state.pathFilePrefix, action),
       pathTitle: pathTitleReducer(state.pathTitle, action),
       pathId: pathIdReducer(state.pathId, action),
-      statusTime: statusTimeReducer(state.statusTime, action),
-      batteryPerc: batteryPercReducer(state.batteryPerc, action),
     );
     printInfoMessage('Option Changed');
   }
@@ -75,7 +69,7 @@ AppState appReducer(AppState state, dynamic action) {
 
   if (action is SendFeedbackAction) {
     newState = state;
-    launch(AppConstants.FEEDBACK_URL, forceSafariVC: false);
+    launchUrl(Uri.http(AppConstants.FEEDBACK_URL));
     printInfoMessage('Sending feedback');
   }
 

@@ -19,34 +19,29 @@ class NitnemApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
-      store: store,
-      child: new StoreConnector<AppState, _ViewModel>(
-        converter: _ViewModel.fromStore,
-        onInit: (store) => store.dispatch(FetchOptionsAction()),
-        builder: (context, vm) => MaterialApp (
-          title: 'Nitnem App',
-          debugShowCheckedModeBanner: false,
-          theme: getThemeByName(vm.themeName).data,
-          color: Colors.grey,
-          home: SplashScreen(),
-          routes: _buildRoutes(),
-          builder: (BuildContext context, Widget child) {
-            return Directionality(
-              child: CupertinoTheme (
-                // Specifically use a blank Cupertino theme here and do not transfer
-                // over the Material primary color etc except the brightness to
-                // showcase standard iOS looks.
-                data: CupertinoThemeData (
-                  brightness: getThemeByName(vm.themeName).data.brightness,
-                ),
-                child: child
-              ),
-              textDirection: TextDirection.ltr,
-            );
-          },
-        ),
-      )
-    );
+        store: store,
+        child: new StoreConnector<AppState, _ViewModel>(
+          converter: _ViewModel.fromStore,
+          onInit: (store) => store.dispatch(FetchOptionsAction()),
+          builder: (context, vm) => MaterialApp(
+            title: 'Nitnem App',
+            debugShowCheckedModeBanner: false,
+            theme: getThemeByName(vm.themeName).data,
+            color: Colors.grey,
+            home: SplashScreen(),
+            routes: _buildRoutes(),
+            builder: (BuildContext context, Widget? child) {
+              return Directionality(
+                child: CupertinoTheme(
+                    data: CupertinoThemeData(
+                      brightness: getThemeByName(vm.themeName).data.brightness,
+                    ),
+                    child: child!),
+                textDirection: TextDirection.ltr,
+              );
+            },
+          ),
+        ));
   }
 
   Map<String, WidgetBuilder> _buildRoutes() {
@@ -55,7 +50,7 @@ class NitnemApp extends StatelessWidget {
       key: (dynamic route) => '${route.routeName}',
       value: (dynamic route) => route.buildRoute,
     );
-  } 
+  }
 
   List<AppRoute> _getRoutes() {
     final List<AppRoute> routes = <AppRoute>[
@@ -63,7 +58,11 @@ class NitnemApp extends StatelessWidget {
       AppRoute(
         routeName: '/home',
         buildRoute: (BuildContext context) => HomeScreen(
-          optionsPage: OptionsPage(readerMode: false),
+          optionsPage: OptionsPage(
+            readerMode: false,
+            key: UniqueKey(),
+          ),
+          key: UniqueKey(),
         ),
       ),
       AppRoute(
@@ -72,7 +71,9 @@ class NitnemApp extends StatelessWidget {
       ),
       AppRoute(
         routeName: '/reader',
-        buildRoute: (BuildContext context) => ReaderScreen(),
+        buildRoute: (BuildContext context) => ReaderScreen(
+          key: UniqueKey(),
+        ),
       ),
     ];
     return routes;
@@ -81,7 +82,7 @@ class NitnemApp extends StatelessWidget {
 
 class _ViewModel {
   final String themeName;
-  _ViewModel({@required this.themeName});
+  _ViewModel({required this.themeName});
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(

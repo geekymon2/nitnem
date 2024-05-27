@@ -14,11 +14,8 @@ ThemeData buildDarkTheme() {
     primaryColorDark: const Color(0xFF0050a0),
     primaryColorLight: secondaryColor,
     indicatorColor: Colors.white,
-    toggleableActiveColor: const Color(0xFF39CEFD),
     canvasColor: const Color(0xFF202124),
     scaffoldBackgroundColor: const Color(0xFF202124),
-    backgroundColor: const Color(0xFF202124),
-    errorColor: const Color(0xFFB00020),
     highlightColor: Colors.grey,
     buttonTheme: ButtonThemeData(
       colorScheme: colorScheme,

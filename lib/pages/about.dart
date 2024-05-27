@@ -13,7 +13,7 @@ class NitnemIcon extends StatelessWidget {
 
 void aboutNitnem(BuildContext context) {
   final ThemeData themeData = Theme.of(context);
-  final TextStyle aboutTextStyle = themeData.textTheme.bodyText1;
+  final TextStyle? aboutTextStyle = themeData.textTheme.bodyLarge;
 
   showDialog(
     context: context,

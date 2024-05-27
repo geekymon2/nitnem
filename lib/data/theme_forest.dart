@@ -9,16 +9,12 @@ ThemeData buildForestTheme() {
  
   final ColorScheme colorScheme = const ColorScheme.light().copyWith(
     primary: primaryColor,
-    primaryVariant: Color( 0xff388e3c ),
     secondary: secondaryColor,
-    secondaryVariant: Color( 0xff388e3c ),
     surface: Color( 0xffffffff ),
-    background: Color( 0xffa5d6a7 ),
     error: Color( 0xffd32f2f ),
     onPrimary: Color( 0xffffffff ),
     onSecondary: Color( 0xffffffff ),
     onSurface: Color( 0xff000000 ),
-    onBackground: Color( 0xffffffff ),
     onError: Color( 0xffffffff ),
     brightness: Brightness.light,
   );
@@ -28,13 +24,10 @@ ThemeData buildForestTheme() {
     colorScheme: colorScheme,
     primaryColor: primaryColor,
     indicatorColor: Colors.white,
-    toggleableActiveColor: const Color(0xff81c784),
     splashColor: Colors.white24,
     splashFactory: InkRipple.splashFactory,
     canvasColor: Colors.white,
     scaffoldBackgroundColor: Colors.white,
-    backgroundColor: Colors.white,
-    errorColor: const Color(0xFFB00020),
     highlightColor: Colors.blueGrey,
     buttonTheme: ButtonThemeData(
       colorScheme: colorScheme,

@@ -11,18 +11,18 @@ import 'package:nitnem/state/appstate.dart';
 
 import 'about.dart';
 
-const double _kItemHeight = 48.0;
+const double _kItemHeight = 4.0;
 const EdgeInsetsDirectional _kItemPadding =
-    EdgeInsetsDirectional.only(start: 56.0);
+    EdgeInsetsDirectional.only(start: 45.0);
 
 class _OptionsItem extends StatelessWidget {
-  const _OptionsItem({Key key, this.child}) : super(key: key);
+  const _OptionsItem({Key? key, required this.child}) : super(key: key);
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    final double textScaleFactor = MediaQuery.textScaleFactorOf(context);
+    final double textScaleFactor = MediaQuery.textScalerOf(context).scale(10);
 
     return MergeSemantics(
       child: Container(
@@ -45,7 +45,7 @@ class _OptionsItem extends StatelessWidget {
 
 class _BooleanItem extends StatelessWidget {
   const _BooleanItem(this.title, this.subtitle, this.value, this.onChanged,
-      {this.switchKey});
+      {required this.switchKey});
 
   final String title;
   final String subtitle;
@@ -91,6 +91,7 @@ class _ActionItem extends StatelessWidget {
     return _OptionsItem(
       child: _FlatButton(
         onPressed: onTap,
+        key: UniqueKey(),
         child: Text(text),
       ),
     );
@@ -98,7 +99,9 @@ class _ActionItem extends StatelessWidget {
 }
 
 class _FlatButton extends StatelessWidget {
-  const _FlatButton({Key key, this.onPressed, this.child}) : super(key: key);
+  const _FlatButton(
+      {required Key key, required this.onPressed, required this.child})
+      : super(key: key);
 
   final VoidCallback onPressed;
   final Widget child;
@@ -108,7 +111,7 @@ class _FlatButton extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       child: DefaultTextStyle(
-        style: Theme.of(context).primaryTextTheme.subtitle1,
+        style: Theme.of(context).primaryTextTheme.titleMedium!,
         child: child,
       ),
     );
@@ -125,7 +128,7 @@ class _Heading extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     return _OptionsItem(
       child: DefaultTextStyle(
-        style: theme.textTheme.bodyText2.copyWith(
+        style: theme.textTheme.bodyMedium!.copyWith(
           fontFamily: 'GoogleSans',
           color: theme.colorScheme.secondary,
         ),
@@ -260,7 +263,7 @@ class _TextScaleFactorItem extends StatelessWidget {
                 const Text('Text size'),
                 Text(
                   '${StoreProvider.of<AppState>(context).state.options.textScaleValue.toStringAsFixed(2)}',
-                  style: Theme.of(context).primaryTextTheme.bodyText2,
+                  style: Theme.of(context).primaryTextTheme.bodyMedium,
                 ),
                 Slider(
                   min: AppConstants.TEXTSCALE_MIN,
@@ -300,7 +303,7 @@ class _LanguageItem extends StatelessWidget {
                 const Text('Language'),
                 Text(
                   '${StoreProvider.of<AppState>(context).state.options.languageName}',
-                  style: Theme.of(context).primaryTextTheme.bodyText2,
+                  style: Theme.of(context).primaryTextTheme.bodyMedium,
                 ),
               ],
             ),
@@ -356,8 +359,8 @@ class _DoNotDisturbItem extends StatelessWidget {
 
 class OptionsPage extends StatelessWidget {
   const OptionsPage({
-    Key key,
-    @required this.readerMode,
+    required Key key,
+    required this.readerMode,
   }) : super(key: key);
 
   final bool readerMode;
@@ -405,7 +408,7 @@ class OptionsPage extends StatelessWidget {
 
     printInfoMessage('[BUILD] Options Completed');
     return DefaultTextStyle(
-      style: theme.primaryTextTheme.subtitle1,
+      style: theme.primaryTextTheme.bodySmall!,
       child: ListView(
           padding: const EdgeInsets.only(bottom: 124.0),
           children: this.readerMode

@@ -8,19 +8,18 @@ ThemeData buildLightTheme() {
   final ColorScheme colorScheme = const ColorScheme.light().copyWith(
     primary: primaryColor,
     secondary: secondaryColor,
+    surface: Colors.blue,
+    error: const Color(0xFFB00020),
   );
   final ThemeData base = ThemeData(
     brightness: Brightness.light,
     colorScheme: colorScheme,
     primaryColor: primaryColor,
     indicatorColor: Colors.white,
-    toggleableActiveColor: const Color(0xFF39CEFD),
     splashColor: Colors.white24,
     splashFactory: InkRipple.splashFactory,
     canvasColor: Colors.white,
     scaffoldBackgroundColor: Colors.white,
-    backgroundColor: Colors.white,
-    errorColor: const Color(0xFFB00020),
     highlightColor: Colors.blueGrey,
     buttonTheme: ButtonThemeData(
       colorScheme: colorScheme,
