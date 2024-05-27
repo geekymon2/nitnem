@@ -11,14 +11,16 @@ import 'package:nitnem/state/appoptions.dart';
 import 'package:nitnem/state/appstate.dart';
 import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wakelock/wakelock.dart';
 
+import '../../data/pathtiledata.dart';
 
 void storeOptionsMiddleware(
     Store<AppState> store, dynamic action, NextDispatcher next) {
   AppState state = store.state;
 
   if (action is ToggleScreenAwakeAction) {
-    //Screen.keepOn(action.isAwake);
+    Wakelock.toggle(enable: action.isAwake);
     state = state.copyWith(
         options: state.options.copyWith(screenAwake: action.isAwake));
     saveOptionsToPrefs(state.options);
@@ -105,8 +107,7 @@ void storeOptionsMiddleware(
   }
 
   if (action is OptionsLoadedAction) {
-    //TODO - need to implement screen wake
-    //Screen.keepOn(action.options.screenAwake);
+    Wakelock.toggle(enable: action.options.screenAwake);
   }
 
   next(action);
@@ -153,17 +154,16 @@ Map<String, ScrollInfo> constructScrollPosMap(String scrollPosString) {
   Map<String, dynamic> rawInfo;
   Map<String, ScrollInfo> scrollInfo = new Map<String, ScrollInfo>();
 
-  //TODO: can never be null so else is never called.
-  // if (scrollPosString != null) {
-  //Raw data contains maps, convert map info into ScrollInfo
-  rawInfo = json.decode(scrollPosString);
-  rawInfo.forEach((k, v) => scrollInfo.putIfAbsent(
-      k, () => new ScrollInfo(v["id"], v["scrollOffset"], v["maxOffset"])));
-  // } else {
-  //   scrollInfo = new Map.fromIterable(PathTileData.items,
-  //       key: (v) => v.id.toString(),
-  //       value: (v) => new ScrollInfo(v.id, 0.0, 0.0));
-  // }
+  if (scrollPosString != '') {
+    //Raw data contains maps, convert map info into ScrollInfo
+    rawInfo = json.decode(scrollPosString);
+    rawInfo.forEach((k, v) => scrollInfo.putIfAbsent(
+        k, () => new ScrollInfo(v["id"], v["scrollOffset"], v["maxOffset"])));
+  } else {
+    scrollInfo = new Map.fromIterable(PathTileData.items,
+        key: (v) => v.id.toString(),
+        value: (v) => new ScrollInfo(v.id, 0.0, 0.0));
+  }
 
   return scrollInfo;
 }

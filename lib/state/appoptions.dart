@@ -72,22 +72,21 @@ class AppOptions {
         hasNPAccess: hasNPAccess ?? this.hasNPAccess);
   }
 
-  // TODO: not sure if this is needed.
-  // @override
-  // bool operator ==(dynamic other) {
-  //   if (runtimeType != other.runtimeType) return false;
-  //   final AppOptions typedOther = other;
-  //   return themeName == typedOther.themeName &&
-  //       bold == typedOther.bold &&
-  //       showStatus == typedOther.showStatus &&
-  //       textScaleValue == typedOther.textScaleValue &&
-  //       languageName == typedOther.languageName &&
-  //       screenAwake == typedOther.screenAwake &&
-  //       saveScrollPosition == typedOther.saveScrollPosition &&
-  //       scrollOffset == typedOther.scrollOffset &&
-  //       doNotDisturb == typedOther.doNotDisturb &&
-  //       hasNPAccess == typedOther.hasNPAccess;
-  // }
+  @override
+  bool operator ==(dynamic other) {
+    if (runtimeType != other.runtimeType) return false;
+    final AppOptions typedOther = other;
+    return themeName == typedOther.themeName &&
+        bold == typedOther.bold &&
+        showStatus == typedOther.showStatus &&
+        textScaleValue == typedOther.textScaleValue &&
+        languageName == typedOther.languageName &&
+        screenAwake == typedOther.screenAwake &&
+        saveScrollPosition == typedOther.saveScrollPosition &&
+        scrollOffset == typedOther.scrollOffset &&
+        doNotDisturb == typedOther.doNotDisturb &&
+        hasNPAccess == typedOther.hasNPAccess;
+  }
 
   @override
   int get hashCode => Object.hashAll([

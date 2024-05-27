@@ -56,20 +56,19 @@ class AppState {
     );
   }
 
-  //TODO: not sure if this is needed.
-  // @override
-  // bool operator ==(dynamic other) {
-  //   if (runtimeType != other.runtimeType) return false;
-  //   final AppState typedOther = other;
-  //   return options == typedOther.options &&
-  //       showReaderOptions == typedOther.showReaderOptions &&
-  //       pathData == typedOther.pathData &&
-  //       pathFilePrefix == typedOther.pathFilePrefix &&
-  //       pathTitle == typedOther.pathTitle &&
-  //       statusTime == typedOther.statusTime &&
-  //       batteryPerc == typedOther.batteryPerc &&
-  //       pathId == typedOther.pathId;
-  // }
+  @override
+  bool operator ==(dynamic other) {
+    if (runtimeType != other.runtimeType) return false;
+    final AppState typedOther = other;
+    return options == typedOther.options &&
+        showReaderOptions == typedOther.showReaderOptions &&
+        pathData == typedOther.pathData &&
+        pathFilePrefix == typedOther.pathFilePrefix &&
+        pathTitle == typedOther.pathTitle &&
+        statusTime == typedOther.statusTime &&
+        batteryPerc == typedOther.batteryPerc &&
+        pathId == typedOther.pathId;
+  }
 
   @override
   int get hashCode => Object.hashAll([
