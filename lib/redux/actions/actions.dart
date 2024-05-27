@@ -73,16 +73,6 @@ class UpdateStatusScrollPercentageAction {
   UpdateStatusScrollPercentageAction(this.scrollInfo);
 }
 
-class UpdateStatusTimeAction {
-  final String timeString;
-  UpdateStatusTimeAction(this.timeString);
-}
-
-class UpdateStatusBatteryPercAction {
-  final int batteryLevel;
-  UpdateStatusBatteryPercAction(this.batteryLevel);
-}
-
 class ToggleScreenAwakeAction {
   final bool isAwake;
   ToggleScreenAwakeAction(this.isAwake);

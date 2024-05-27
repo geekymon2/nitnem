@@ -16,7 +16,7 @@ description: Nitnem App. Please respectfully cover you head and remove your shoe
 version: 3.0.0+0
 
 environment:
-  sdk: ">=2.14.0 <3.0.0"
+  sdk: ">=2.15.0 <3.0.0"
 
 dependencies:
   flutter:

@@ -16,8 +16,6 @@ double scrollOffsetSelector(AppState state) =>
     getScrollOffsetForThisPath(state.options.scrollOffset, state.pathId);
 double maxOffsetSelector(AppState state) =>
     getMaxOffsetForThisPath(state.options.scrollOffset, state.pathId);
-String timeStringSelector(AppState state) => state.statusTime;
-int batteryPercSelector(AppState state) => state.batteryPerc;
 bool saveScrollPositionSelector(AppState state) =>
     state.options.saveScrollPosition;
 bool dndStatusSelector(AppState state) => state.options.doNotDisturb;
