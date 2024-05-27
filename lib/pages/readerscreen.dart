@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +32,14 @@ class _MyReaderPageState extends State<ReaderScreen> {
   //Ephimeral State
   String _batteryLevel = '';
   String _currentTime = '';
+  bool _topButtonVisible = false;
+
+  @override
+  void setState(VoidCallback fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
 
   void _updateBatteryLevel() {
     _battery.batteryLevel.then((level) {
@@ -50,6 +57,15 @@ class _MyReaderPageState extends State<ReaderScreen> {
     setState(() {
       _currentTime = formattedTime.toString();
     });
+  }
+
+  void _updateTopButtonVisibility() {
+    if (_controller.hasClients && _controller.position.maxScrollExtent > 0.0) {
+      setState(() {
+        _topButtonVisible =
+            _controller.offset == _controller.position.maxScrollExtent;
+      });
+    }
   }
 
   void initReaderScreen(Store<AppState> store) {
@@ -97,17 +113,8 @@ class _MyReaderPageState extends State<ReaderScreen> {
   // }
 
   _onEndScroll(ScrollMetrics metrics) {
-    _checkTopActionVisibility();
+    _updateTopButtonVisibility();
     //_updateScrollPosition();
-  }
-
-  //TODO: this logic is defective.
-  bool _checkTopActionVisibility() {
-    if (_controller.hasClients && _controller.position.maxScrollExtent > 0.0) {
-      return _controller.offset == _controller.position.maxScrollExtent;
-    } else {
-      return false;
-    }
   }
 
   // String _calculateScrollPerc(double offset, double maxoffset) {
@@ -327,7 +334,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                           ))
                       : null,
                   floatingActionButton: Visibility(
-                      visible: _checkTopActionVisibility(),
+                      visible: _topButtonVisible,
                       child: SizedBox(
                         width: 50,
                         height: 50,
