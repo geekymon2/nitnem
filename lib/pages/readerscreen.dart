@@ -28,6 +28,8 @@ class ReaderScreen extends StatefulWidget {
 class _MyReaderPageState extends State<ReaderScreen> {
   final Battery _battery = Battery();
   ScrollController _controller = ScrollController(initialScrollOffset: 0.0);
+  static final GlobalKey<ScaffoldState> _readerScreenScaffoldKey =
+      GlobalKey<ScaffoldState>();
 
   //Ephimeral State
   String _batteryLevel = '';
@@ -70,7 +72,6 @@ class _MyReaderPageState extends State<ReaderScreen> {
   }
 
   void _updateScrollPerc() {
-    //return scrollPerc.toStringAsFixed(2);
     setState(() {
       _scrollPerc = (_controller.offset != 0.0)
           ? (_controller.offset / _controller.position.maxScrollExtent) * 100
@@ -124,8 +125,8 @@ class _MyReaderPageState extends State<ReaderScreen> {
 
   _onEndScroll(ScrollMetrics metrics) {
     _updateTopButtonVisibility();
-    //_updateScrollPosition();
     _updateScrollPerc();
+    _updateScrollPosition();
   }
 
   @override
@@ -134,6 +135,8 @@ class _MyReaderPageState extends State<ReaderScreen> {
     final bool isDark = theme.brightness == Brightness.dark;
 
     printInfoMessage('[BUILD] ReaderScreen');
+    printInfoMessage(
+        '[STATE] Battery: $_batteryLevel, Time: $_currentTime, ScrollPerc: $_scrollPerc');
     //Only the bottom UI overlay is enabled, hiding the system status bar when in reading pane
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom]);
@@ -148,6 +151,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
             onInit: (store) => initReaderScreen(store),
             builder: (context, vm) {
               return Scaffold(
+                  key: _readerScreenScaffoldKey,
                   body: Container(
                     decoration: BoxDecoration(
                         image: new DecorationImage(
