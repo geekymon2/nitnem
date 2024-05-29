@@ -14,6 +14,8 @@ import 'models/themes.dart';
 
 class NitnemApp extends StatelessWidget {
   final Store<AppState> store;
+  final _optionsPageKey = GlobalKey();
+  final _homeScreenKey = GlobalKey();
   NitnemApp(this.store);
 
   @override
@@ -60,9 +62,9 @@ class NitnemApp extends StatelessWidget {
         buildRoute: (BuildContext context) => HomeScreen(
           optionsPage: OptionsPage(
             readerMode: false,
-            key: UniqueKey(),
+            key: _optionsPageKey,
           ),
-          key: UniqueKey(),
+          key: _homeScreenKey,
         ),
       ),
       AppRoute(

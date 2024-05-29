@@ -30,18 +30,40 @@ class _MyReaderPageState extends State<ReaderScreen> {
   ScrollController _controller = ScrollController(initialScrollOffset: 0.0);
   static final GlobalKey<ScaffoldState> _readerScreenScaffoldKey =
       GlobalKey<ScaffoldState>();
+  static final GlobalKey _storeConnectorKey = GlobalKey();
 
   //Ephimeral State
   String _batteryLevel = '';
   String _currentTime = '';
   bool _topButtonVisible = false;
-  double _scrollPerc = 0.0;
+  Timer? _batteryTimer;
+  Timer? _scrollPosTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startBatteryUpdateTimer();
+    _updateBatteryLevel();
+    _updateCurrentTime();
+  }
 
   @override
   void setState(VoidCallback fn) {
     if (mounted) {
       super.setState(fn);
     }
+  }
+
+  void _startBatteryUpdateTimer() {
+    _batteryTimer = Timer.periodic(
+        Duration(seconds: AppConstants.STATUS_TIME_UPDATE_INTERVAL_SECONDS),
+        (Timer t) => _updateCurrentTime());
+  }
+
+  void _startScrollPosUpdateTimer() {
+    _scrollPosTimer = Timer(Duration(milliseconds: 500), () {
+      _navigateToScrollPositionOnLoad();
+    });
   }
 
   void _updateBatteryLevel() {
@@ -52,6 +74,13 @@ class _MyReaderPageState extends State<ReaderScreen> {
     });
   }
 
+  /*
+   * 
+  Sets the state for current time.
+  This is called first from within initState in order to set the state
+  at the time of initilisation and then called again periodically based
+  on a timer that updates the time on this screen.
+  */
   void _updateCurrentTime() {
     DateTime dateTime = DateTime.now();
     final timeFormatter = DateFormat('HH:mm a');
@@ -71,50 +100,41 @@ class _MyReaderPageState extends State<ReaderScreen> {
     }
   }
 
-  void _updateScrollPerc() {
-    setState(() {
-      _scrollPerc = (_controller.offset != 0.0)
-          ? (_controller.offset / _controller.position.maxScrollExtent) * 100
-          : 0.0;
-    });
+  String _calculateScrollPerc(double offset, double maxoffset) {
+    final double scrollPerc =
+        (offset != 0.0) ? (offset / maxoffset) * 100 : 0.0;
+    return scrollPerc.toStringAsFixed(2);
   }
 
   void initReaderScreen(Store<AppState> store) {
-    _updateBatteryLevel();
-    //init status bar time.
-    Timer.periodic(
-        Duration(seconds: AppConstants.STATUS_TIME_UPDATE_INTERVAL_SECONDS),
-        (Timer t) => _updateCurrentTime());
-
-    //init the scroll controller, lets set the initial state to beginning.
-    //wait a bit to let all async actions to finish before scrolling to position.
-    // Timer(Duration(milliseconds: 1500), () {
-    //   //_navigateToScrollPositionForFirstTime();
-    // });
-
+    _startScrollPosUpdateTimer();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _updateCurrentTime();
     });
   }
 
-  // _navigateToScrollPositionForFirstTime() {
-  //   final int id = StoreProvider.of<AppState>(context).state.pathId;
-  //   final bool savePos =
-  //       StoreProvider.of<AppState>(context).state.options.saveScrollPosition;
-  //   final double loadedScrollOffset = StoreProvider.of<AppState>(context)
-  //       .state
-  //       .options
-  //       .scrollOffset[id.toString()]!
-  //       .scrollOffset;
-  //   final double offset = savePos ? loadedScrollOffset : 0.0;
-  //   _controller.animateTo(offset,
-  //       duration: new Duration(milliseconds: 500), curve: Curves.ease);
-  //   StoreProvider.of<AppState>(context).dispatch(
-  //       UpdateStatusScrollPercentageAction(
-  //           ScrollInfo(id, offset, _controller.position.maxScrollExtent)));
-  // }
+  /* 
+   *
+  Navigate to the scroll position on first load
+  This is called from the initstate in order to wait for a set time
+  before applying and animating the scroll position to the saved value
+  */
+  _navigateToScrollPositionOnLoad() {
+    final int id = StoreProvider.of<AppState>(context).state.pathId;
+    final bool savePos =
+        StoreProvider.of<AppState>(context).state.options.saveScrollPosition;
+    final double loadedScrollOffset = StoreProvider.of<AppState>(context)
+        .state
+        .options
+        .scrollOffset[id.toString()]!
+        .scrollOffset;
+    final double offset = savePos ? loadedScrollOffset : 0.0;
+    _controller.animateTo(offset,
+        duration: new Duration(milliseconds: 500), curve: Curves.ease);
+    _updateScrollPositionInStatusBar();
+  }
 
-  _updateScrollPosition() {
+  _updateScrollPositionInStatusBar() {
     final int id = StoreProvider.of<AppState>(context).state.pathId;
     //distpatch action to update scroll position indicator
     final double maxOffset = _controller.position.maxScrollExtent;
@@ -125,8 +145,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
 
   _onEndScroll(ScrollMetrics metrics) {
     _updateTopButtonVisibility();
-    _updateScrollPerc();
-    _updateScrollPosition();
+    _updateScrollPositionInStatusBar();
   }
 
   @override
@@ -135,8 +154,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
     final bool isDark = theme.brightness == Brightness.dark;
 
     printInfoMessage('[BUILD] ReaderScreen');
-    printInfoMessage(
-        '[STATE] Battery: $_batteryLevel, Time: $_currentTime, ScrollPerc: $_scrollPerc');
+    printInfoMessage('[STATE] Battery: $_batteryLevel, Time: $_currentTime');
     //Only the bottom UI overlay is enabled, hiding the system status bar when in reading pane
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom]);
@@ -147,6 +165,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
               .dispatch(ClearReaderOptionsToggleAction());
         },
         child: StoreConnector<AppState, _ViewModel>(
+            key: _storeConnectorKey,
             converter: _ViewModel.fromStore,
             onInit: (store) => initReaderScreen(store),
             builder: (context, vm) {
@@ -323,7 +342,9 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                         ? 1
                                         : 2,
                                     child: Text(
-                                      _scrollPerc.toStringAsFixed(2),
+                                      _calculateScrollPerc(
+                                              vm.scrollOffset, vm.maxOffset) +
+                                          "%",
                                       textAlign: TextAlign.center,
                                       style: new TextStyle(
                                         fontFamily:
@@ -366,6 +387,9 @@ class _MyReaderPageState extends State<ReaderScreen> {
     //All overlays are enabled with the system status bar when in home screen
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);
+    _controller.dispose();
+    _batteryTimer?.cancel();
+    _scrollPosTimer?.cancel();
     super.dispose();
   }
 }
