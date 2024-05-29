@@ -1,5 +1,5 @@
 workflows:
-  release-build---google-play-and-app-store:
+  release-build-google-play:
     name: Release Build - Google Play
     instance_type: mac_mini_m1
     max_build_duration: 60
@@ -48,8 +48,6 @@ workflows:
       - flutter build appbundle --release --build-name=2.0.$(($BUILD_NUMBER + 100)) --build-number=$(($BUILD_NUMBER + 100))
       - find . -name "Podfile" -execdir pod install \;
       - keychain initialize
-      - app-store-connect fetch-signing-files "com.manpreet.nitnem" --type IOS_APP_STORE
-        --create
       - keychain add-certificates
       - xcode-project use-profiles
       - flutter build ipa --export-options-plist=/Users/builder/export_options.plist --build-name=2.0.$(($BUILD_NUMBER + 100)) --build-number=$(($BUILD_NUMBER + 100))
