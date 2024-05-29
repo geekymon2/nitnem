@@ -11,7 +11,7 @@ subprojects {
         if (project.hasProperty('android')) {
             project.android {
                 if (namespace == null) {
-                    namespace "com.geekymon2.nitnem"
+                    namespace "com.manpreet.nitnem"
                 }
             }
         }
