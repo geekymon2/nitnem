@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
 
   final Widget optionsPage;
 
-  static final GlobalKey<ScaffoldState> scaffoldKey =
+  static final GlobalKey<ScaffoldState> _homeScreenScaffoldKey =
       GlobalKey<ScaffoldState>();
 
   ///Determine title size based on resolution
@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
               (PathTile item) => buildNitnemTile(context, item, vm));
           listTiles = ListTile.divideTiles(context: context, tiles: listTiles);
           return BackdropScaffold(
-            key: scaffoldKey,
+            key: _homeScreenScaffoldKey,
             backgroundColor: isDark ? kFlutterBlue : theme.primaryColor,
             appBar: BackdropAppBar(
               backgroundColor: theme.primaryColor,
