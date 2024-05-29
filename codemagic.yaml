@@ -45,7 +45,7 @@ workflows:
       - flutter packages pub get
       - flutter config --enable-web
       - flutter test
-      - flutter build appbundle --release --build-name=2.0.$(($BUILD_NUMBER + 100)) --build-number=$(($BUILD_NUMBER + 100))
+      - flutter build appbundle --release --build-name=3.0.$(($BUILD_NUMBER + 300)) --build-number=$(($BUILD_NUMBER + 300))
       - find . -name "Podfile" -execdir pod install \;
       - keychain initialize
       - keychain add-certificates
