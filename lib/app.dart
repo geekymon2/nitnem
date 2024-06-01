@@ -57,7 +57,6 @@ class NitnemApp extends StatelessWidget {
 
   List<AppRoute> _getRoutes() {
     final List<AppRoute> routes = <AppRoute>[
-      // Demos
       AppRoute(
         routeName: '/home',
         buildRoute: (BuildContext context) => HomeScreen(

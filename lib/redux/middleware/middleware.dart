@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
+//import 'package:flutter_dnd/flutter_dnd.dart';
 import 'package:nitnem/common/printmessage.dart';
 import 'package:nitnem/constants/appconstants.dart';
 import 'package:nitnem/models/language.dart';
@@ -126,7 +127,8 @@ Future<AppOptions> loadOptionsFromPrefs() async {
   bool hasNPAccess = false;
   AppOptions options = AppOptions.initial();
   if (defaultTargetPlatform == TargetPlatform.android) {
-    // hasNPAccess = (await FlutterDnd.isNotificationPolicyAccessGranted)!;
+    //TODO: need to fix DND
+    //hasNPAccess = (await FlutterDnd.isNotificationPolicyAccessGranted)!;
   }
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var stateString = preferences.getString(AppConstants.OPTIONS_SHAREDPREF_KEY);
