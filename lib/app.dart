@@ -16,6 +16,7 @@ class NitnemApp extends StatelessWidget {
   final Store<AppState> store;
   final _optionsPageKey = GlobalKey();
   final _homeScreenKey = GlobalKey();
+  final _readerScreenKey = GlobalKey();
   NitnemApp(this.store);
 
   @override
@@ -74,7 +75,7 @@ class NitnemApp extends StatelessWidget {
       AppRoute(
         routeName: '/reader',
         buildRoute: (BuildContext context) => ReaderScreen(
-          key: UniqueKey(),
+          key: _readerScreenKey,
         ),
       ),
     ];

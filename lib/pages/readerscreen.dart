@@ -28,6 +28,7 @@ class ReaderScreen extends StatefulWidget {
 class _MyReaderPageState extends State<ReaderScreen> {
   final Battery _battery = Battery();
   ScrollController _controller = ScrollController(initialScrollOffset: 0.0);
+  static final GlobalKey _optionsKey = GlobalKey();
   static final GlobalKey<ScaffoldState> _readerScreenScaffoldKey =
       GlobalKey<ScaffoldState>();
   static final GlobalKey _storeConnectorKey = GlobalKey();
@@ -212,7 +213,7 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                       : vm.nitnemPathTitle),
                                   background: OptionsPage(
                                     readerMode: true,
-                                    key: UniqueKey(),
+                                    key: _optionsKey,
                                   ),
                                 ),
                               ),
