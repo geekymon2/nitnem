@@ -18,6 +18,8 @@ workflows:
       xcode: latest
       cocoapods: default
       java: 17
+      android_signing:
+        - nitnem
     triggering:
       events:
         - push
@@ -50,7 +52,7 @@ workflows:
       - keychain initialize
       - keychain add-certificates
       - xcode-project use-profiles
-      - flutter build ipa --export-options-plist=/Users/builder/export_options.plist --build-name=2.0.$(($BUILD_NUMBER + 100)) --build-number=$(($BUILD_NUMBER + 100))
+      - flutter build ipa --export-options-plist=/Users/builder/export_options.plist --build-name=3.0.$(($BUILD_NUMBER + 300)) --build-number=$(($BUILD_NUMBER + 300))
       - |
         # build web
         flutter build web --release
