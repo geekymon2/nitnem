@@ -49,10 +49,10 @@ workflows:
       - flutter test
       - flutter build appbundle --release --build-name=3.0.$(($BUILD_NUMBER + 300)) --build-number=$(($BUILD_NUMBER + 300))
       - find . -name "Podfile" -execdir pod install \;
-      - # build web
-        flutter build web --release
-        cd build/web
-        7z a -r ../web.zip ./*
+      # build web
+      - flutter build web --release
+      - cd build/web
+      - 7z a -r ../web.zip ./*
     artifacts:
       - build/**/outputs/**/*.apk
       - build/**/outputs/**/*.aab
