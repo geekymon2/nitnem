@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
-//import 'package:flutter_dnd/flutter_dnd.dart';
 import 'package:nitnem/common/printmessage.dart';
 import 'package:nitnem/constants/appconstants.dart';
 import 'package:nitnem/models/language.dart';
@@ -31,12 +29,6 @@ void storeOptionsMiddleware(
   if (action is ToggleBoldAction) {
     state =
         state.copyWith(options: state.options.copyWith(bold: action.isBold));
-    saveOptionsToPrefs(state.options);
-  }
-
-  if (action is ToggleDNDAction) {
-    state = state.copyWith(
-        options: state.options.copyWith(doNotDisturb: action.isDnd));
     saveOptionsToPrefs(state.options);
   }
 
@@ -124,12 +116,7 @@ void saveOptionsToPrefs(AppOptions options) async {
 }
 
 Future<AppOptions> loadOptionsFromPrefs() async {
-  bool hasNPAccess = false;
   AppOptions options = AppOptions.initial();
-  if (defaultTargetPlatform == TargetPlatform.android) {
-    //TODO: need to fix DND
-    //hasNPAccess = (await FlutterDnd.isNotificationPolicyAccessGranted)!;
-  }
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var stateString = preferences.getString(AppConstants.OPTIONS_SHAREDPREF_KEY);
   if (stateString != null) {
@@ -143,9 +130,7 @@ Future<AppOptions> loadOptionsFromPrefs() async {
         languageName: prefs["languageName"],
         screenAwake: prefs["screenAwake"],
         saveScrollPosition: prefs["saveScrollPosition"],
-        scrollOffset: constructScrollPosMap(prefs["scrollOffset"]),
-        doNotDisturb: prefs["doNotDisturb"],
-        hasNPAccess: hasNPAccess);
+        scrollOffset: constructScrollPosMap(prefs["scrollOffset"]));
   }
 
   printInfoMessage('[OPTIONS LOADED: ${options.toString()}');

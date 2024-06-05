@@ -18,7 +18,6 @@ double maxOffsetSelector(AppState state) =>
     getMaxOffsetForThisPath(state.options.scrollOffset, state.pathId);
 bool saveScrollPositionSelector(AppState state) =>
     state.options.saveScrollPosition;
-bool dndStatusSelector(AppState state) => state.options.doNotDisturb;
 
 double getScrollOffsetForThisPath(Map<String, ScrollInfo> scrollPos, int id) {
   //set scroll position for path with does not exist previously in saved options.
