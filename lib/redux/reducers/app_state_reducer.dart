@@ -18,7 +18,6 @@ import 'languagereducer.dart';
 import 'statusreducer.dart';
 import 'textscalereducer.dart';
 import 'themereducer.dart';
-import 'dndreducer.dart';
 
 AppState appReducer(AppState state, dynamic action) {
   AppState newState = state.copyWith();
@@ -37,8 +36,7 @@ AppState appReducer(AppState state, dynamic action) {
       action is UpdateStatusScrollPercentageAction ||
       action is ToggleScreenAwakeAction ||
       action is ClearReaderOptionsToggleAction ||
-      action is ToggleReadingPositionSaveAction ||
-      action is ToggleDNDAction) {
+      action is ToggleReadingPositionSaveAction) {
     newState = AppState(
       options: AppOptions(
         themeName: themeReducer(state.options.themeName, action),
@@ -50,8 +48,6 @@ AppState appReducer(AppState state, dynamic action) {
         saveScrollPosition:
             saveScrollPosReducer(state.options.saveScrollPosition, action),
         scrollOffset: scrollPercReducer(state.options.scrollOffset, action),
-        doNotDisturb: dndReducer(state.options.doNotDisturb, action),
-        hasNPAccess: state.options.hasNPAccess,
       ),
       showReaderOptions: readerOptionsReducer(state.showReaderOptions, action),
       pathData: pathDataReducer(state.pathData, action),

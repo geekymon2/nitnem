@@ -324,20 +324,6 @@ class _MyReaderPageState extends State<ReaderScreen> {
                                     ),
                                   ),
                                   Expanded(
-                                    flex: 1,
-                                    child: Text(
-                                      (vm.dnd) ? "DND" : "",
-                                      textAlign: TextAlign.right,
-                                      style: new TextStyle(
-                                        fontFamily:
-                                            AppConstants.STATUSBAR_FONT_FAMILY,
-                                        fontSize: AppConstants
-                                            .STATUSBAR_FONT_SIZE_SMALL,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
                                     flex: (defaultTargetPlatform ==
                                             TargetPlatform.android)
                                         ? 1
@@ -407,7 +393,6 @@ class _ViewModel {
   final double scrollOffset;
   final double maxOffset;
   final bool saveScrollPosition;
-  final bool dnd;
 
   _ViewModel(
       {required this.onToggleReaderOptions,
@@ -420,8 +405,7 @@ class _ViewModel {
       required this.nitnemPathTitle,
       required this.scrollOffset,
       required this.maxOffset,
-      required this.saveScrollPosition,
-      required this.dnd});
+      required this.saveScrollPosition});
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
@@ -438,7 +422,6 @@ class _ViewModel {
       scrollOffset: scrollOffsetSelector(store.state),
       maxOffset: maxOffsetSelector(store.state),
       saveScrollPosition: saveScrollPositionSelector(store.state),
-      dnd: dndStatusSelector(store.state),
     );
   }
 

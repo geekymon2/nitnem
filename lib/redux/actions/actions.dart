@@ -29,12 +29,6 @@ class ToggleBoldAction {
   ToggleBoldAction(this.isBold);
 }
 
-class ToggleDNDAction {
-  final bool isDnd;
-  final bool hasNPAccess;
-  ToggleDNDAction(this.isDnd, this.hasNPAccess);
-}
-
 class ToggleStatusAction {
   final bool showStatus;
   ToggleStatusAction(this.showStatus);

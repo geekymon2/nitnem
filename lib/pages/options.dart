@@ -339,23 +339,6 @@ class _LanguageItem extends StatelessWidget {
   }
 }
 
-class _DoNotDisturbItem extends StatelessWidget {
-  const _DoNotDisturbItem();
-
-  @override
-  Widget build(BuildContext context) {
-    return _BooleanItem(
-      'Do Not Disturb',
-      'Requires Notification Permission',
-      StoreProvider.of<AppState>(context).state.options.doNotDisturb == true,
-      (bool value) {
-        StoreProvider.of<AppState>(context).dispatch(ToggleDNDAction(value,
-            StoreProvider.of<AppState>(context).state.options.hasNPAccess));
-      },
-      switchKey: const Key('dnd'),
-    );
-  }
-}
 
 class OptionsPage extends StatelessWidget {
   const OptionsPage({
@@ -389,9 +372,6 @@ class OptionsPage extends StatelessWidget {
       const _Heading('Gurbani'),
       _LanguageItem(readerMode),
       _SaveScrollPosItem(),
-      (defaultTargetPlatform == TargetPlatform.android)
-          ? _DoNotDisturbItem()
-          : Container(),
     ];
 
     //define all widgets including all options widgets first.

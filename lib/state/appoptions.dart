@@ -19,9 +19,7 @@ class AppOptions {
       required this.languageName,
       required this.screenAwake,
       required this.saveScrollPosition,
-      required this.scrollOffset,
-      required this.doNotDisturb,
-      required this.hasNPAccess});
+      required this.scrollOffset});
 
   final String themeName;
   final bool bold;
@@ -31,8 +29,6 @@ class AppOptions {
   final bool screenAwake;
   final bool saveScrollPosition;
   final Map<String, ScrollInfo> scrollOffset;
-  final bool doNotDisturb;
-  final bool hasNPAccess;
 
   factory AppOptions.initial() => AppOptions(
       themeName: ThemeName.Default.toString(),
@@ -44,9 +40,7 @@ class AppOptions {
       saveScrollPosition: false,
       scrollOffset: new Map.fromIterable(PathTileData.items,
           key: (v) => v.id.toString(),
-          value: (v) => new ScrollInfo(v.id, 0.0, 0.0)),
-      doNotDisturb: false,
-      hasNPAccess: false);
+          value: (v) => new ScrollInfo(v.id, 0.0, 0.0)));
 
   AppOptions copyWith(
       {String? themeName,
@@ -56,9 +50,7 @@ class AppOptions {
       String? languageName,
       bool? screenAwake,
       bool? saveScrollPosition,
-      Map<String, ScrollInfo>? scrollOffset,
-      bool? doNotDisturb,
-      bool? hasNPAccess}) {
+      Map<String, ScrollInfo>? scrollOffset}) {
     return AppOptions(
         themeName: themeName ?? this.themeName,
         bold: bold ?? this.bold,
@@ -67,9 +59,7 @@ class AppOptions {
         languageName: languageName ?? this.languageName,
         screenAwake: screenAwake ?? this.screenAwake,
         saveScrollPosition: saveScrollPosition ?? this.saveScrollPosition,
-        scrollOffset: scrollOffset ?? this.scrollOffset,
-        doNotDisturb: doNotDisturb ?? this.doNotDisturb,
-        hasNPAccess: hasNPAccess ?? this.hasNPAccess);
+        scrollOffset: scrollOffset ?? this.scrollOffset);
   }
 
   @override
@@ -83,9 +73,7 @@ class AppOptions {
         languageName == typedOther.languageName &&
         screenAwake == typedOther.screenAwake &&
         saveScrollPosition == typedOther.saveScrollPosition &&
-        scrollOffset == typedOther.scrollOffset &&
-        doNotDisturb == typedOther.doNotDisturb &&
-        hasNPAccess == typedOther.hasNPAccess;
+        scrollOffset == typedOther.scrollOffset;
   }
 
   @override
@@ -98,8 +86,6 @@ class AppOptions {
         screenAwake,
         saveScrollPosition,
         scrollOffset,
-        doNotDisturb,
-        hasNPAccess
       ]);
 
   Map<String, dynamic> toJson() {
@@ -112,7 +98,6 @@ class AppOptions {
     map["screenAwake"] = this.screenAwake;
     map["saveScrollPosition"] = this.saveScrollPosition;
     map["scrollOffset"] = json.encode(this.scrollOffset);
-    map["doNotDisturb"] = this.doNotDisturb;
     return map;
   }
 
@@ -122,6 +107,6 @@ class AppOptions {
     String pos = "";
     scrollOffset.forEach((k, v) => pos += "$k: ${v.scrollOffset}, ");
 
-    return '[theme: $themeName, bold: $bold, status: $showStatus, scale: $textScaleValue, lang: $languageName, awake: $screenAwake, savepos: $saveScrollPosition, pos: $pos], dnd: $doNotDisturb';
+    return '[theme: $themeName, bold: $bold, status: $showStatus, scale: $textScaleValue, lang: $languageName, awake: $screenAwake, savepos: $saveScrollPosition, pos: $pos]';
   }
 }
