@@ -1,24 +1,22 @@
 //import 'package:flutter_dnd/flutter_dnd.dart';
 import 'package:nitnem/redux/actions/actions.dart';
 import 'package:redux/redux.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 final dndReducer = combineReducers<bool>([
   TypedReducer<bool, ToggleDNDAction>(_activeDNDReducer),
 ]);
 
 bool _activeDNDReducer(bool isDND, ToggleDNDAction action) {
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
   if (action.isDnd) {
     if (action.hasNPAccess) {
-      // TODO: Need to fix DND
-      
-      //  FlutterDnd.setInterruptionFilter(
-      //   FlutterDnd.INTERRUPTION_FILTER_NONE); //Supress All Notifications
+      flutterLocalNotificationsPlugin.cancelAll();
     } else {
-      // FlutterDnd.gotoPolicySettings();
+      //Does not have access for Notifications
     }
-  } else {
-    //FlutterDnd.setInterruptionFilter(
-    //  FlutterDnd.INTERRUPTION_FILTER_ALL); //No notifications are supressed
   }
 
   return action.isDnd;

@@ -129,6 +129,7 @@ Future<AppOptions> loadOptionsFromPrefs() async {
   if (defaultTargetPlatform == TargetPlatform.android) {
     //TODO: need to fix DND
     //hasNPAccess = (await FlutterDnd.isNotificationPolicyAccessGranted)!;
+    hasNPAccess = true;
   }
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var stateString = preferences.getString(AppConstants.OPTIONS_SHAREDPREF_KEY);
