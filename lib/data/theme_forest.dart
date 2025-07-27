@@ -23,7 +23,6 @@ ThemeData buildForestTheme() {
     brightness: Brightness.light,
     colorScheme: colorScheme,
     primaryColor: primaryColor,
-    indicatorColor: Colors.white,
     splashColor: Colors.white24,
     splashFactory: InkRipple.splashFactory,
     canvasColor: Colors.white,
@@ -55,7 +54,7 @@ ThemeData buildForestTheme() {
         fontWeight: FontWeight.w400,
         fontStyle: FontStyle.normal,
       ),
-    ),
+    ), tabBarTheme: TabBarThemeData(indicatorColor: Colors.white),
   );
   return base.copyWith(
     textTheme: buildTextTheme(base.textTheme),
