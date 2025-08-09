@@ -12,8 +12,9 @@ import 'package:nitnem/state/appstate.dart';
 import 'about.dart';
 
 const double _kItemHeight = 4.0;
-const EdgeInsetsDirectional _kItemPadding =
-    EdgeInsetsDirectional.only(start: 45.0);
+const EdgeInsetsDirectional _kItemPadding = EdgeInsetsDirectional.only(
+  start: 45.0,
+);
 
 class _OptionsItem extends StatelessWidget {
   const _OptionsItem({Key? key, required this.child}) : super(key: key);
@@ -44,13 +45,19 @@ class _OptionsItem extends StatelessWidget {
 }
 
 class _BooleanItem extends StatelessWidget {
-  const _BooleanItem(this.title, this.subtitle, this.value, this.onChanged,
-      {required this.switchKey});
+  const _BooleanItem(
+    this.title,
+    this.subtitle,
+    this.value,
+    this.onChanged, {
+    required this.switchKey,
+  });
 
   final String title;
   final String subtitle;
   final bool value;
   final ValueChanged<bool> onChanged;
+
   // [switchKey] is used for accessing the switch from driver tests.
   final Key switchKey;
 
@@ -62,12 +69,13 @@ class _BooleanItem extends StatelessWidget {
         children: <Widget>[
           Expanded(child: Text(title)),
           Expanded(
-              child: Text(
-            subtitle,
-            style: TextStyle(
-              fontSize: AppConstants.OPTIONS_SUBTITLE_FONT_SIZE,
+            child: Text(
+              subtitle,
+              style: TextStyle(
+                fontSize: AppConstants.OPTIONS_SUBTITLE_FONT_SIZE,
+              ),
             ),
-          )),
+          ),
           Switch(
             key: switchKey,
             value: value,
@@ -89,19 +97,17 @@ class _ActionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _OptionsItem(
-      child: _FlatButton(
-        onPressed: onTap,
-        key: UniqueKey(),
-        child: Text(text),
-      ),
+      child: _FlatButton(onPressed: onTap, key: UniqueKey(), child: Text(text)),
     );
   }
 }
 
 class _FlatButton extends StatelessWidget {
-  const _FlatButton(
-      {required Key key, required this.onPressed, required this.child})
-      : super(key: key);
+  const _FlatButton({
+    required Key key,
+    required this.onPressed,
+    required this.child,
+  }) : super(key: key);
 
   final VoidCallback onPressed;
   final Widget child;
@@ -113,6 +119,9 @@ class _FlatButton extends StatelessWidget {
       child: DefaultTextStyle(
         style: Theme.of(context).primaryTextTheme.titleMedium!,
         child: child,
+      ),
+      style: TextButton.styleFrom(
+        side: const BorderSide(color: Colors.black12, width: 1),
       ),
     );
   }
@@ -132,10 +141,7 @@ class _Heading extends StatelessWidget {
           fontFamily: 'GoogleSans',
           color: theme.colorScheme.secondary,
         ),
-        child: Semantics(
-          child: Text(text),
-          header: true,
-        ),
+        child: Semantics(child: Text(text), header: true),
       ),
     );
   }
@@ -168,8 +174,9 @@ class _KeepScreenAwakeItem extends StatelessWidget {
       'Requires Wake Lock Permission',
       StoreProvider.of<AppState>(context).state.options.screenAwake == true,
       (bool value) {
-        StoreProvider.of<AppState>(context)
-            .dispatch(ToggleScreenAwakeAction(value));
+        StoreProvider.of<AppState>(
+          context,
+        ).dispatch(ToggleScreenAwakeAction(value));
       },
       switchKey: const Key('screenAwake'),
     );
@@ -187,8 +194,9 @@ class _SaveScrollPosItem extends StatelessWidget {
       StoreProvider.of<AppState>(context).state.options.saveScrollPosition ==
           true,
       (bool value) {
-        StoreProvider.of<AppState>(context)
-            .dispatch(ToggleReadingPositionSaveAction(value));
+        StoreProvider.of<AppState>(
+          context,
+        ).dispatch(ToggleReadingPositionSaveAction(value));
       },
       switchKey: const Key('saveScrollPosition'),
     );
@@ -212,6 +220,17 @@ class _ShowStatusItem extends StatelessWidget {
   }
 }
 
+class _ChangeBaaniOrderItem extends StatelessWidget {
+  const _ChangeBaaniOrderItem();
+
+  @override
+  Widget build(BuildContext context) {
+    return _ActionItem('Change Baani Order', () {
+      aboutNitnem(context);
+    });
+  }
+}
+
 class _ThemeChoices extends StatelessWidget {
   _ThemeChoices();
 
@@ -219,20 +238,27 @@ class _ThemeChoices extends StatelessWidget {
   _buildChoiceList(BuildContext context) {
     List<Widget> choices = [];
     ThemeName.values.forEach((item) {
-      choices.add(Container(
-        padding: const EdgeInsets.all(2.0),
-        child: ChoiceChip(
-          label: Text(item.toString().replaceAll(
-              item.runtimeType.toString() + ".", AppConstants.EMPTY_STRING)),
-          selected:
-              StoreProvider.of<AppState>(context).state.options.themeName ==
-                  item.toString(),
-          onSelected: (selected) {
-            StoreProvider.of<AppState>(context)
-                .dispatch(ChangeThemeAction(item.toString()));
-          },
+      choices.add(
+        Container(
+          padding: const EdgeInsets.all(2.0),
+          child: ChoiceChip(
+            label: Text(
+              item.toString().replaceAll(
+                item.runtimeType.toString() + ".",
+                AppConstants.EMPTY_STRING,
+              ),
+            ),
+            selected:
+                StoreProvider.of<AppState>(context).state.options.themeName ==
+                item.toString(),
+            onSelected: (selected) {
+              StoreProvider.of<AppState>(
+                context,
+              ).dispatch(ChangeThemeAction(item.toString()));
+            },
+          ),
         ),
-      ));
+      );
     });
     return choices;
   }
@@ -241,9 +267,7 @@ class _ThemeChoices extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 50.0),
-      child: Wrap(
-        children: _buildChoiceList(context),
-      ),
+      child: Wrap(children: _buildChoiceList(context)),
     );
   }
 }
@@ -269,13 +293,14 @@ class _TextScaleFactorItem extends StatelessWidget {
                   min: AppConstants.TEXTSCALE_MIN,
                   max: AppConstants.TEXTSCALE_MAX,
                   divisions: 15,
-                  value: StoreProvider.of<AppState>(context)
-                      .state
-                      .options
-                      .textScaleValue,
+                  value:
+                      StoreProvider.of<AppState>(
+                        context,
+                      ).state.options.textScaleValue,
                   onChanged: (double value) {
-                    StoreProvider.of<AppState>(context)
-                        .dispatch(TextScaleAction(value));
+                    StoreProvider.of<AppState>(
+                      context,
+                    ).dispatch(TextScaleAction(value));
                   },
                 ),
               ],
@@ -289,6 +314,7 @@ class _TextScaleFactorItem extends StatelessWidget {
 
 class _LanguageItem extends StatelessWidget {
   final bool readerMode;
+
   const _LanguageItem(this.readerMode);
 
   @override
@@ -322,14 +348,15 @@ class _LanguageItem extends StatelessWidget {
             onSelected: (LanguageMenuItem selectedValue) {
               if (readerMode) {
                 StoreProvider.of<AppState>(context).dispatch(
-                    ChangeLanguageAndFetchNitnemPathAction(
-                        selectedValue.title,
-                        StoreProvider.of<AppState>(context)
-                            .state
-                            .pathFilePrefix));
+                  ChangeLanguageAndFetchNitnemPathAction(
+                    selectedValue.title,
+                    StoreProvider.of<AppState>(context).state.pathFilePrefix,
+                  ),
+                );
               } else {
-                StoreProvider.of<AppState>(context)
-                    .dispatch(ChangeLanguageAction(selectedValue.title));
+                StoreProvider.of<AppState>(
+                  context,
+                ).dispatch(ChangeLanguageAction(selectedValue.title));
               }
             },
           ),
@@ -339,12 +366,9 @@ class _LanguageItem extends StatelessWidget {
   }
 }
 
-
 class OptionsPage extends StatelessWidget {
-  const OptionsPage({
-    required Key key,
-    required this.readerMode,
-  }) : super(key: key);
+  const OptionsPage({required Key key, required this.readerMode})
+    : super(key: key);
 
   final bool readerMode;
 
@@ -355,9 +379,7 @@ class OptionsPage extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     //a blank heading is needed to fix display overlap
-    final blankWidgets = <Widget>[
-      const _Heading(''),
-    ];
+    final blankWidgets = <Widget>[const _Heading('')];
     //define options widgets.
     final optWidgets = <Widget>[
       const _Heading('Themes'),
@@ -370,6 +392,7 @@ class OptionsPage extends StatelessWidget {
           ? _KeepScreenAwakeItem()
           : Container(),
       const _Heading('Gurbani'),
+      _ChangeBaaniOrderItem(),
       _LanguageItem(readerMode),
       _SaveScrollPosItem(),
     ];
@@ -390,10 +413,12 @@ class OptionsPage extends StatelessWidget {
     return DefaultTextStyle(
       style: theme.primaryTextTheme.bodySmall!,
       child: ListView(
-          padding: const EdgeInsets.only(bottom: 124.0),
-          children: this.readerMode
-              ? blankWidgets + optWidgets
-              : optWidgets + aboutWidgets),
+        padding: const EdgeInsets.only(bottom: 124.0),
+        children:
+            this.readerMode
+                ? blankWidgets + optWidgets
+                : optWidgets + aboutWidgets,
+      ),
     );
   }
 }
