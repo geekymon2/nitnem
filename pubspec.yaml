@@ -22,7 +22,7 @@ dependencies:
   flutter:
     sdk: flutter
   backdrop: ^0.9.1
-  url_launcher: ^6.3.1
+  url_launcher: ^6.3.2
   package_info_plus: ^8.0.0
   shared_preferences: ^2.5.2
   json_serializable: ^6.8.0

@@ -68,6 +68,8 @@ class FetchNitnemPathAction {
 
 class SendFeedbackAction {}
 
+class SaveBaaniOrderChangeAction {}
+
 class UpdateStatusScrollPercentageAction {
   ScrollInfo scrollInfo;
 

@@ -45,8 +45,10 @@ AppState appReducer(AppState state, dynamic action) {
         textScaleValue: textScaleReducer(state.options.textScaleValue, action),
         languageName: languageReducer(state.options.languageName, action),
         screenAwake: screenAwakeReducer(state.options.screenAwake, action),
-        saveScrollPosition:
-            saveScrollPosReducer(state.options.saveScrollPosition, action),
+        saveScrollPosition: saveScrollPosReducer(
+          state.options.saveScrollPosition,
+          action,
+        ),
         scrollOffset: scrollPercReducer(state.options.scrollOffset, action),
       ),
       showReaderOptions: readerOptionsReducer(state.showReaderOptions, action),
@@ -65,7 +67,7 @@ AppState appReducer(AppState state, dynamic action) {
 
   if (action is SendFeedbackAction) {
     newState = state;
-    launchUrl(Uri.http(AppConstants.FEEDBACK_URL));
+    launchUrl(Uri.https(AppConstants.FEEDBACK_URL));
     printInfoMessage('Sending feedback');
   }
 

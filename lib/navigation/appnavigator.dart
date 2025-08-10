@@ -16,4 +16,8 @@ class AppNavigator {
   static void goToBaaniOrder(BuildContext context) {
     Navigator.pushNamed(context, '/order');
   }
+
+  static void goBack(BuildContext context) {
+    Navigator.pop(context);
+  }
 }
