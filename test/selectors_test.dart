@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:nitnem/state/appstate.dart';
 import 'package:nitnem/redux/selectors/selectors.dart';
+import 'package:nitnem/state/appstate.dart';
 
 void main() {
   group('Selectors', () {

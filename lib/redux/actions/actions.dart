@@ -10,27 +10,32 @@ class ChangeThemeAction {
 
 class ChangeLanguageAction {
   final String language;
+
   ChangeLanguageAction(this.language);
 }
 
 class ChangeLanguageAndFetchNitnemPathAction {
   final String language;
   final String pathFilePrefix;
+
   ChangeLanguageAndFetchNitnemPathAction(this.language, this.pathFilePrefix);
 }
 
 class TextScaleAction {
   final double scale;
+
   TextScaleAction(this.scale);
 }
 
 class ToggleBoldAction {
   final bool isBold;
+
   ToggleBoldAction(this.isBold);
 }
 
 class ToggleStatusAction {
   final bool showStatus;
+
   ToggleStatusAction(this.showStatus);
 }
 
@@ -57,6 +62,7 @@ class NitnemPathLoadedAction {
 class FetchNitnemPathAction {
   final PathTile path;
   final String languageName;
+
   FetchNitnemPathAction(this.path, this.languageName);
 }
 
@@ -64,15 +70,18 @@ class SendFeedbackAction {}
 
 class UpdateStatusScrollPercentageAction {
   ScrollInfo scrollInfo;
+
   UpdateStatusScrollPercentageAction(this.scrollInfo);
 }
 
 class ToggleScreenAwakeAction {
   final bool isAwake;
+
   ToggleScreenAwakeAction(this.isAwake);
 }
 
 class ToggleReadingPositionSaveAction {
   final bool savePos;
+
   ToggleReadingPositionSaveAction(this.savePos);
 }

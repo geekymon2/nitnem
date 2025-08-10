@@ -1,15 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:nitnem/navigation/approute.dart';
+import 'package:nitnem/pages/baaniorderscreen.dart';
+import 'package:nitnem/pages/homescreen.dart';
+import 'package:nitnem/pages/options.dart';
+import 'package:nitnem/pages/readerscreen.dart';
+import 'package:nitnem/pages/splashscreen.dart';
 import 'package:nitnem/redux/actions/actions.dart';
 import 'package:nitnem/redux/selectors/selectors.dart';
 import 'package:nitnem/state/appstate.dart';
 import 'package:redux/redux.dart';
-import 'package:nitnem/navigation/approute.dart';
-import 'package:nitnem/pages/options.dart';
-import 'package:nitnem/pages/readerscreen.dart';
-import 'package:nitnem/pages/splashscreen.dart';
-import 'package:nitnem/pages/homescreen.dart';
+
 import 'models/themes.dart';
 
 class NitnemApp extends StatelessWidget {
@@ -17,34 +19,39 @@ class NitnemApp extends StatelessWidget {
   final _optionsPageKey = GlobalKey();
   final _homeScreenKey = GlobalKey();
   final _readerScreenKey = GlobalKey();
+  final _orderScreenKey = GlobalKey();
+
   NitnemApp(this.store);
 
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
-        store: store,
-        child: new StoreConnector<AppState, _ViewModel>(
-          converter: _ViewModel.fromStore,
-          onInit: (store) => store.dispatch(FetchOptionsAction()),
-          builder: (context, vm) => MaterialApp(
-            title: 'Nitnem App',
-            debugShowCheckedModeBanner: false,
-            theme: getThemeByName(vm.themeName).data,
-            color: Colors.grey,
-            home: SplashScreen(),
-            routes: _buildRoutes(),
-            builder: (BuildContext context, Widget? child) {
-              return Directionality(
-                child: CupertinoTheme(
+      store: store,
+      child: new StoreConnector<AppState, _ViewModel>(
+        converter: _ViewModel.fromStore,
+        onInit: (store) => store.dispatch(FetchOptionsAction()),
+        builder:
+            (context, vm) => MaterialApp(
+              title: 'Nitnem App',
+              debugShowCheckedModeBanner: false,
+              theme: getThemeByName(vm.themeName).data,
+              color: Colors.grey,
+              home: SplashScreen(),
+              routes: _buildRoutes(),
+              builder: (BuildContext context, Widget? child) {
+                return Directionality(
+                  child: CupertinoTheme(
                     data: CupertinoThemeData(
                       brightness: getThemeByName(vm.themeName).data.brightness,
                     ),
-                    child: child!),
-                textDirection: TextDirection.ltr,
-              );
-            },
-          ),
-        ));
+                    child: child!,
+                  ),
+                  textDirection: TextDirection.ltr,
+                );
+              },
+            ),
+      ),
+    );
   }
 
   Map<String, WidgetBuilder> _buildRoutes() {
@@ -59,13 +66,11 @@ class NitnemApp extends StatelessWidget {
     final List<AppRoute> routes = <AppRoute>[
       AppRoute(
         routeName: '/home',
-        buildRoute: (BuildContext context) => HomeScreen(
-          optionsPage: OptionsPage(
-            readerMode: false,
-            key: _optionsPageKey,
-          ),
-          key: _homeScreenKey,
-        ),
+        buildRoute:
+            (BuildContext context) => HomeScreen(
+              optionsPage: OptionsPage(readerMode: false, key: _optionsPageKey),
+              key: _homeScreenKey,
+            ),
       ),
       AppRoute(
         routeName: '/intro',
@@ -73,9 +78,13 @@ class NitnemApp extends StatelessWidget {
       ),
       AppRoute(
         routeName: '/reader',
-        buildRoute: (BuildContext context) => ReaderScreen(
-          key: _readerScreenKey,
-        ),
+        buildRoute:
+            (BuildContext context) => ReaderScreen(key: _readerScreenKey),
+      ),
+      AppRoute(
+        routeName: '/order',
+        buildRoute:
+            (BuildContext context) => BaaniOrderScreen(key: _orderScreenKey),
       ),
     ];
     return routes;
@@ -84,12 +93,11 @@ class NitnemApp extends StatelessWidget {
 
 class _ViewModel {
   final String themeName;
+
   _ViewModel({required this.themeName});
 
   static _ViewModel fromStore(Store<AppState> store) {
-    return _ViewModel(
-      themeName: themeSelector(store.state),
-    );
+    return _ViewModel(themeName: themeSelector(store.state));
   }
 
   @override

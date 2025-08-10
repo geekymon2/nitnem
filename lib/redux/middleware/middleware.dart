@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:nitnem/common/printmessage.dart';
 import 'package:nitnem/constants/appconstants.dart';
@@ -15,64 +16,78 @@ import 'package:wakelock_plus/wakelock_plus.dart';
 import '../../data/pathtiledata.dart';
 
 void storeOptionsMiddleware(
-    Store<AppState> store, dynamic action, NextDispatcher next) {
+  Store<AppState> store,
+  dynamic action,
+  NextDispatcher next,
+) {
   AppState state = store.state;
 
   if (action is ToggleScreenAwakeAction) {
     WakelockPlus.toggle(enable: action.isAwake);
 
     state = state.copyWith(
-        options: state.options.copyWith(screenAwake: action.isAwake));
+      options: state.options.copyWith(screenAwake: action.isAwake),
+    );
     saveOptionsToPrefs(state.options);
   }
 
   if (action is ToggleBoldAction) {
-    state =
-        state.copyWith(options: state.options.copyWith(bold: action.isBold));
+    state = state.copyWith(
+      options: state.options.copyWith(bold: action.isBold),
+    );
     saveOptionsToPrefs(state.options);
   }
 
   if (action is UpdateStatusScrollPercentageAction) {
     Map<String, ScrollInfo> scrollPos = state.options.scrollOffset;
     scrollPos.update(
-        action.scrollInfo.id.toString(), (ScrollInfo val) => action.scrollInfo);
+      action.scrollInfo.id.toString(),
+      (ScrollInfo val) => action.scrollInfo,
+    );
     state = state.copyWith(
-        options: state.options.copyWith(scrollOffset: scrollPos));
+      options: state.options.copyWith(scrollOffset: scrollPos),
+    );
     saveOptionsToPrefs(state.options);
   }
 
   if (action is ToggleStatusAction) {
     state = state.copyWith(
-        options: state.options.copyWith(showStatus: action.showStatus));
+      options: state.options.copyWith(showStatus: action.showStatus),
+    );
     saveOptionsToPrefs(state.options);
   }
 
   if (action is ToggleReadingPositionSaveAction) {
     state = state.copyWith(
-        options: state.options.copyWith(saveScrollPosition: action.savePos));
+      options: state.options.copyWith(saveScrollPosition: action.savePos),
+    );
     saveOptionsToPrefs(state.options);
   }
 
   if (action is TextScaleAction) {
     state = state.copyWith(
-        options: state.options.copyWith(textScaleValue: action.scale));
+      options: state.options.copyWith(textScaleValue: action.scale),
+    );
     saveOptionsToPrefs(state.options);
   }
 
   if (action is ChangeLanguageAction) {
     state = state.copyWith(
-        options: state.options.copyWith(languageName: action.language));
+      options: state.options.copyWith(languageName: action.language),
+    );
     saveOptionsToPrefs(state.options);
   }
 
   if (action is ChangeLanguageAndFetchNitnemPathAction) {
-    loadAsset(action.pathFilePrefix +
-            '_' +
-            getLanguageMenuItemValueByName(action.language).langCode)
-        .then((pathData) {
+    loadAsset(
+      action.pathFilePrefix +
+          '_' +
+          getLanguageMenuItemValueByName(action.language).langCode,
+    ).then((pathData) {
       state = state.copyWith(
-          pathData: pathData,
-          options: state.options.copyWith(languageName: action.language));
+        pathData: pathData,
+        options: state.options.copyWith(languageName: action.language),
+      );
       saveOptionsToPrefs(state.options);
       store.dispatch(NitnemPathLoadedAction(pathData));
     });
@@ -80,7 +95,8 @@ void storeOptionsMiddleware(
 
   if (action is ChangeThemeAction) {
     state = state.copyWith(
-        options: state.options.copyWith(themeName: action.themeName));
+      options: state.options.copyWith(themeName: action.themeName),
+    );
     saveOptionsToPrefs(state.options);
   }
 
@@ -111,7 +127,9 @@ void saveOptionsToPrefs(AppOptions options) async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var optionsString = json.encode(options.toJson());
   await preferences.setString(
-      AppConstants.OPTIONS_SHAREDPREF_KEY, optionsString);
+    AppConstants.OPTIONS_SHAREDPREF_KEY,
+    optionsString,
+  );
   printInfoMessage('[OPTIONS SAVED]: ${options.toString()}');
 }
 
@@ -123,14 +141,15 @@ Future<AppOptions> loadOptionsFromPrefs() async {
     dynamic prefs = json.decode(stateString);
 
     options = options.copyWith(
-        themeName: prefs["themeName"],
-        bold: prefs["bold"],
-        showStatus: prefs["showStatus"],
-        textScaleValue: prefs["textScaleValue"],
-        languageName: prefs["languageName"],
-        screenAwake: prefs["screenAwake"],
-        saveScrollPosition: prefs["saveScrollPosition"],
-        scrollOffset: constructScrollPosMap(prefs["scrollOffset"]));
+      themeName: prefs["themeName"],
+      bold: prefs["bold"],
+      showStatus: prefs["showStatus"],
+      textScaleValue: prefs["textScaleValue"],
+      languageName: prefs["languageName"],
+      screenAwake: prefs["screenAwake"],
+      saveScrollPosition: prefs["saveScrollPosition"],
+      scrollOffset: constructScrollPosMap(prefs["scrollOffset"]),
+    );
   }
 
   printInfoMessage('[OPTIONS LOADED: ${options.toString()}');
@@ -145,12 +164,18 @@ Map<String, ScrollInfo> constructScrollPosMap(String scrollPosString) {
   if (scrollPosString != '') {
     //Raw data contains maps, convert map info into ScrollInfo
     rawInfo = json.decode(scrollPosString);
-    rawInfo.forEach((k, v) => scrollInfo.putIfAbsent(
-        k, () => new ScrollInfo(v["id"], v["scrollOffset"], v["maxOffset"])));
+    rawInfo.forEach(
+      (k, v) => scrollInfo.putIfAbsent(
+        k,
+        () => new ScrollInfo(v["id"], v["scrollOffset"], v["maxOffset"]),
+      ),
+    );
   } else {
-    scrollInfo = new Map.fromIterable(PathTileData.items,
-        key: (v) => v.id.toString(),
-        value: (v) => new ScrollInfo(v.id, 0.0, 0.0));
+    scrollInfo = new Map.fromIterable(
+      PathTileData.items,
+      key: (v) => v.id.toString(),
+      value: (v) => new ScrollInfo(v.id, 0.0, 0.0),
+    );
   }
 
   return scrollInfo;

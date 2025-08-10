@@ -9,6 +9,7 @@ import 'package:nitnem/models/themes.dart';
 import 'package:nitnem/redux/actions/actions.dart';
 import 'package:nitnem/state/appstate.dart';
 
+import '../navigation/appnavigator.dart';
 import 'about.dart';
 
 const double _kItemHeight = 4.0;
@@ -122,6 +123,7 @@ class _FlatButton extends StatelessWidget {
       ),
       style: TextButton.styleFrom(
         side: const BorderSide(color: Colors.black12, width: 1),
+        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
       ),
     );
   }
@@ -226,7 +228,7 @@ class _ChangeBaaniOrderItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _ActionItem('Change Baani Order', () {
-      aboutNitnem(context);
+      AppNavigator.goToBaaniOrder(context);
     });
   }
 }
