@@ -67,8 +67,8 @@ AppState appReducer(AppState state, dynamic action) {
 
   if (action is SendFeedbackAction) {
     newState = state;
-    launchUrl(Uri.https(AppConstants.FEEDBACK_URL));
     printInfoMessage('Sending feedback');
+    launchUrl(Uri.parse(AppConstants.FEEDBACK_URL));
   }
 
   printInfoMessage('[STATE] ${newState.toString()}');
