@@ -122,8 +122,8 @@ class _FlatButton extends StatelessWidget {
         child: child,
       ),
       style: TextButton.styleFrom(
-        side: const BorderSide(color: Colors.black12, width: 1),
-        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+        side: const BorderSide(color: Colors.black45, width: 1),
+        backgroundColor: Theme.of(context).colorScheme.tertiary,
       ),
     );
   }

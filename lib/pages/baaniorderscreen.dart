@@ -63,7 +63,7 @@ class BaaniOrderScreen extends StatelessWidget {
         return Scaffold(
           key: _baaniOrderScreenScaffoldKey,
           appBar: AppBar(
-            backgroundColor: theme.scaffoldBackgroundColor,
+            backgroundColor: theme.primaryColor,
             centerTitle: true,
             title: Text("Change Baani Order"),
             leading: IconButton(
@@ -84,7 +84,9 @@ class BaaniOrderScreen extends StatelessWidget {
           body: Scrollbar(
             child: ReorderableListView(
               padding: EdgeInsets.symmetric(vertical: 8.0),
-              onReorder: (int oldIndex, int newIndex) {},
+              onReorder: (int oldIndex, int newIndex) {
+                printInfoMessage("Old: $oldIndex, New: $newIndex");
+              },
               children: listTiles.toList(),
             ),
           ),
