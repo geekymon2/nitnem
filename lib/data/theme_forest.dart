@@ -58,6 +58,9 @@ ThemeData buildForestTheme() {
   );
   return base.copyWith(
     textTheme: buildTextTheme(base.textTheme),
-    primaryTextTheme: buildTextTheme(base.primaryTextTheme),
+    primaryTextTheme: buildPrimaryTextTheme(
+      base.primaryTextTheme,
+      Colors.black,
+    ),
   );
 }
