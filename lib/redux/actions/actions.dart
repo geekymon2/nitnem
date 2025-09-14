@@ -68,10 +68,16 @@ class FetchNitnemPathAction {
 
 class SendFeedbackAction {}
 
-class SaveBaaniOrderChangeAction {}
+class BaaniOrderChangeAction {}
+
+class BaaniOrderSaveAction {
+  final List<dynamic> baaniOrder;
+
+  BaaniOrderSaveAction(this.baaniOrder);
+}
 
 class UpdateStatusScrollPercentageAction {
-  ScrollInfo scrollInfo;
+  final ScrollInfo scrollInfo;
 
   UpdateStatusScrollPercentageAction(this.scrollInfo);
 }

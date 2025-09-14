@@ -85,7 +85,13 @@ class BaaniOrderScreen extends StatelessWidget {
             child: ReorderableListView(
               padding: EdgeInsets.symmetric(vertical: 8.0),
               onReorder: (int oldIndex, int newIndex) {
-                printInfoMessage("Old: $oldIndex, New: $newIndex");
+                if (newIndex > oldIndex) newIndex -= 1;
+                final element = PathTileData.items.removeAt(oldIndex);
+                PathTileData.items.insert(newIndex, element);
+                printInfoMessage(
+                  "Baani Order Changed To: ${PathTileData.items}",
+                );
+                vm.onOrderChangeAction(context);
               },
               children: listTiles.toList(),
             ),
@@ -100,14 +106,23 @@ class BaaniOrderScreen extends StatelessWidget {
 
 class _ViewModel {
   final void Function(BuildContext) onOrderSaveAction;
+  final void Function(BuildContext) onOrderChangeAction;
 
-  _ViewModel({required this.onOrderSaveAction});
+  _ViewModel({
+    required this.onOrderSaveAction,
+    required this.onOrderChangeAction,
+  });
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
       onOrderSaveAction: (BuildContext ctx) {
-        StoreProvider.of<AppState>(ctx).dispatch(SaveBaaniOrderChangeAction());
+        List<dynamic> itemIds =
+            PathTileData.items.map((item) => item.id).toList();
+        StoreProvider.of<AppState>(ctx).dispatch(BaaniOrderSaveAction(itemIds));
         AppNavigator.goBack(ctx);
+      },
+      onOrderChangeAction: (BuildContext ctx) {
+        StoreProvider.of<AppState>(ctx).dispatch(BaaniOrderChangeAction());
       },
     );
   }

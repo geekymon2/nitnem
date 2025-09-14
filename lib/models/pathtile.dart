@@ -1,3 +1,6 @@
+import 'package:json_annotation/json_annotation.dart';
+
+@JsonSerializable()
 class PathTile {
   int _id;
   String _title;
@@ -16,9 +19,14 @@ class PathTile {
 
   String get gurmukhi {
     return _gurmukhi;
-  } 
+  }
 
   String get filePrefix {
     return _filePrefix;
+  }
+
+  @override
+  String toString() {
+    return 'PathTile{id: $_id, title: $_title}';
   }
 }

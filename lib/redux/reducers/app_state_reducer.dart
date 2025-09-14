@@ -13,6 +13,7 @@ import 'package:nitnem/state/appoptions.dart';
 import 'package:nitnem/state/appstate.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'baaniorderreducer.dart';
 import 'boldreducer.dart';
 import 'languagereducer.dart';
 import 'statusreducer.dart';
@@ -36,7 +37,8 @@ AppState appReducer(AppState state, dynamic action) {
       action is UpdateStatusScrollPercentageAction ||
       action is ToggleScreenAwakeAction ||
       action is ClearReaderOptionsToggleAction ||
-      action is ToggleReadingPositionSaveAction) {
+      action is ToggleReadingPositionSaveAction ||
+      action is BaaniOrderChangeAction) {
     newState = AppState(
       options: AppOptions(
         themeName: themeReducer(state.options.themeName, action),
@@ -50,6 +52,10 @@ AppState appReducer(AppState state, dynamic action) {
           action,
         ),
         scrollOffset: scrollPercReducer(state.options.scrollOffset, action),
+        baaniOrderedIds: baaniOrderIdReducer(
+          state.options.baaniOrderedIds,
+          action,
+        ),
       ),
       showReaderOptions: readerOptionsReducer(state.showReaderOptions, action),
       pathData: pathDataReducer(state.pathData, action),

@@ -8,11 +8,19 @@ class PathTileData {
     new PathTile(4, 'Anand Sahib', 'Anµdu swihb', 'anand_sahib'),
     new PathTile(5, 'Rehras Sahib', 'rhrwis swihb', 'rehraas_sahib'),
     new PathTile(
-        6, 'Tav-Prasad Savaiye', 'qÍ pRswid sv`X', 'tavprasad_savaiye'),
+      6,
+      'Tav-Prasad Savaiye',
+      'qÍ pRswid sv`X',
+      'tavprasad_savaiye',
+    ),
     new PathTile(7, 'Ardas', 'Ardws', 'ardas'),
     new PathTile(8, 'Sukhmani Sahib', 'suKmnI swihb', 'sukhmani_sahib'),
     new PathTile(
-        9, 'Dukh Bhanjani Sahib', 'duK BMjnI swihb', 'dukh_bhanjani_sahib'),
+      9,
+      'Dukh Bhanjani Sahib',
+      'duK BMjnI swihb',
+      'dukh_bhanjani_sahib',
+    ),
     new PathTile(10, 'Sohila Sahib', 'soihlw swihb', 'sohila_sahib'),
     new PathTile(11, 'Aarti', 'AwrqI', 'aarti_aarta'),
   ];
