@@ -70,6 +70,8 @@ class SendFeedbackAction {}
 
 class BaaniOrderChangeAction {}
 
+class BaaniOrderResetAction {}
+
 class BaaniOrderSaveAction {
   final List<dynamic> baaniOrder;
 

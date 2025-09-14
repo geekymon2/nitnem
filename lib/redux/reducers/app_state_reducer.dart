@@ -38,7 +38,8 @@ AppState appReducer(AppState state, dynamic action) {
       action is ToggleScreenAwakeAction ||
       action is ClearReaderOptionsToggleAction ||
       action is ToggleReadingPositionSaveAction ||
-      action is BaaniOrderChangeAction) {
+      action is BaaniOrderChangeAction ||
+      action is BaaniOrderResetAction) {
     newState = AppState(
       options: AppOptions(
         themeName: themeReducer(state.options.themeName, action),

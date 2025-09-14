@@ -34,6 +34,15 @@ void storeOptionsMiddleware(
     saveOptionsToPrefs(state.options);
   }
 
+  if (action is BaaniOrderResetAction) {
+    state = state.copyWith(
+      options: state.options.copyWith(
+        baaniOrderedIds: PathTileData.defaultOrderIds,
+      ),
+    );
+    saveOptionsToPrefs(state.options);
+  }
+
   if (action is ToggleBoldAction) {
     state = state.copyWith(
       options: state.options.copyWith(bold: action.isBold),

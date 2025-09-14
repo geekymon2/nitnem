@@ -16,19 +16,30 @@ Future<AppOptions> loadOptionsFromPrefs() async {
     AppConstants.OPTIONS_SHAREDPREF_KEY,
   );
   if (optionsString != null) {
-    dynamic prefs = json.decode(optionsString);
+    try {
+      dynamic prefs = json.decode(optionsString);
 
-    options = options.copyWith(
-      themeName: prefs[SharedPrefKeys.THEME_NAME],
-      bold: prefs[SharedPrefKeys.BOLD],
-      showStatus: prefs[SharedPrefKeys.SHOW_STATUS],
-      textScaleValue: prefs[SharedPrefKeys.TEXT_SCALE_VALUE],
-      languageName: prefs[SharedPrefKeys.LANGUAGE_NAME],
-      screenAwake: prefs[SharedPrefKeys.SCREEN_AWAKE],
-      saveScrollPosition: prefs[SharedPrefKeys.SAVE_SCROLL_POSITION],
-      scrollOffset: constructScrollPosMap(prefs[SharedPrefKeys.SCROLL_OFFSET]),
-      baaniOrderedIds: prefs[SharedPrefKeys.BAANI_ORDERED_IDS],
-    );
+      options = options.copyWith(
+        themeName: prefs[SharedPrefKeys.THEME_NAME],
+        bold: prefs[SharedPrefKeys.BOLD],
+        showStatus: prefs[SharedPrefKeys.SHOW_STATUS],
+        textScaleValue: prefs[SharedPrefKeys.TEXT_SCALE_VALUE],
+        languageName: prefs[SharedPrefKeys.LANGUAGE_NAME],
+        screenAwake: prefs[SharedPrefKeys.SCREEN_AWAKE],
+        saveScrollPosition: prefs[SharedPrefKeys.SAVE_SCROLL_POSITION],
+        scrollOffset: constructScrollPosMap(
+          prefs[SharedPrefKeys.SCROLL_OFFSET],
+        ),
+        baaniOrderedIds: prefs[SharedPrefKeys.BAANI_ORDERED_IDS],
+      );
+    } on Exception catch (ex) {
+      printErrorMessage(ex.toString());
+      //If deserialisation of app options fail then perform the following.
+      // 1. clear the shared prefs key
+      // 2. reinit app options to default
+      await preferences.clear();
+      options = AppOptions.initial();
+    }
   }
 
   printInfoMessage('[OPTIONS LOADED: ${options.toString()}');

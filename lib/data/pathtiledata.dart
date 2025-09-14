@@ -24,4 +24,6 @@ class PathTileData {
     new PathTile(10, 'Sohila Sahib', 'soihlw swihb', 'sohila_sahib'),
     new PathTile(11, 'Aarti', 'AwrqI', 'aarti_aarta'),
   ];
+
+  static List<dynamic> defaultOrderIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 }

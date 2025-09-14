@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nitnem/common/printmessage.dart';
 import 'package:nitnem/constants/appconstants.dart';
 import 'package:nitnem/models/pathtile.dart';
@@ -34,7 +35,7 @@ class BaaniOrderScreen extends StatelessWidget {
           fontWeight: FontWeight.w700,
         ),
       ),
-      trailing: Icon(Icons.drag_indicator),
+      trailing: Icon(FontAwesomeIcons.bars),
       subtitle: Text(
         item.gurmukhi,
         style: new TextStyle(
@@ -70,11 +71,17 @@ class BaaniOrderScreen extends StatelessWidget {
               onPressed: () {
                 AppNavigator.goBack(context);
               },
-              icon: Icon(Icons.arrow_back),
+              icon: Icon(FontAwesomeIcons.leftLong),
             ),
             actions: <Widget>[
               IconButton(
-                icon: Icon(Icons.check),
+                icon: Icon(FontAwesomeIcons.rotateLeft),
+                onPressed: () {
+                  vm.onOrderResetAction(context);
+                },
+              ),
+              IconButton(
+                icon: Icon(FontAwesomeIcons.circleCheck),
                 onPressed: () {
                   vm.onOrderSaveAction(context);
                 },
@@ -107,10 +114,12 @@ class BaaniOrderScreen extends StatelessWidget {
 class _ViewModel {
   final void Function(BuildContext) onOrderSaveAction;
   final void Function(BuildContext) onOrderChangeAction;
+  final void Function(BuildContext) onOrderResetAction;
 
   _ViewModel({
     required this.onOrderSaveAction,
     required this.onOrderChangeAction,
+    required this.onOrderResetAction,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {
@@ -123,6 +132,14 @@ class _ViewModel {
       },
       onOrderChangeAction: (BuildContext ctx) {
         StoreProvider.of<AppState>(ctx).dispatch(BaaniOrderChangeAction());
+      },
+      onOrderResetAction: (BuildContext ctx) {
+        // Reorder based on original order IDs
+        final idToItem = {for (var item in PathTileData.items) item.id: item};
+        List<PathTile> originalOrder =
+            PathTileData.defaultOrderIds.map((id) => idToItem[id]!).toList();
+        PathTileData.items = originalOrder;
+        StoreProvider.of<AppState>(ctx).dispatch(BaaniOrderResetAction());
       },
     );
   }
