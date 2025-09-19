@@ -1,21 +1,19 @@
+import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nitnem/common/printmessage.dart';
 import 'package:nitnem/constants/appconstants.dart';
+import 'package:nitnem/data/pathtiledata.dart';
 import 'package:nitnem/data/themedata.dart';
 import 'package:nitnem/models/pathtile.dart';
-import 'package:nitnem/data/pathtiledata.dart';
 import 'package:nitnem/navigation/appnavigator.dart';
 import 'package:nitnem/redux/actions/actions.dart';
 import 'package:nitnem/state/appstate.dart';
 import 'package:redux/redux.dart';
-import 'package:backdrop/backdrop.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({
-    required Key key,
-    required this.optionsPage,
-  }) : super(key: key);
+  HomeScreen({required Key key, required this.optionsPage}) : super(key: key);
 
   final Widget optionsPage;
 
@@ -36,26 +34,32 @@ class HomeScreen extends StatelessWidget {
   ///Builds a nitnem paath line entry
   Widget buildNitnemTile(BuildContext context, PathTile item, _ViewModel vm) {
     var listTile = ListTile(
-        onTap: () => vm.onPathClickAction(context, item),
-        dense: false,
-        leading: new Image.asset('assets/images/book.png',
-            fit: BoxFit.fill, width: 36),
-        title: Text(
-          item.title,
-          style: new TextStyle(
-              fontFamily: AppConstants.HOME_LISTITEM_FONT,
-              fontSize: AppConstants.HOME_LISTITEM_FONT_SIZE,
-              fontWeight: FontWeight.w700),
+      onTap: () => vm.onPathClickAction(context, item),
+      dense: false,
+      leading: new Image.asset(
+        'assets/images/book.png',
+        fit: BoxFit.fill,
+        width: 36,
+      ),
+      title: Text(
+        item.title,
+        style: new TextStyle(
+          fontFamily: AppConstants.HOME_LISTITEM_FONT,
+          fontSize: AppConstants.HOME_LISTITEM_FONT_SIZE,
+          fontWeight: FontWeight.w700,
         ),
-        trailing: Icon(Icons.keyboard_arrow_right),
-        subtitle: Text(item.gurmukhi,
-            style: new TextStyle(
-                fontFamily: AppConstants.HOME_LISTSUBITEM_FONT,
-                fontSize: AppConstants.HOME_LISTSUBITEM_FONT_SIZE,
-                fontWeight: FontWeight.w700)));
-    return MergeSemantics(
-      child: listTile,
+      ),
+      trailing: Icon(FontAwesomeIcons.circleRight),
+      subtitle: Text(
+        item.gurmukhi,
+        style: new TextStyle(
+          fontFamily: AppConstants.HOME_LISTSUBITEM_FONT,
+          fontSize: AppConstants.HOME_LISTSUBITEM_FONT_SIZE,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
     );
+    return MergeSemantics(child: listTile);
   }
 
   @override
@@ -65,51 +69,58 @@ class HomeScreen extends StatelessWidget {
     final bool isDark = theme.brightness == Brightness.dark;
 
     var result = StoreConnector<AppState, _ViewModel>(
-        converter: _ViewModel.fromStore,
-        builder: (context, vm) {
-          Iterable<Widget> listTiles = PathTileData.items.map<Widget>(
-              (PathTile item) => buildNitnemTile(context, item, vm));
-          listTiles = ListTile.divideTiles(context: context, tiles: listTiles);
-          return BackdropScaffold(
-            key: _homeScreenScaffoldKey,
-            backgroundColor: isDark ? kFlutterBlue : theme.primaryColor,
-            appBar: BackdropAppBar(
-              backgroundColor: theme.primaryColor,
-              title: Padding(
-                  padding: const EdgeInsets.only(top: 15.0),
-                  child: Row(
-                    children: [
-                      new Image.asset('assets/images/floral-left.png',
-                          fit: BoxFit.fill,
-                          width: AppConstants.HOME_FLORAL_WIDTH),
-                      Text(
-                        AppConstants.HOME_TITLE_TEXT,
-                        textAlign: TextAlign.center,
-                        style: new TextStyle(
-                            fontFamily: AppConstants.HOME_TITLE_FONT,
-                            fontSize: getTitleFontSize(context),
-                            fontWeight: FontWeight.bold),
-                      ),
-                      new Image.asset('assets/images/floral-right.png',
-                          fit: BoxFit.fill,
-                          width: AppConstants.HOME_FLORAL_WIDTH)
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.center,
-                  )),
-              actions: <Widget>[
-                BackdropToggleButton(
-                  icon: AnimatedIcons.list_view,
-                )
-              ],
+      converter: _ViewModel.fromStore,
+      builder: (context, vm) {
+        Iterable<Widget> listTiles = PathTileData.items.map<Widget>(
+          (PathTile item) => buildNitnemTile(context, item, vm),
+        );
+        listTiles = ListTile.divideTiles(context: context, tiles: listTiles);
+        return BackdropScaffold(
+          key: _homeScreenScaffoldKey,
+          backgroundColor: isDark ? kFlutterBlue : theme.primaryColor,
+          appBar: BackdropAppBar(
+            backgroundColor: theme.primaryColor,
+            title: Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Row(
+                children: [
+                  new Image.asset(
+                    'assets/images/floral-left.png',
+                    fit: BoxFit.fill,
+                    width: AppConstants.HOME_FLORAL_WIDTH,
+                  ),
+                  Text(
+                    AppConstants.HOME_TITLE_TEXT,
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(
+                      fontFamily: AppConstants.HOME_TITLE_FONT,
+                      fontSize: getTitleFontSize(context),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  new Image.asset(
+                    'assets/images/floral-right.png',
+                    fit: BoxFit.fill,
+                    width: AppConstants.HOME_FLORAL_WIDTH,
+                  ),
+                ],
+                mainAxisAlignment: MainAxisAlignment.center,
+              ),
             ),
-            backLayer: optionsPage,
-            frontLayer: Scrollbar(
-                child: ListView(
+            actions: <Widget>[
+              BackdropToggleButton(icon: AnimatedIcons.list_view),
+            ],
+          ),
+          backLayer: optionsPage,
+          frontLayer: Scrollbar(
+            child: ListView(
               padding: EdgeInsets.symmetric(vertical: 8.0),
               children: listTiles.toList(),
-            )),
-          );
-        });
+            ),
+          ),
+        );
+      },
+    );
     return result;
   }
 }
@@ -117,15 +128,14 @@ class HomeScreen extends StatelessWidget {
 class _ViewModel {
   final void Function(BuildContext, PathTile) onPathClickAction;
 
-  _ViewModel({
-    required this.onPathClickAction,
-  });
+  _ViewModel({required this.onPathClickAction});
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
       onPathClickAction: (BuildContext ctx, PathTile path) {
         store.dispatch(
-            FetchNitnemPathAction(path, store.state.options.languageName));
+          FetchNitnemPathAction(path, store.state.options.languageName),
+        );
         AppNavigator.goToReader(ctx);
       },
     );

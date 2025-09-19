@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:nitnem/state/appstate.dart';
-import 'package:nitnem/redux/reducers/app_state_reducer.dart';
 import 'package:nitnem/redux/actions/actions.dart';
+import 'package:nitnem/redux/reducers/app_state_reducer.dart';
+import 'package:nitnem/state/appstate.dart';
 
 void main() {
   group('AppState Reducer', () {

@@ -13,7 +13,7 @@ description: Nitnem App. Please respectfully cover you head and remove your shoe
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 
 ## build name and build number being populated from codemagic.yaml
-version: 3.0.0+0
+version: 3.1.0+0
 
 environment:
   sdk: ">=3.7.0 <4.0.0"
@@ -22,7 +22,7 @@ dependencies:
   flutter:
     sdk: flutter
   backdrop: ^0.9.1
-  url_launcher: ^6.3.1
+  url_launcher: ^6.3.2
   package_info_plus: ^8.0.0
   shared_preferences: ^2.5.2
   json_serializable: ^6.8.0
@@ -33,6 +33,7 @@ dependencies:
   provider: ^6.1.2
   cupertino_icons: ^1.0.2
   wakelock_plus: ^1.2.5
+  font_awesome_flutter: ^10.9.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.3

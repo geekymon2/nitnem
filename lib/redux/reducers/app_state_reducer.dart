@@ -13,6 +13,7 @@ import 'package:nitnem/state/appoptions.dart';
 import 'package:nitnem/state/appstate.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'baaniorderreducer.dart';
 import 'boldreducer.dart';
 import 'languagereducer.dart';
 import 'statusreducer.dart';
@@ -36,7 +37,9 @@ AppState appReducer(AppState state, dynamic action) {
       action is UpdateStatusScrollPercentageAction ||
       action is ToggleScreenAwakeAction ||
       action is ClearReaderOptionsToggleAction ||
-      action is ToggleReadingPositionSaveAction) {
+      action is ToggleReadingPositionSaveAction ||
+      action is BaaniOrderChangeAction ||
+      action is BaaniOrderResetAction) {
     newState = AppState(
       options: AppOptions(
         themeName: themeReducer(state.options.themeName, action),
@@ -45,9 +48,15 @@ AppState appReducer(AppState state, dynamic action) {
         textScaleValue: textScaleReducer(state.options.textScaleValue, action),
         languageName: languageReducer(state.options.languageName, action),
         screenAwake: screenAwakeReducer(state.options.screenAwake, action),
-        saveScrollPosition:
-            saveScrollPosReducer(state.options.saveScrollPosition, action),
+        saveScrollPosition: saveScrollPosReducer(
+          state.options.saveScrollPosition,
+          action,
+        ),
         scrollOffset: scrollPercReducer(state.options.scrollOffset, action),
+        baaniOrderedIds: baaniOrderIdReducer(
+          state.options.baaniOrderedIds,
+          action,
+        ),
       ),
       showReaderOptions: readerOptionsReducer(state.showReaderOptions, action),
       pathData: pathDataReducer(state.pathData, action),
@@ -65,8 +74,8 @@ AppState appReducer(AppState state, dynamic action) {
 
   if (action is SendFeedbackAction) {
     newState = state;
-    launchUrl(Uri.http(AppConstants.FEEDBACK_URL));
     printInfoMessage('Sending feedback');
+    launchUrl(Uri.parse(AppConstants.FEEDBACK_URL));
   }
 
   printInfoMessage('[STATE] ${newState.toString()}');

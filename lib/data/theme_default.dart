@@ -46,10 +46,15 @@ ThemeData buildLightTheme() {
         fontWeight: FontWeight.w400,
         fontStyle: FontStyle.normal,
       ),
-    ), tabBarTheme: TabBarThemeData(indicatorColor: Colors.white),
+    ),
+    tabBarTheme: TabBarThemeData(indicatorColor: Colors.white),
   );
+
   return base.copyWith(
     textTheme: buildTextTheme(base.textTheme),
-    primaryTextTheme: buildTextTheme(base.primaryTextTheme),
+    primaryTextTheme: buildPrimaryTextTheme(
+      base.primaryTextTheme,
+      Colors.black,
+    ),
   );
 }
