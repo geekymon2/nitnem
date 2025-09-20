@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nitnem/themes/themetextbuilder.dart';
+
+import './themetextbuilder.dart';
 
 ThemeData buildDarkTheme() {
   const Color primaryColor = Color(0xFF60385A);
@@ -43,7 +44,7 @@ ThemeData buildDarkTheme() {
       valueIndicatorShape: PaddleSliderValueIndicatorShape(),
       showValueIndicator: ShowValueIndicator.onlyForDiscrete,
       valueIndicatorTextStyle: TextStyle(
-        color: Color(0xffEDE7F6), // Soft lavender text
+        color: Color(0xffEDE7F6),
         fontSize: 14.0,
         fontWeight: FontWeight.w400,
         fontStyle: FontStyle.normal,
