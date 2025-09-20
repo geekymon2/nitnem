@@ -5,9 +5,13 @@ import 'themetextbuilder.dart';
 ThemeData buildWoodTheme() {
   const Color primaryColor = Color(0xFF795548);
   const Color secondaryColor = Color(0xFFd7ccc8);
+  const Color tertiaryColor = Color(0xFFf2aa90);
   final ColorScheme colorScheme = const ColorScheme.light().copyWith(
     primary: primaryColor,
     secondary: secondaryColor,
+    tertiary: tertiaryColor,
+    surface: Color(0xFFb5806c),
+    error: const Color(0xFFB00020),
   );
   final ThemeData base = ThemeData(
     brightness: Brightness.light,
@@ -47,11 +51,12 @@ ThemeData buildWoodTheme() {
     ),
     tabBarTheme: TabBarThemeData(indicatorColor: Colors.white),
   );
+
   return base.copyWith(
     textTheme: buildTextTheme(base.textTheme),
     primaryTextTheme: buildPrimaryTextTheme(
       base.primaryTextTheme,
-      Colors.black,
+      Color(0xff2d1f1b),
     ),
   );
 }

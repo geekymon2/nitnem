@@ -5,11 +5,16 @@ import 'themetextbuilder.dart';
 ThemeData buildFloralTheme() {
   const Color primaryColor = Color(0xFF00bcd4);
   const Color secondaryColor = Color(0xFFe0f7fa);
+  const Color tertiaryColor = Color(0xFF77ECFF);
   final ColorScheme colorScheme = const ColorScheme.light().copyWith(
     primary: primaryColor,
     secondary: secondaryColor,
+    tertiary: tertiaryColor,
+    surface: Color(0xff94f3ff),
+    error: const Color(0xFFB00020),
   );
   final ThemeData base = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: colorScheme,
     primaryColor: primaryColor,
@@ -31,7 +36,7 @@ ThemeData buildFloralTheme() {
       inactiveTickMarkColor: Color(0x8a3f51b5),
       disabledActiveTickMarkColor: Color(0x1fc5cae9),
       disabledInactiveTickMarkColor: Color(0x1f303f9f),
-      thumbColor: Color(0xff0097a7),
+      thumbColor: Color(0xff77ecff),
       disabledThumbColor: Color(0x52303f9f),
       thumbShape: RoundSliderThumbShape(),
       overlayColor: Color(0x293f51b5),
