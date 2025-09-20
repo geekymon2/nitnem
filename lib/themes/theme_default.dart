@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'themetextbuilder.dart';
+import './themetextbuilder.dart';
 
 ThemeData buildLightTheme() {
   const Color primaryColor = Color(0xFF0175c2);
   const Color secondaryColor = Color(0xFF13B9FD);
+  const Color tertiaryColor = Color(0xFF63CFFF);
   final ColorScheme colorScheme = const ColorScheme.light().copyWith(
     primary: primaryColor,
     secondary: secondaryColor,
-    surface: Colors.blue,
+    tertiary: tertiaryColor,
+    surface: Color(0xFF24edd6),
     error: const Color(0xFFB00020),
   );
   final ThemeData base = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: colorScheme,
     primaryColor: primaryColor,
@@ -54,7 +57,7 @@ ThemeData buildLightTheme() {
     textTheme: buildTextTheme(base.textTheme),
     primaryTextTheme: buildPrimaryTextTheme(
       base.primaryTextTheme,
-      Colors.black,
+      Colors.indigo.shade900,
     ),
   );
 }

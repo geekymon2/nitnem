@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nitnem/common/printmessage.dart';
-import 'package:nitnem/data/themedata.dart';
+import 'package:nitnem/themes/themedata.dart';
 
 enum ThemeName { Default, Stars, Forest, Ethnic, Floral, Wood }
 

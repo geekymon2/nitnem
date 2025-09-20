@@ -9,13 +9,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:nitnem/common/printmessage.dart';
 import 'package:nitnem/constants/appconstants.dart';
-import 'package:nitnem/data/themedata.dart';
 import 'package:nitnem/models/language.dart';
 import 'package:nitnem/models/scrollinfo.dart';
 import 'package:nitnem/pages/options.dart';
 import 'package:nitnem/redux/actions/actions.dart';
 import 'package:nitnem/redux/selectors/selectors.dart';
 import 'package:nitnem/state/appstate.dart';
+import 'package:nitnem/themes/themedata.dart';
 import 'package:redux/redux.dart';
 
 class ReaderScreen extends StatefulWidget {
