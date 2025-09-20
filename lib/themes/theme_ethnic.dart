@@ -5,13 +5,14 @@ import 'themetextbuilder.dart';
 ThemeData buildEthnicTheme() {
   const Color primaryColor = Color(0xffffa726);
   const Color secondaryColor = Color(0xfffff3e0);
-
+  const Color tertiaryColor = Color(0xffFECB86);
   final ColorScheme colorScheme = const ColorScheme.light().copyWith(
     primary: primaryColor,
     secondary: secondaryColor,
-    surface: Color(0xffffffff),
+    tertiary: tertiaryColor,
+    surface: Color(0xffd67600),
     error: Color(0xffd32f2f),
-    onPrimary: Color(0xff000000),
+    onPrimary: Color(0xffffc779),
     onSecondary: Color(0xff000000),
     onSurface: Color(0xff000000),
     onError: Color(0xffffffff),
@@ -19,6 +20,7 @@ ThemeData buildEthnicTheme() {
   );
 
   final ThemeData base = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: colorScheme,
     primaryColor: primaryColor,
@@ -44,11 +46,11 @@ ThemeData buildEthnicTheme() {
       disabledThumbColor: Color(0x52303f9f),
       thumbShape: RoundSliderThumbShape(),
       overlayColor: Color(0x293f51b5),
-      valueIndicatorColor: Color(0xff3f51b5),
+      valueIndicatorColor: Color(0xff8d5300),
       valueIndicatorShape: PaddleSliderValueIndicatorShape(),
       showValueIndicator: ShowValueIndicator.onlyForDiscrete,
       valueIndicatorTextStyle: TextStyle(
-        color: Color(0xff0000ff),
+        color: Color(0xffba7100),
         fontSize: 14.0,
         fontWeight: FontWeight.w400,
         fontStyle: FontStyle.normal,
@@ -56,8 +58,12 @@ ThemeData buildEthnicTheme() {
     ),
     tabBarTheme: TabBarThemeData(indicatorColor: Colors.white),
   );
+
   return base.copyWith(
     textTheme: buildTextTheme(base.textTheme),
-    primaryTextTheme: buildTextTheme(base.primaryTextTheme),
+    primaryTextTheme: buildPrimaryTextTheme(
+      base.primaryTextTheme,
+      Color(0xff854900),
+    ),
   );
 }

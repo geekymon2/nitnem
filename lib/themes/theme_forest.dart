@@ -20,6 +20,7 @@ ThemeData buildForestTheme() {
   );
 
   final ThemeData base = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: colorScheme,
     primaryColor: primaryColor,
