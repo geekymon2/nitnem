@@ -5,11 +5,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nitnem/common/printmessage.dart';
 import 'package:nitnem/constants/appconstants.dart';
 import 'package:nitnem/data/pathtiledata.dart';
-import 'package:nitnem/data/themedata.dart';
 import 'package:nitnem/models/pathtile.dart';
 import 'package:nitnem/navigation/appnavigator.dart';
 import 'package:nitnem/redux/actions/actions.dart';
 import 'package:nitnem/state/appstate.dart';
+import 'package:nitnem/themes/themedata.dart';
 import 'package:redux/redux.dart';
 
 class HomeScreen extends StatelessWidget {
