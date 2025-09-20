@@ -2,22 +2,17 @@ import 'package:flutter/material.dart';
 
 import 'themetextbuilder.dart';
 
-ThemeData buildEthnicTheme() {
-  const Color primaryColor = Color(0xffffa726);
-  const Color secondaryColor = Color(0xfffff3e0);
-
+ThemeData buildWoodTheme() {
+  const Color primaryColor = Color(0xFF795548);
+  const Color secondaryColor = Color(0xFFd7ccc8);
+  const Color tertiaryColor = Color(0xFFf2aa90);
   final ColorScheme colorScheme = const ColorScheme.light().copyWith(
     primary: primaryColor,
     secondary: secondaryColor,
-    surface: Color(0xffffffff),
-    error: Color(0xffd32f2f),
-    onPrimary: Color(0xff000000),
-    onSecondary: Color(0xff000000),
-    onSurface: Color(0xff000000),
-    onError: Color(0xffffffff),
-    brightness: Brightness.light,
+    tertiary: tertiaryColor,
+    surface: Color(0xFFb5806c),
+    error: const Color(0xFFB00020),
   );
-
   final ThemeData base = ThemeData(
     brightness: Brightness.light,
     colorScheme: colorScheme,
@@ -32,15 +27,15 @@ ThemeData buildEthnicTheme() {
       textTheme: ButtonTextTheme.primary,
     ),
     sliderTheme: SliderThemeData(
-      activeTrackColor: Color(0xffffecb3),
-      inactiveTrackColor: Color(0x3dff6f00),
+      activeTrackColor: Color(0xffbcaaa4),
+      inactiveTrackColor: Color(0xff8d6e63),
       disabledActiveTrackColor: Color(0x52303f9f),
       disabledInactiveTrackColor: Color(0x1f303f9f),
-      activeTickMarkColor: Color(0x8ac5cae9),
+      activeTickMarkColor: Color(0x8a0d47a1),
       inactiveTickMarkColor: Color(0x8a3f51b5),
       disabledActiveTickMarkColor: Color(0x1fc5cae9),
       disabledInactiveTickMarkColor: Color(0x1f303f9f),
-      thumbColor: Color(0xffffca28),
+      thumbColor: Color(0xffbcaaa4),
       disabledThumbColor: Color(0x52303f9f),
       thumbShape: RoundSliderThumbShape(),
       overlayColor: Color(0x293f51b5),
@@ -56,8 +51,12 @@ ThemeData buildEthnicTheme() {
     ),
     tabBarTheme: TabBarThemeData(indicatorColor: Colors.white),
   );
+
   return base.copyWith(
     textTheme: buildTextTheme(base.textTheme),
-    primaryTextTheme: buildTextTheme(base.primaryTextTheme),
+    primaryTextTheme: buildPrimaryTextTheme(
+      base.primaryTextTheme,
+      Color(0xff2d1f1b),
+    ),
   );
 }

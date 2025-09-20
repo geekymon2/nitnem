@@ -5,11 +5,12 @@ import 'themetextbuilder.dart';
 ThemeData buildForestTheme() {
   const Color primaryColor = Color(0xff4caf50);
   const Color secondaryColor = Color(0xff405016);
-
+  const Color tertiaryColor = Color(0xFF01C21B);
   final ColorScheme colorScheme = const ColorScheme.light().copyWith(
     primary: primaryColor,
     secondary: secondaryColor,
-    surface: Color(0xffffffff),
+    tertiary: tertiaryColor,
+    surface: Color(0xff0eea21),
     error: Color(0xffd32f2f),
     onPrimary: Color(0xffffffff),
     onSecondary: Color(0xffffffff),
@@ -19,6 +20,7 @@ ThemeData buildForestTheme() {
   );
 
   final ThemeData base = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: colorScheme,
     primaryColor: primaryColor,
@@ -26,7 +28,7 @@ ThemeData buildForestTheme() {
     splashFactory: InkRipple.splashFactory,
     canvasColor: Colors.white,
     scaffoldBackgroundColor: Colors.white,
-    highlightColor: Colors.blueGrey,
+    highlightColor: Color(0xff094D11),
     buttonTheme: ButtonThemeData(
       colorScheme: colorScheme,
       textTheme: ButtonTextTheme.primary,
@@ -40,7 +42,7 @@ ThemeData buildForestTheme() {
       inactiveTickMarkColor: Color(0x8a3f51b5),
       disabledActiveTickMarkColor: Color(0x1fc5cae9),
       disabledInactiveTickMarkColor: Color(0x1f303f9f),
-      thumbColor: Color(0xff2e7d32),
+      thumbColor: Color(0xff124714),
       disabledThumbColor: Color(0x52303f9f),
       thumbShape: RoundSliderThumbShape(),
       overlayColor: Color(0x293f51b5),
@@ -56,11 +58,12 @@ ThemeData buildForestTheme() {
     ),
     tabBarTheme: TabBarThemeData(indicatorColor: Colors.white),
   );
+
   return base.copyWith(
     textTheme: buildTextTheme(base.textTheme),
     primaryTextTheme: buildPrimaryTextTheme(
       base.primaryTextTheme,
-      Colors.black,
+      Color(0xff124714),
     ),
   );
 }

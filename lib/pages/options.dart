@@ -115,6 +115,8 @@ class _FlatButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var borderColor = Theme.of(context).highlightColor;
+
     return TextButton(
       onPressed: onPressed,
       child: DefaultTextStyle(
@@ -122,7 +124,7 @@ class _FlatButton extends StatelessWidget {
         child: child,
       ),
       style: TextButton.styleFrom(
-        side: const BorderSide(color: Colors.black45, width: 1),
+        side: BorderSide(color: borderColor, width: 1),
         backgroundColor: Theme.of(context).colorScheme.tertiary,
       ),
     );
@@ -258,6 +260,7 @@ class _ThemeChoices extends StatelessWidget {
                 context,
               ).dispatch(ChangeThemeAction(item.toString()));
             },
+            selectedColor: Theme.of(context).colorScheme.surface,
           ),
         ),
       );
